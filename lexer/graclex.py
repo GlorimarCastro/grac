@@ -12,7 +12,8 @@ reservedWords = {
     'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData', 'uploadData'],
     'CSV_VAR':['hasHeader','classColumn','featuresColumns','saveResult'],
     'BOOLEAN':['true', 'false'],
-    'ALL': 'all'
+    'ALL': 'all',
+    'PRINT': ['printBestClassifier\(\)','printClassifiersComparitions\(\)']
 
 }
 
@@ -31,6 +32,7 @@ reg_crossvalidation = re.compile('|'.join(reservedWords['CROSSVALIDATION_VAR']))
 reg_uploadcommand = re.compile('|'.join(reservedWords['UPLOAD_COMMAND']))
 reg_csvvar = re.compile('|'.join(reservedWords['CSV_VAR']))
 reg_boolean = re.compile('|'.join(reservedWords['BOOLEAN']))
+reg_print = re.compile('|'.join(reservedWords['PRINT']))
 #------------------------------------------------------
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
@@ -68,7 +70,9 @@ def t_BOOLEAN(t):
 @TOKEN(reg_uploadcommand.pattern)
 def t_UPLOAD_COMMAND(t):
     return t
-
+@TOKEN(reg_print.pattern)
+def t_PRINT(t):
+    return t
 # Define a rule so we can track line numbers 
 def t_newline(t):     
     r'\n+'     
@@ -109,6 +113,8 @@ svc()dtc()DTC()"SvC()" doCrossValidation execute() #hola
 svc()965() all true
 uploadData
 hasHeader
+printClassifiersComparitions()
+printBestClassifier()
 """
 lexer = lex.lex(reflags=re.UNICODE|re.IGNORECASE)
 lexer.input(data2test)
