@@ -5,7 +5,7 @@ import re
 #reserved words:
 reservedWords = {
     'CLASSIFIER'  : ['svc\(\)','dtc\(\)', 'nnc\(\)'],
-    'CLASSIFIER_METHOD': ['getErrorRate\(\)', 'saveErrorRate\(\)', 'predict', 'execute\(\)'],
+    'CLASSIFIER_METHOD': ['getErrorRate\(\)', 'saveErrorRate\(\)', 'predict', 'execute\(\)','calcBestClassifier\(\)'],
     'COMMENT': ['#'],
     'INT':'int',
     'CROSSVALIDATION_VAR':['doCrossValidation', 'k_foldd'],
@@ -13,7 +13,8 @@ reservedWords = {
     'CSV_VAR':['hasHeader','classColumn','featuresColumns','saveResult'],
     'BOOLEAN':['true', 'false'],
     'ALL': 'all',
-    'PRINT': ['printBestClassifier\(\)','printClassifiersComparitions\(\)']
+    'PRINT': ['printBestClassifier\(\)','printClassifiersComparitions\(\)'],
+    'STATISTICS': ['mean','avg','min','max','mode','least','rndm','count','stdev']
 
 }
 
@@ -22,7 +23,7 @@ tokens = [
        'PATH'   
 ] + list(reservedWords)#+ list(iter.chain.from_iterable(reservedWords.values())) 
 
-literals = ['(',')','{','}', '=']
+literals = ['(',')','{','}', '=', ',']
 #------------------------------------------------------
 #        REG DECLARATIONS - @TOKEN DECORATORS
 #------------------------------------------------------
@@ -33,6 +34,7 @@ reg_uploadcommand = re.compile('|'.join(reservedWords['UPLOAD_COMMAND']))
 reg_csvvar = re.compile('|'.join(reservedWords['CSV_VAR']))
 reg_boolean = re.compile('|'.join(reservedWords['BOOLEAN']))
 reg_print = re.compile('|'.join(reservedWords['PRINT']))
+reg_statistics = re.compile('|'.join(reservedWords['STATISTICS']))
 #------------------------------------------------------
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
@@ -73,6 +75,10 @@ def t_UPLOAD_COMMAND(t):
 @TOKEN(reg_print.pattern)
 def t_PRINT(t):
     return t
+@TOKEN(reg_statistics.pattern)
+def t_STATISTICS(t):
+    return t
+
 # Define a rule so we can track line numbers 
 def t_newline(t):     
     r'\n+'     
@@ -115,6 +121,9 @@ uploadData
 hasHeader
 printClassifiersComparitions()
 printBestClassifier()
+calcBestClassifier()
+mean
+avg
 """
 lexer = lex.lex(reflags=re.UNICODE|re.IGNORECASE)
 lexer.input(data2test)
