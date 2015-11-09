@@ -1,0 +1,85 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    CSV_SAVERESULT
+    PRINT
+    PATH
+    COMMENT
+    UPLOAD_COMMAND
+    CLASSIFIER_METHOD
+    ALL
+    STATISTICS
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> GRAC_START { statement_list }
+Rule 2     statement_list -> statement
+Rule 3     statement_list -> statement ; statement_list
+Rule 4     statement -> method
+Rule 5     statement -> assignment
+Rule 6     method -> classifier
+Rule 7     method -> classifier_methods
+Rule 8     method -> upload_methods
+Rule 9     method -> csv_methods
+Rule 10    method -> prints
+Rule 11    method -> statistics
+Rule 12    classifier -> CLASSIFIERS
+Rule 13    assignment -> crossvalidation_assignment
+Rule 14    assignment -> csv_assignment
+Rule 15    crossvalidation_assignment -> KFOLD = INT
+Rule 16    crossvalidation_assignment -> CROSSVALIDATIONACTION = BOOLEAN
+Rule 17    csv_assignment -> CSV_HEADER = BOOLEAN
+Rule 18    csv_assignment -> CSV_CLASSCOLUMN = INT
+Rule 19    csv_assignment -> CSV_FEATURESCOLUMNS = array_list
+Rule 20    array_list -> [ list ]
+Rule 21    list -> INT
+Rule 22    list -> INT , list
+
+Terminals, with rules where they appear
+
+,                    : 22
+;                    : 3
+=                    : 15 16 17 18 19
+ALL                  : 
+BOOLEAN              : 16 17
+CLASSIFIERS          : 12
+CLASSIFIER_METHOD    : 
+COMMENT              : 
+CROSSVALIDATIONACTION : 16
+CSV_CLASSCOLUMN      : 18
+CSV_FEATURESCOLUMNS  : 19
+CSV_HEADER           : 17
+CSV_SAVERESULT       : 
+GRAC_START           : 1
+INT                  : 15 18 21 22
+KFOLD                : 15
+PATH                 : 
+PRINT                : 
+STATISTICS           : 
+UPLOAD_COMMAND       : 
+[                    : 20
+]                    : 20
+error                : 
+{                    : 1
+}                    : 1
+
+Nonterminals, with rules where they appear
+
+array_list           : 19
+assignment           : 5
+classifier           : 6
+classifier_methods   : 7
+crossvalidation_assignment : 13
+csv_assignment       : 14
+csv_methods          : 9
+list                 : 20 22
+method               : 4
+prints               : 10
+program              : 0
+statement            : 2 3
+statement_list       : 1 3
+statistics           : 11
+upload_methods       : 8
+

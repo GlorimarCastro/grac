@@ -3,14 +3,13 @@ from ply.lex import TOKEN
 import re
 
 #reserved words:
+#crear CSV_Method = saveresult() y borrarlo de CSV_VAR
 reservedWords = {
-    'CLASSIFIER'  : ['svc\(\)','dtc\(\)', 'nnc\(\)'],
+    'CLASSIFIERS'  : ['svc\(\)','dtc\(\)', 'nnc\(\)'],
     'CLASSIFIER_METHOD': ['getErrorRate\(\)', 'saveErrorRate\(\)', 'predict', 'execute\(\)','calcBestClassifier\(\)'],
     'COMMENT': ['#'],
     'INT':'int',
-    'CROSSVALIDATION_VAR':['doCrossValidation', 'k_foldd'],
     'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData', 'uploadData'],
-    'CSV_VAR':['hasHeader','classColumn','featuresColumns','saveResult'],
     'BOOLEAN':['true', 'false'],
     'ALL': 'all',
     'PRINT': ['printBestClassifier\(\)','printClassifiersComparitions\(\)'],
@@ -20,26 +19,38 @@ reservedWords = {
 
 #list of token names
 tokens = [
-       'PATH'   
+        'GRAC_START',
+        'KFOLD',
+        'CROSSVALIDATIONACTION',
+        'CSV_HEADER',
+        'CSV_CLASSCOLUMN',
+        'CSV_FEATURESCOLUMNS',
+        'CSV_SAVERESULT',
+        'PATH',  
 ] + list(reservedWords)#+ list(iter.chain.from_iterable(reservedWords.values())) 
 
-literals = ['(',')','{','}', '=', ',']
+literals = ['(',')','{','}', '=', ',', ';', '[', ']']
 #------------------------------------------------------
 #        REG DECLARATIONS - @TOKEN DECORATORS
 #------------------------------------------------------
-reg_classifiers = re.compile('|'.join(reservedWords['CLASSIFIER']))
+reg_classifiers = re.compile('|'.join(reservedWords['CLASSIFIERS']))
 reg_classifiers_methods = re.compile('|'.join(reservedWords['CLASSIFIER_METHOD']))
-reg_crossvalidation = re.compile('|'.join(reservedWords['CROSSVALIDATION_VAR']))
 reg_uploadcommand = re.compile('|'.join(reservedWords['UPLOAD_COMMAND']))
-reg_csvvar = re.compile('|'.join(reservedWords['CSV_VAR']))
 reg_boolean = re.compile('|'.join(reservedWords['BOOLEAN']))
 reg_print = re.compile('|'.join(reservedWords['PRINT']))
 reg_statistics = re.compile('|'.join(reservedWords['STATISTICS']))
 #------------------------------------------------------
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
-t_ignore = ' \t'
-t_ALL = r'all'
+t_ignore                = ' \t'
+t_ALL                   = r'all'
+t_GRAC_START            = 'grac'
+t_KFOLD                 = 'k_fold'
+t_CROSSVALIDATIONACTION = 'doCrossValidation'
+t_CSV_HEADER            = 'hasheader'
+t_CSV_CLASSCOLUMN       = 'class_column'
+t_CSV_FEATURESCOLUMNS   = 'features_columns'
+t_CSV_SAVERESULT        = 'saveResult' 
 #------------------------------------------------------
 #        TOKEN DEFINITION WITH FUNCTION
 #------------------------------------------------------
@@ -56,14 +67,6 @@ def t_CLASSIFIER(t):
 def t_CLASSIFIER_METHOD(t):
     return(t)
 
-#RULE FOR CROSSVALIDATION VARIABLES:
-@TOKEN(reg_crossvalidation.pattern)
-def t_CROSSVALIDATION_VAR(t):
-    return t
-
-@TOKEN(reg_csvvar.pattern)
-def t_CSV_VAR(t):
-    return t
 
 @TOKEN(reg_boolean.pattern)
 def t_BOOLEAN(t):
@@ -114,6 +117,7 @@ def find_column(input,token):
 #=========================================================================
 #test
 #=========================================================================
+'''
 data2test = """
 svc()dtc()DTC()"SvC()" doCrossValidation execute() #hola 
 svc()965() all true
@@ -125,10 +129,13 @@ calcBestClassifier()
 mean
 avg
 """
+'''
 lexer = lex.lex(reflags=re.UNICODE|re.IGNORECASE)
+'''
 lexer.input(data2test)
 for tok in lexer:
     print tok
 
 
 print 'llego al final'
+'''
