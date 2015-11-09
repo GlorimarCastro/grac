@@ -6,7 +6,7 @@ import re
 #crear CSV_Method = saveresult() y borrarlo de CSV_VAR
 reservedWords = {
     'CLASSIFIERS'  : ['svc\(\)','dtc\(\)', 'nnc\(\)'],
-    'CLASSIFIER_METHOD': ['getErrorRate\(\)', 'saveErrorRate\(\)', 'predict', 'execute\(\)','calcBestClassifier\(\)'],
+    'CLASSIFIER_METHOD': ['getErrorRate\(\)', 'saveErrorRate\(\)',  'execute\(\)','calcBestClassifier\(\)'],
     'COMMENT': ['#'],
     'INT':'int',
     'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData', 'uploadData'],
@@ -26,6 +26,7 @@ tokens = [
         'CSV_CLASSCOLUMN',
         'CSV_FEATURESCOLUMNS',
         'CSV_SAVERESULT',
+        'CLASSIFIER_METHOD_WPARAMETER',
         'PATH',  
 ] + list(reservedWords)#+ list(iter.chain.from_iterable(reservedWords.values())) 
 
@@ -42,15 +43,16 @@ reg_statistics = re.compile('|'.join(reservedWords['STATISTICS']))
 #------------------------------------------------------
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
-t_ignore                = ' \t'
-t_ALL                   = r'all'
-t_GRAC_START            = 'grac'
-t_KFOLD                 = 'k_fold'
-t_CROSSVALIDATIONACTION = 'doCrossValidation'
-t_CSV_HEADER            = 'hasheader'
-t_CSV_CLASSCOLUMN       = 'class_column'
-t_CSV_FEATURESCOLUMNS   = 'features_columns'
-t_CSV_SAVERESULT        = 'saveResult' 
+t_ignore                        = ' \t'
+t_ALL                           = r'all'
+t_GRAC_START                    = 'grac'
+t_KFOLD                         = 'k_fold'
+t_CROSSVALIDATIONACTION         = 'doCrossValidation'
+t_CSV_HEADER                    = 'hasheader'
+t_CSV_CLASSCOLUMN               = 'class_column'
+t_CSV_FEATURESCOLUMNS           = 'features_columns'
+t_CSV_SAVERESULT                = 'saveResult' 
+t_CLASSIFIER_METHOD_WPARAMETER  = 'predict'
 #------------------------------------------------------
 #        TOKEN DEFINITION WITH FUNCTION
 #------------------------------------------------------

@@ -2,14 +2,8 @@ Created by PLY version 3.8 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    CSV_SAVERESULT
-    PRINT
-    PATH
     COMMENT
-    UPLOAD_COMMAND
-    CLASSIFIER_METHOD
     ALL
-    STATISTICS
 
 Grammar
 
@@ -23,63 +17,74 @@ Rule 6     method -> classifier
 Rule 7     method -> classifier_methods
 Rule 8     method -> upload_methods
 Rule 9     method -> csv_methods
-Rule 10    method -> prints
-Rule 11    method -> statistics
+Rule 10    method -> printResults
+Rule 11    method -> statistics_methods
 Rule 12    classifier -> CLASSIFIERS
-Rule 13    assignment -> crossvalidation_assignment
-Rule 14    assignment -> csv_assignment
-Rule 15    crossvalidation_assignment -> KFOLD = INT
-Rule 16    crossvalidation_assignment -> CROSSVALIDATIONACTION = BOOLEAN
-Rule 17    csv_assignment -> CSV_HEADER = BOOLEAN
-Rule 18    csv_assignment -> CSV_CLASSCOLUMN = INT
-Rule 19    csv_assignment -> CSV_FEATURESCOLUMNS = array_list
-Rule 20    array_list -> [ list ]
-Rule 21    list -> INT
-Rule 22    list -> INT , list
+Rule 13    classifier_methods -> CLASSIFIER_METHOD
+Rule 14    classifier_methods -> CLASSIFIER_METHOD_WPARAMETER ( PATH )
+Rule 15    upload_methods -> UPLOAD_COMMAND ( PATH )
+Rule 16    csv_methods -> CSV_SAVERESULT ( PATH )
+Rule 17    printResults -> PRINT
+Rule 18    statistics_methods -> STATISTICS ( ID )
+Rule 19    statistics_methods -> STATISTICS ( INT )
+Rule 20    assignment -> crossvalidation_assignment
+Rule 21    assignment -> csv_assignment
+Rule 22    crossvalidation_assignment -> KFOLD = INT
+Rule 23    crossvalidation_assignment -> CROSSVALIDATIONACTION = BOOLEAN
+Rule 24    csv_assignment -> CSV_HEADER = BOOLEAN
+Rule 25    csv_assignment -> CSV_CLASSCOLUMN = INT
+Rule 26    csv_assignment -> CSV_FEATURESCOLUMNS = array_list
+Rule 27    array_list -> [ list ]
+Rule 28    list -> INT
+Rule 29    list -> INT , list
 
 Terminals, with rules where they appear
 
-,                    : 22
+(                    : 14 15 16 18 19
+)                    : 14 15 16 18 19
+,                    : 29
 ;                    : 3
-=                    : 15 16 17 18 19
+=                    : 22 23 24 25 26
 ALL                  : 
-BOOLEAN              : 16 17
+BOOLEAN              : 23 24
 CLASSIFIERS          : 12
-CLASSIFIER_METHOD    : 
+CLASSIFIER_METHOD    : 13
+CLASSIFIER_METHOD_WPARAMETER : 14
 COMMENT              : 
-CROSSVALIDATIONACTION : 16
-CSV_CLASSCOLUMN      : 18
-CSV_FEATURESCOLUMNS  : 19
-CSV_HEADER           : 17
-CSV_SAVERESULT       : 
+CROSSVALIDATIONACTION : 23
+CSV_CLASSCOLUMN      : 25
+CSV_FEATURESCOLUMNS  : 26
+CSV_HEADER           : 24
+CSV_SAVERESULT       : 16
 GRAC_START           : 1
-INT                  : 15 18 21 22
-KFOLD                : 15
-PATH                 : 
-PRINT                : 
-STATISTICS           : 
-UPLOAD_COMMAND       : 
-[                    : 20
-]                    : 20
+INT                  : 19 22 25 28 29
+KFOLD                : 22
+PATH                 : 14 15 16
+PRINT                : 17
+STATISTICS           : 18 19
+UPLOAD_COMMAND       : 15
+[                    : 27
+]                    : 27
 error                : 
 {                    : 1
 }                    : 1
 
 Nonterminals, with rules where they appear
 
-array_list           : 19
+ID                   : 18
+array_list           : 26
 assignment           : 5
 classifier           : 6
 classifier_methods   : 7
-crossvalidation_assignment : 13
-csv_assignment       : 14
+crossvalidation_assignment : 20
+csv_assignment       : 21
 csv_methods          : 9
-list                 : 20 22
+list                 : 27 29
 method               : 4
-prints               : 10
+printResults         : 10
 program              : 0
 statement            : 2 3
 statement_list       : 1 3
-statistics           : 11
+statistics_methods   : 11
 upload_methods       : 8
 
