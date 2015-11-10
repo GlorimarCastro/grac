@@ -4,14 +4,14 @@ import lexer.graclex as graclex
 tokens = graclex.tokens
 
 #grac static variable
-global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn
+global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables
 k_fold = 5
 doCrossValidation = False
 hasHeader = False
 classColumn = 0
 featuresColumn = [1]
-
-
+variables = {}
+ 
 
 #start
 def p_programm(p):
@@ -43,7 +43,8 @@ def p_method(p):
                 | printResults
                 | statistics_methods'''
     p[0] = p[1]
-    
+
+#GLORIMAR
 def p_classifier(t):
     'classifier : CLASSIFIERS'
     t[0] = t[1]
@@ -56,7 +57,7 @@ def p_classifier(t):
     elif t[1] == "nnc()":
         #execute nnc
         pass
-
+#GLORIMAR
 def p_classifier_methods(t):
     '''classifier_methods : CLASSIFIER_METHOD
                             | CLASSIFIER_METHOD_WPARAMETER '(' PATH ')' '''
@@ -79,6 +80,11 @@ def p_classifier_methods(t):
         pass
 
 
+
+#ANTHONY
+#HACER VARIABLES GLOBALES PARA CADA UNO 
+#averiguar que el path exista si si guardar en global
+#asegurar que es .csv
 def p_upload_methods(t):
     '''upload_methods : UPLOAD_COMMAND '(' PATH ')' '''
     t[0] = t[1]
@@ -93,10 +99,16 @@ def p_upload_methods(t):
         pass
     pass
   
+#rafa
+#guardar variables de resultado en file en formato csv
+#carlos - {methodo: result }
+#glorimar - matriz
+#path csv y existe
 def p_csv_methods(p):
     ''' csv_methods : CSV_SAVERESULT '(' PATH ')' '''
     pass
     
+#glorimar
 def p_printResults(t):
     'printResults : PRINT'
     t[0] = t[1]
@@ -106,11 +118,18 @@ def p_printResults(t):
     elif t[1] == "printClassifiersComparitions()":
         #execute printClassifiersComparitions
         pass
-    
+#carlos
+#resultado guardarlos en un dic global
+#si el usuario no ha subido file error
+#imt = columna del file 
 def p_statistics_methods(p):
     '''statistics_methods : STATISTICS '(' ID ')' 
-                            | STATISTICS '(' INT ')' '''
-    pass
+                            | STATISTICS '(' INT ')' 
+                            | STATISTICS '(' array_list ')' '''
+    if isinstance(p[3], int):
+        pass
+    else:
+        pass
 
 #=====================================================================================
 #            ASSIGNMENT RULES            ASSIGNMENT RULES
