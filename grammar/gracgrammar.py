@@ -143,8 +143,11 @@ def p_statistics_methods(p):
 def p_assignment(p):
     '''assignment : crossvalidation_assignment
                     | csv_assignment
-                    | ID = array_list'''
+                    | ID '=' array_list'''
     p[0] = p[1]
+    if len(p) > 2:
+        global variables
+        variables[p[1]] = p[3]
     
 def p_crossvalidation_assignment(p):
     '''crossvalidation_assignment :  KFOLD '=' INT
