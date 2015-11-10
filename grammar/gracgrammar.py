@@ -4,13 +4,16 @@ import lexer.graclex as graclex
 tokens = graclex.tokens
 
 #grac static variable
-global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables
+global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, dataFilePath
 k_fold = 5
 doCrossValidation = False
 hasHeader = False
 classColumn = 0
 featuresColumn = [1]
 variables = {}
+trainingDataFilePath = None
+testDataFilePath = None
+dataFilePath = None
  
 
 #start
@@ -89,13 +92,16 @@ def p_upload_methods(t):
     '''upload_methods : UPLOAD_COMMAND '(' PATH ')' '''
     t[0] = t[1]
     if t[1] == "uploadTrainingData":
-        #execute uploadTrainingData
+        global trainingDataFilePath
+        trainingDataFilePath = uploadFile(t[3])
         pass
     elif t[1] == "uploadTestData":
-        #execute uploadTestData
+        global testDataFilePath
+        testDataFilePath = uploadFile(t[3])
         pass
     elif t[1] == "uploadData":
-        #execute uploadData
+        global dataFilePath
+        dataFilePath = uploadFile(t[3])
         pass
     pass
   
@@ -136,7 +142,8 @@ def p_statistics_methods(p):
 #=====================================================================================
 def p_assignment(p):
     '''assignment : crossvalidation_assignment
-                    | csv_assignment'''
+                    | csv_assignment
+                    | ID = array_list'''
     p[0] = p[1]
     
 def p_crossvalidation_assignment(p):
@@ -183,6 +190,21 @@ def p_error(p):
     print ("Sintax error in input")
 
 
+#===============================================================================================================================
+#                                                   Intermediate Code
+#===============================================================================================================================
+
+def uploadFile(csvfilepath):
+
+    if not csvfilepath.lower().endswith('.csv'):
+        raise Exception('Incorrect file extension.')
+
+    else:
+        try:
+            open(csvfilepath, 'r').close()
+        except:
+            raise Exception('Invalid path or file is corrupt.')
+    return csvfilepath
 
 #===============================================================================================================================
 #                    TEST                        TEST                        TEST                        TESTs
