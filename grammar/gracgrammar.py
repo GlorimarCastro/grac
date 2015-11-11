@@ -193,55 +193,58 @@ def p_statistics_methods(p):
 
     else:
         global variables
-        if p[1] == 'count':
-            temp = 0
-            for e in variables[p[3]]:
-                temp += 1
-            stat['count'] = temp
+        if p[3] in variables:
+            if p[1] == 'count':
+                temp = 0
+                for e in variables[p[3]]:
+                    temp += 1
+                stat['count'] = temp
 
-        if p[1] == 'min':
+            if p[1] == 'min':
 
-            stat['min'] = min(variables[p[3]])
+                stat['min'] = min(variables[p[3]])
 
-        if p[1] == 'max':
+            if p[1] == 'max':
 
-            stat['max'] = max(variables[p[3]])
+                stat['max'] = max(variables[p[3]])
 
-        if p[1] == 'rndm':
+            if p[1] == 'rndm':
 
-            stat['rndm'] = random.choice(variables[p[3]])
+                stat['rndm'] = random.choice(variables[p[3]])
 
-        if p[1] == 'least':
-            # Tally occurrences of numbers in a list
-            cnt = {}
-            result = []
-            #initialize dictionary with counts=0
-            for n in [variables[p[3]]]:
-                cnt[n] = 0
-            #link keys with their counts
-            for w in [variables[p[3]]]:
-                cnt[w] += 1
-            #get min
-            min = len(cnt)
-            #print min
-            for c in cnt:
-                if cnt[c] < min:
-                    min = cnt[c]
+            if p[1] == 'least':
+                # Tally occurrences of numbers in a list
+                cnt = {}
+                result = []
+                #initialize dictionary with counts=0
+                for n in [variables[p[3]]]:
+                    cnt[n] = 0
+                #link keys with their counts
+                for w in [variables[p[3]]]:
+                    cnt[w] += 1
+                #get min
+                min = len(cnt)
+                #print min
+                for c in cnt:
+                    if cnt[c] < min:
+                        min = cnt[c]
 
-            #prints keys with the lowest counts
-            for e in cnt:
-                if cnt[e] == min:
-                    result.append(e)
-            stat['least'] = result
+                #prints keys with the lowest counts
+                for e in cnt:
+                    if cnt[e] == min:
+                        result.append(e)
+                stat['least'] = result
 
-        if p[1] == 'mode':
-            stat['mode'] = stats.mode(variables[p[3]])
-        if p[1] == 'stdev':
-            stat['stdev'] = stats.stdev(variables[p[3]])
-        if p[1] == 'avg':
-            stat['avg'] = stats.mean(variables[p[3]])
-        if p[1] == 'mean':
-            stat['mean'] = stats.mean(variables[p[3]])
+            if p[1] == 'mode':
+                stat['mode'] = stats.mode(variables[p[3]])
+            if p[1] == 'stdev':
+                stat['stdev'] = stats.stdev(variables[p[3]])
+            if p[1] == 'avg':
+                stat['avg'] = stats.mean(variables[p[3]])
+            if p[1] == 'mean':
+                stat['mean'] = stats.mean(variables[p[3]])
+        else:
+            print "Variable not defined"
 
 
 #=====================================================================================
