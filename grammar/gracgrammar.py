@@ -1,10 +1,11 @@
 import ply.yacc as yacc
 import lexer.graclex as graclex
-
+from scipy import stats
+import random
 tokens = graclex.tokens
 
 #grac static variable
-global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, dataFilePath
+global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, dataFilePath, stat
 k_fold = 5
 doCrossValidation = False
 hasHeader = False
@@ -14,7 +15,7 @@ variables = {}
 trainingDataFilePath = None
 testDataFilePath = None
 dataFilePath = None
- 
+stat = {}
 
 #start
 def p_programm(p):
@@ -127,15 +128,121 @@ def p_printResults(t):
 #carlos
 #resultado guardarlos en un dic global
 #si el usuario no ha subido file error
-#imt = columna del file 
+#int = columna del file
+#ID sacar de dict
+# verificar que to-do exista
 def p_statistics_methods(p):
     '''statistics_methods : STATISTICS '(' ID ')' 
                             | STATISTICS '(' INT ')' 
                             | STATISTICS '(' array_list ')' '''
+    global stat
     if isinstance(p[3], int):
+        #WTF LOL
         pass
+    elif isinstance(p[3], list):
+
+        if p[1] == 'count':
+            temp = 0
+            for e in p[3]:
+                temp += 1
+            stat['count'] = temp
+
+        if p[1] == 'min':
+
+            stat['min'] = min(p[3])
+
+        if p[1] == 'max':
+
+            stat['max'] = max(p[3])
+
+        if p[1] == 'rndm':
+
+            stat['rndm'] = random.choice(p[3])
+
+        if p[1] == 'least':
+            # Tally occurrences of numbers in a list
+            cnt = {}
+            result = []
+            #initialize dictionary with counts=0
+            for n in [p[3]]:
+                cnt[n] = 0
+            #link keys with their counts
+            for w in [p[3]]:
+                cnt[w] += 1
+            #get min
+            min = len(cnt)
+            #print min
+            for c in cnt:
+                if cnt[c] < min:
+                    min = cnt[c]
+
+            #prints keys with the lowest counts
+            for e in cnt:
+                if cnt[e] == min:
+                    result.append(e)
+            stat['least'] = result
+
+        if p[1] == 'mode':
+            stat['mode'] = stats.mode(p[3])
+        if p[1] == 'stdev':
+            stat['stdev'] = stats.stdev(p[3])
+        if p[1] == 'avg':
+            stat['avg'] = stats.mean(p[3])
+        if p[1] == 'mean':
+            stat['mean'] = stats.mean(p[3])
+
     else:
-        pass
+        global variables
+        if p[1] == 'count':
+            temp = 0
+            for e in variables[p[3]]:
+                temp += 1
+            stat['count'] = temp
+
+        if p[1] == 'min':
+
+            stat['min'] = min(variables[p[3]])
+
+        if p[1] == 'max':
+
+            stat['max'] = max(variables[p[3]])
+
+        if p[1] == 'rndm':
+
+            stat['rndm'] = random.choice(variables[p[3]])
+
+        if p[1] == 'least':
+            # Tally occurrences of numbers in a list
+            cnt = {}
+            result = []
+            #initialize dictionary with counts=0
+            for n in [variables[p[3]]]:
+                cnt[n] = 0
+            #link keys with their counts
+            for w in [variables[p[3]]]:
+                cnt[w] += 1
+            #get min
+            min = len(cnt)
+            #print min
+            for c in cnt:
+                if cnt[c] < min:
+                    min = cnt[c]
+
+            #prints keys with the lowest counts
+            for e in cnt:
+                if cnt[e] == min:
+                    result.append(e)
+            stat['least'] = result
+
+        if p[1] == 'mode':
+            stat['mode'] = stats.mode(variables[p[3]])
+        if p[1] == 'stdev':
+            stat['stdev'] = stats.stdev(variables[p[3]])
+        if p[1] == 'avg':
+            stat['avg'] = stats.mean(variables[p[3]])
+        if p[1] == 'mean':
+            stat['mean'] = stats.mean(variables[p[3]])
+
 
 #=====================================================================================
 #            ASSIGNMENT RULES            ASSIGNMENT RULES
@@ -225,3 +332,35 @@ print doCrossValidation
 print k_fold
 print featuresColumn
 print(result)
+
+#print random.choice([1,2,3,4,5,6,7,8,9,10])
+#print stats
+
+'''
+###TESTING LEAST FREQUENT ALGORITHM
+# Tally occurrences of numbers in a list
+cnt = {}
+result = []
+#initialize dictionary with counts=0
+for n in ['green','green','blue','blue','red','red','red','red']:
+    cnt[n] = 0
+#link keys with their counts
+for w in ['green','green','blue','blue','red','red','red','red']:
+    cnt[w] += 1
+#get min
+min = len(cnt)
+#print min
+for c in cnt:
+    if cnt[c] < min:
+        min = cnt[c]
+
+#prints keys with the lowest counts
+for e in cnt:
+    if cnt[e] == min:
+        result.append(e)
+
+print result
+
+'''
+
+print "Reminder: mean=avg"
