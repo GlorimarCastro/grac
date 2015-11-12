@@ -27,14 +27,6 @@ reservedWords = {
 
 #list of token names
 tokens = [
-        'GRAC_START',
-        'KFOLD',
-        'CROSSVALIDATIONACTION',
-        'CSV_HEADER',
-        'CSV_CLASSCOLUMN',
-        'CSV_FEATURESCOLUMNS',
-        'CSV_SAVERESULT',
-        'CLASSIFIER_METHOD_WPARAMETER',
         'PATH',
         'ID',
 ] + list(reservedWords)#+ list(iter.chain.from_iterable(reservedWords.values())) 
@@ -53,15 +45,15 @@ reg_statistics = re.compile('|'.join(reservedWords['STATISTICS']))
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
 t_ignore                        = ' \t'
-t_ALL                           = r'all'
-t_GRAC_START                    = 'grac'
-t_KFOLD                         = 'k_fold'
-t_CROSSVALIDATIONACTION         = 'doCrossValidation'
-t_CSV_HEADER                    = 'hasheader'
-t_CSV_CLASSCOLUMN               = 'class_column'
-t_CSV_FEATURESCOLUMNS           = 'features_columns'
-t_CSV_SAVERESULT                = 'saveResult'
-t_CLASSIFIER_METHOD_WPARAMETER  = 'predict'
+t_ALL                           = reservedWords.get('ALL')[0]
+t_GRAC_START                    = reservedWords.get('GRAC_START')[0]
+t_KFOLD                         = reservedWords.get('KFOLD')[0]
+t_CROSSVALIDATIONACTION         = reservedWords.get('CROSSVALIDATIONACTION')[0]
+t_CSV_HEADER                    = reservedWords.get('CSV_HEADER')[0]
+t_CSV_CLASSCOLUMN               = reservedWords.get('CSV_CLASSCOLUMN')[0]
+t_CSV_FEATURESCOLUMNS           = reservedWords.get('CSV_FEATURESCOLUMNS')[0]
+t_CSV_SAVERESULT                = reservedWords.get('CSV_SAVERESULT')[0]
+t_CLASSIFIER_METHOD_WPARAMETER  = reservedWords.get('CLASSIFIER_METHOD_WPARAMETER')[0]
 #------------------------------------------------------
 #        TOKEN DEFINITION WITH FUNCTION
 #------------------------------------------------------
@@ -143,8 +135,8 @@ def find_column(input,token):
 #=========================================================================
 #test
 #=========================================================================
-
-data2test = """
+"""
+data2test = """ """
 svc()dtc()DTC()"SvC()" doCrossValidation execute() #hola
 svc()965() all true
 uploadData
@@ -157,13 +149,14 @@ avg
 dimelou
 
 """
-data3 = "all"
+
 
 lexer = lex.lex(reflags=re.UNICODE|re.IGNORECASE)
-
+"""
 lexer.input(data2test)
 for tok in lexer:
     print tok
 
 
 print 'llego al final'
+"""
