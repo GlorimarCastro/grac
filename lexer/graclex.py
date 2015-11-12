@@ -5,11 +5,11 @@ import re
 #reserved words:
 #crear CSV_Method = saveresult() y borrarlo de CSV_VAR
 reservedWords = {
-    'CLASSIFIERS'  : ['svc\(\)','dtc\(\)', 'nnc\(\)'],
+    'CLASSIFIERS'  : ['svc\(\)','dtc\(\)', 'gnbc\(\)'],
     'CLASSIFIER_METHOD': ['getErrorRate\(\)', 'saveErrorRate\(\)',  'execute\(\)','calcBestClassifier\(\)'],
     'COMMENT': ['#'],
     'INT': 'int',
-    'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData', 'uploadData'],
+    'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData'],
     'BOOLEAN':['true', 'false'],
     'ALL': ['all'],
     'PRINT': ['printBestClassifier\(\)','printClassifiersComparitions\(\)'],
@@ -41,6 +41,8 @@ reg_uploadcommand = re.compile('|'.join(reservedWords['UPLOAD_COMMAND']))
 reg_boolean = re.compile('|'.join(reservedWords['BOOLEAN']))
 reg_print = re.compile('|'.join(reservedWords['PRINT']))
 reg_statistics = re.compile('|'.join(reservedWords['STATISTICS']))
+reg_featurescolumn = re.compile(reservedWords.get('CSV_FEATURESCOLUMNS')[0])
+reg_classcolumn = re.compile(reservedWords.get('CSV_CLASSCOLUMN')[0])
 #------------------------------------------------------
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
@@ -50,14 +52,18 @@ t_GRAC_START                    = reservedWords.get('GRAC_START')[0]
 t_KFOLD                         = reservedWords.get('KFOLD')[0]
 t_CROSSVALIDATIONACTION         = reservedWords.get('CROSSVALIDATIONACTION')[0]
 t_CSV_HEADER                    = reservedWords.get('CSV_HEADER')[0]
-t_CSV_CLASSCOLUMN               = reservedWords.get('CSV_CLASSCOLUMN')[0]
-t_CSV_FEATURESCOLUMNS           = reservedWords.get('CSV_FEATURESCOLUMNS')[0]
 t_CSV_SAVERESULT                = reservedWords.get('CSV_SAVERESULT')[0]
 t_CLASSIFIER_METHOD_WPARAMETER  = reservedWords.get('CLASSIFIER_METHOD_WPARAMETER')[0]
 #------------------------------------------------------
 #        TOKEN DEFINITION WITH FUNCTION
 #------------------------------------------------------
+@TOKEN(reg_featurescolumn.pattern)
+def t_CSV_FEATURESCOLUMNS(t):   
+    return t
 
+@TOKEN(reg_classcolumn.pattern)
+def t_CSV_CLASSCOLUMN(t):
+    return t
 
 def t_PATH(t):
     r'\"(.+?)\"'

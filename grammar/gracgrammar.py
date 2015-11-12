@@ -2,10 +2,14 @@ import ply.yacc as yacc
 import lexer.graclex as graclex
 from scipy import stats
 import random, csv
+import numpy
+import sys
+from sklearn.base import ClassifierMixin
 tokens = graclex.tokens
 
 #grac static variable
-global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, dataFilePath, stat
+global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, dataFilePath, stat, trainingData, testData, data
+global classifier, statLast
 k_fold = 5
 doCrossValidation = False
 hasHeader = False
@@ -15,7 +19,13 @@ variables = {}
 trainingDataFilePath = None
 testDataFilePath = None
 dataFilePath = None
+trainingData = None
+testData = None
+data = None
+classifier = None
 stat = {}
+classResult = None
+statLast = None
 
 #start
 def p_programm(p):
@@ -25,7 +35,6 @@ def p_statement_list(p):
     '''statement_list : statement
                         | statement ';' statement_list'''
     if len(p) > 2:
-        #verificar que hacer cuando tenemos multiples lineas a ejecutarse
         p[0] = (p[1], p[3]) 
     else:
         p[0] = p[1]
@@ -38,7 +47,6 @@ def p_statement(p):
 #=====================================================================================
 #            METHODS            METHODS
 #=====================================================================================
-#hay que terminar esto
 def p_method(p):
     '''method : classifier
                 | classifier_methods
@@ -52,25 +60,41 @@ def p_method(p):
 def p_classifier(t):
     'classifier : CLASSIFIERS'
     t[0] = t[1]
+    global classifier, statLast
+    statLast = False
     if t[1] == "svc()":
         #execute svm
-        pass
+        verifyTrainingData()
+        from sklearn import svm
+        classifier = svm.SVC()
     elif t[1] == "dtc()":
         #execute dtc
-        pass
-    elif t[1] == "nnc()":
-        #execute nnc
-        pass
+        verifyTrainingData()
+        from sklearn import tree
+        classifier = tree.DecisionTreeClassifier()
+        
+    elif t[1] == "gnbc()":
+        #execute gnvc
+        verifyTrainingData()
+        from sklearn.naive_bayes import GaussianNB
+        classifier = GaussianNB()
+        
 #GLORIMAR
 def p_classifier_methods(t):
     '''classifier_methods : CLASSIFIER_METHOD
-                            | CLASSIFIER_METHOD_WPARAMETER '(' PATH ')' '''
+                            | CLASSIFIER_METHOD_WPARAMETER '(' ')' '''
     t[0] = t[1]
+    global classifier, classResult
     #si es un methodo que requiere parametro se ejecuta en el if
     if len(t) > 2:
         if t[1] == "predict":
             #execute predict
-            pass
+            verifyTestData()
+            verifyClassifier()
+            featuresVect = testData[: ,featuresColumn]
+            classResult =  classifier.predict(featuresVect)
+            print "Result:"
+            print classResult
     else:
         if t[1] == "getErrorRate()":
             #execute getErrorRate
@@ -79,32 +103,32 @@ def p_classifier_methods(t):
             #execute saveErrorRate
             pass
         elif t[1] == "execute()":
-            #execute execute
-            pass
-        pass
+            verifyClassifier()
+            verifyTrainingData()
+            
+            features = trainingData[:,featuresColumn]
+            classVector = trainingData[:,classColumn]
+            classifier.fit(features, classVector)
+            
 
 
 
-#ANTHONY
-#HACER VARIABLES GLOBALES PARA CADA UNO 
-#averiguar que el path exista si si guardar en global
-#asegurar que es .csv
 def p_upload_methods(t):
     '''upload_methods : UPLOAD_COMMAND '(' PATH ')' '''
     t[0] = t[1]
+    t[3] = t[3][1:-1]
     if t[1] == "uploadTrainingData":
-        global trainingDataFilePath
-        trainingDataFilePath = uploadFile(t[3])
-        pass
+        global trainingDataFilePath, trainingData
+        trainingDataFilePath = t[3]
+        trainingData = uploadFile(t[3])
+    
     elif t[1] == "uploadTestData":
-        global testDataFilePath
-        testDataFilePath = uploadFile(t[3])
-        pass
-    elif t[1] == "uploadData":
-        global dataFilePath
-        dataFilePath = uploadFile(t[3])
-        pass
-    pass
+        global testDataFilePath, testData
+        testDataFilePath = t[3]
+        testData = uploadFile(t[3])
+        
+        
+    
 #********************************************************************************************************************************************************************************************************************************************************
 #rafa
 #guardar variables de resultado en file en formato csv
@@ -113,11 +137,12 @@ def p_upload_methods(t):
 #path csv y existe
 def p_csv_methods(t):
     ''' csv_methods : CSV_SAVERESULT '(' PATH ')' '''
+    
     writer = csv.writer(open(t[3]+'.csv', 'wb'))
 #writes statistics results
-for key, value in stat.items():
-    writer.writerow([key, value])
-    pass
+    for key, value in stat.items():
+        writer.writerow([key, value])
+        
 #**********************************************************************************************************************************************************************************************************************************************************
 #glorimar
 def p_printResults(t):
@@ -139,7 +164,8 @@ def p_statistics_methods(p):
     '''statistics_methods : STATISTICS '(' ID ')' 
                             | STATISTICS '(' INT ')' 
                             | STATISTICS '(' array_list ')' '''
-    global stat
+    global stat, statLast
+    statLast = True
     if isinstance(p[3], int):
         #WTF LOL
         pass
@@ -188,12 +214,13 @@ def p_statistics_methods(p):
 
         if p[1] == 'mode':
             stat['mode'] = stats.mode(p[3])
+            ""
         if p[1] == 'stdev':
-            stat['stdev'] = stats.stdev(p[3])
+            stat['stdev'] = numpy.std(p[3])
         if p[1] == 'avg':
-            stat['avg'] = stats.mean(p[3])
+            stat['avg'] = numpy.mean(p[3])
         if p[1] == 'mean':
-            stat['mean'] = stats.mean(p[3])
+            stat['mean'] = numpy.mean(p[3])
 
     else:
         global variables
@@ -242,11 +269,12 @@ def p_statistics_methods(p):
             if p[1] == 'mode':
                 stat['mode'] = stats.mode(variables[p[3]])
             if p[1] == 'stdev':
-                stat['stdev'] = stats.stdev(variables[p[3]])
+                stat['stdev'] = numpy.std(variables[p[3]])
             if p[1] == 'avg':
-                stat['avg'] = stats.mean(variables[p[3]])
+                stat['avg'] = numpy.mean(variables[p[3]])
             if p[1] == 'mean':
-                stat['mean'] = stats.mean(variables[p[3]])
+                stat['mean'] = numpy.mean(variables[p[3]])
+
         else:
             print "Variable not defined"
 
@@ -280,12 +308,12 @@ def p_csv_assignment(p):
     if isinstance(p[3], int):
         global classColumn
         classColumn = p[3]
-    elif isinstance(p[3], bool):
-        global hasHeader
-        hasHeader = p[3]
-    else:
+    elif isinstance(p[3], list):
         global featuresColumn
         featuresColumn = p[3]
+    else:
+        global hasHeader
+        hasHeader = p[3]
 
 def p_array_list(p):
     '''array_list : '[' list ']' '''
@@ -312,18 +340,35 @@ def p_error(p):
 #===============================================================================================================================
 
 def uploadFile(csvfilepath):
-
+    print csvfilepath
     if not csvfilepath.lower().endswith('.csv'):
         raise Exception('Incorrect file extension.')
 
     else:
         try:
-            open(csvfilepath, 'r').close()
+            if hasHeader == "true":
+                return numpy.loadtxt(open(csvfilepath,"rb"),delimiter=",",skiprows=1)
+            else:
+                return numpy.loadtxt(open(csvfilepath,"rb"),delimiter=",")
         except:
             raise Exception('Invalid path or file is corrupt.')
-    return csvfilepath
+    return None
+
+def verifyTrainingData():
+    global trainingData
+    if trainingData == None  :
+            sys.exit("Trainind data have not being uploaded.")
 
 
+def verifyTestData():
+    global testData
+    if testData == None  :
+            sys.exit("Test data have not being uploaded.")
+
+def verifyClassifier():
+    if classifier == None:
+        sys.exit("Classifier have not being initialized")
+        
 #===============================================================================================================================
 #                    TEST                        TEST                        TEST                        TESTs
 #===============================================================================================================================
@@ -331,17 +376,21 @@ data2test3 = ""
  
 data2test = """
 grac {
-mean([1,23,4,5,6,898,57])
-saveresult("D:\PycharmProjects/testing/brou")
+features_columns = [1,2,3,4];
+hasHeader = false;
+class_column = 0;
+uploadTrainingData("dumyData.csv");
+gnbc();
+execute();
+uploadTestData("testdata.csv\");
+predict()
 }
 """
 
 y = yacc.yacc()
 result = y.parse(data2test)
-print doCrossValidation
-print k_fold
-print featuresColumn
-print(result)
+ 
+
 
 #print random.choice([1,2,3,4,5,6,7,8,9,10])
 #print stats
@@ -373,4 +422,3 @@ print result
 
 '''
 
-print "Reminder: mean=avg"
