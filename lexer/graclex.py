@@ -9,7 +9,7 @@ reservedWords = {
     'CLASSIFIER_METHOD': ['getErrorRate\(\)', 'saveErrorRate\(\)',  'execute\(\)','calcBestClassifier\(\)'],
     'COMMENT': ['#'],
     'INT': 'int',
-    'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData'],
+    'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData', 'uploadData'],
     'BOOLEAN':['true', 'false'],
     'ALL': ['all'],
     'PRINT': ['printBestClassifier\(\)','printClassifiersComparitions\(\)'],

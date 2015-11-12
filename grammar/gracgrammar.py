@@ -8,7 +8,7 @@ from sklearn.base import ClassifierMixin
 tokens = graclex.tokens
 
 #grac static variable
-global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, dataFilePath, stat, trainingData, testData, data
+global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, statDataFilePath, stat, trainingData, testData, statData
 global classifier, statLast
 k_fold = 5
 doCrossValidation = False
@@ -18,10 +18,10 @@ featuresColumn = [1]
 variables = {}
 trainingDataFilePath = None
 testDataFilePath = None
-dataFilePath = None
+statDataFilePath = None
 trainingData = None
 testData = None
-data = None
+statData = None
 classifier = None
 stat = {}
 classResult = None
@@ -116,17 +116,21 @@ def p_classifier_methods(t):
 def p_upload_methods(t):
     '''upload_methods : UPLOAD_COMMAND '(' PATH ')' '''
     t[0] = t[1]
-    t[3] = t[3][1:-1]
-    if t[1] == "uploadTrainingData":
+    t[3] = t[3][1:-1] #para quitar las comillas
+    if t[1].lower() == "uploadTrainingData".lower():
         global trainingDataFilePath, trainingData
         trainingDataFilePath = t[3]
         trainingData = uploadFile(t[3])
     
-    elif t[1] == "uploadTestData":
+    elif t[1].lower() == "uploadTestData".lower():
         global testDataFilePath, testData
         testDataFilePath = t[3]
         testData = uploadFile(t[3])
-        
+        print "entro"
+    elif t[1].lower() == "uploaddata":
+        global statData, statDataFilePath
+        statDataFilePath = t[3]
+        statData = uploadFile(statDataFilePath)
         
     
 #********************************************************************************************************************************************************************************************************************************************************
@@ -383,12 +387,14 @@ uploadTrainingData("dumyData.csv");
 gnbc();
 execute();
 uploadTestData("testdata.csv\");
-predict()
+predict();
+uploaddata("statdumy.csv")
 }
 """
 
 y = yacc.yacc()
 result = y.parse(data2test)
+print statData
  
 
 
