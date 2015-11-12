@@ -8,12 +8,20 @@ reservedWords = {
     'CLASSIFIERS'  : ['svc\(\)','dtc\(\)', 'nnc\(\)'],
     'CLASSIFIER_METHOD': ['getErrorRate\(\)', 'saveErrorRate\(\)',  'execute\(\)','calcBestClassifier\(\)'],
     'COMMENT': ['#'],
-    'INT':'int',
+    'INT': 'int',
     'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData', 'uploadData'],
     'BOOLEAN':['true', 'false'],
-    'ALL': 'all',
+    'ALL': ['all'],
     'PRINT': ['printBestClassifier\(\)','printClassifiersComparitions\(\)'],
-    'STATISTICS': ['mean','avg','min','max','mode','least','rndm','count','stdev']
+    'STATISTICS': ['mean','avg','min','max','mode','least','rndm','count','stdev'],
+    'GRAC_START': ['grac'],
+    'KFOLD': ['k_fold'],
+    'CROSSVALIDATIONACTION': ['doCrossValidation'],
+    'CSV_HEADER': ['hasheader'],
+    'CSV_CLASSCOLUMN': ['class_column'],
+    'CSV_FEATURESCOLUMNS': ["features_columns"],
+    'CSV_SAVERESULT': ['saveResult'],
+    'CLASSIFIER_METHOD_WPARAMETER': ['predict']
 
 }
 
@@ -27,7 +35,8 @@ tokens = [
         'CSV_FEATURESCOLUMNS',
         'CSV_SAVERESULT',
         'CLASSIFIER_METHOD_WPARAMETER',
-        'PATH',  
+        'PATH',
+        'ID',
 ] + list(reservedWords)#+ list(iter.chain.from_iterable(reservedWords.values())) 
 
 literals = ['(',')','{','}', '=', ',', ';', '[', ']']
@@ -51,17 +60,20 @@ t_CROSSVALIDATIONACTION         = 'doCrossValidation'
 t_CSV_HEADER                    = 'hasheader'
 t_CSV_CLASSCOLUMN               = 'class_column'
 t_CSV_FEATURESCOLUMNS           = 'features_columns'
-t_CSV_SAVERESULT                = 'saveResult' 
+t_CSV_SAVERESULT                = 'saveResult'
 t_CLASSIFIER_METHOD_WPARAMETER  = 'predict'
 #------------------------------------------------------
 #        TOKEN DEFINITION WITH FUNCTION
 #------------------------------------------------------
+
+
 def t_PATH(t):
     r'\"(.+?)\"'
     return t
+
 #Rule for classifiers:
 @TOKEN(reg_classifiers.pattern)
-def t_CLASSIFIER(t):
+def t_CLASSIFIERS(t):
     return(t)
 
 #RULE for classifier methods:
@@ -93,6 +105,7 @@ def t_INT(t):
     r'\d+'
     t.value = int(t.value)
     return t
+
 #Comment
 def t_COMMENT(t):
     r'\#.*'
@@ -103,6 +116,17 @@ def t_COMMENT(t):
 def t_error(t):
     print "Illegal character '%s'" % t.value[0]
     t.lexer.skip(1)
+
+
+
+#DEFINIR EL "ID" AL FINAL
+def t_ID(t):
+    r'[a-zA-Z]+'
+    for key in reservedWords:
+        for value in reservedWords.get(key):
+            if t.value.lower() == value.lower():
+                t.type = key
+    return t
  #------------------------------------------------------
 #        EXTRA FUNCTIONS
 #------------------------------------------------------   
@@ -119,9 +143,9 @@ def find_column(input,token):
 #=========================================================================
 #test
 #=========================================================================
-'''
+
 data2test = """
-svc()dtc()DTC()"SvC()" doCrossValidation execute() #hola 
+svc()dtc()DTC()"SvC()" doCrossValidation execute() #hola
 svc()965() all true
 uploadData
 hasHeader
@@ -130,14 +154,16 @@ printBestClassifier()
 calcBestClassifier()
 mean
 avg
+dimelou
+
 """
-'''
+data3 = "all"
+
 lexer = lex.lex(reflags=re.UNICODE|re.IGNORECASE)
-'''
+
 lexer.input(data2test)
 for tok in lexer:
     print tok
 
 
 print 'llego al final'
-'''

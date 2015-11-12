@@ -1,7 +1,7 @@
 import ply.yacc as yacc
 import lexer.graclex as graclex
 from scipy import stats
-import random
+import random, csv
 tokens = graclex.tokens
 
 #grac static variable
@@ -105,16 +105,20 @@ def p_upload_methods(t):
         dataFilePath = uploadFile(t[3])
         pass
     pass
-  
+#********************************************************************************************************************************************************************************************************************************************************
 #rafa
 #guardar variables de resultado en file en formato csv
 #carlos - {methodo: result }
 #glorimar - matriz
 #path csv y existe
-def p_csv_methods(p):
+def p_csv_methods(t):
     ''' csv_methods : CSV_SAVERESULT '(' PATH ')' '''
+    writer = csv.writer(open(t[3]+'.csv', 'wb'))
+#writes statistics results
+for key, value in stat.items():
+    writer.writerow([key, value])
     pass
-    
+#**********************************************************************************************************************************************************************************************************************************************************
 #glorimar
 def p_printResults(t):
     'printResults : PRINT'
@@ -319,18 +323,21 @@ def uploadFile(csvfilepath):
             raise Exception('Invalid path or file is corrupt.')
     return csvfilepath
 
+
 #===============================================================================================================================
 #                    TEST                        TEST                        TEST                        TESTs
 #===============================================================================================================================
 data2test3 = ""
  
 data2test = """
-grac { features_columns = [3 ,4 ,5,4,5,5,6,6,7]
+grac {
+mean([1,23,4,5,6,898,57])
+saveresult("D:\PycharmProjects/testing/brou")
 }
 """
 
 y = yacc.yacc()
-result = y.parse(data2test3)
+result = y.parse(data2test)
 print doCrossValidation
 print k_fold
 print featuresColumn
