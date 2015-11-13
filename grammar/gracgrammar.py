@@ -1,7 +1,7 @@
 import ply.yacc as yacc
 import lexer.graclex as graclex
 from scipy import stats
-import random, csv
+import random, csv, os
 import numpy
 import sys
 from audioop import avg
@@ -209,36 +209,39 @@ def p_upload_methods(t):
 #falta asegurar que los file sean validos y que es un directorio
 def p_csv_methods(p):
     ''' csv_methods : CSV_SAVERESULT '(' PATH ')' '''
-    
+
+    path = p[3][1:-1]
     if p[1].lower() == 'savePredResult':
         if classResult == None:
             sys.exit("Classifier prediction have not being calculated")
-            
+
         writer = csv.writer(open(p[3]+'.csv', 'wb'))
         for value in classResult:
             writer.writerow(value)
-            
+
     elif p[1].lower() == 'saveStatResult':
         writer = csv.writer(open(p[3]+'.csv', 'wb'))
         for key, value in stat.items():
             writer.writerow([key, value])
-            
+
     elif p[1].lower() == 'savecvresult':
         if len(cv_fold_result) < 1:
             sys.exit("Cross-validation have not being executed")
+        if(not os.path.isdir(path)):
+            sys.exit("Directory not found")
         #para cada fold creara el file
         for foldn in cv_fold_result:
-            writer = csv.writer(open(str(foldn) + '.csv', 'wb')) #verificar que actually grabe dentro del directorio p[3]+ '\\' + 
+            writer = csv.writer(open(path+'/'+str(foldn) + '.csv', 'wb')) #verificar que actually grabe dentro del directorio p[3]+ '\\' +
             writer.writerow(['truth' , 'prediction'])
             for i in range(len(cv_fold_result[foldn]['truth'])):
                 writer.writerow([cv_fold_result[foldn]['truth'][i] , cv_fold_result[foldn]['prediction'][i]])
-                
+
         #crea file para scoring
-        f = open('scoring.csv', 'wb')
+        f = open(path+'/'+'scoring.csv', 'wb')
         for foldn in cv_scoring:
             f.write(foldn + ': ' + str(cv_scoring[foldn]))
             f.write("\n")
-    
+
 
         
 #glorimar
