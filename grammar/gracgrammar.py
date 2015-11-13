@@ -8,13 +8,15 @@ from sklearn.base import ClassifierMixin
 tokens = graclex.tokens
 
 #grac static variable
-global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, statDataFilePath, stat, trainingData, testData, statData
+global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, testFeaturesColumn, testClassColumn,  variables, trainingDataFilePath, testDataFilePath, statDataFilePath, stat, trainingData, testData, statData
 global classifier, statLast
 k_fold = 5
 doCrossValidation = False
 hasHeader = False
 classColumn = 0
 featuresColumn = [1]
+testClassColumn = 0
+testFeaturesColumn = [1]
 variables = {}
 trainingDataFilePath = None
 testDataFilePath = None
@@ -133,7 +135,6 @@ def p_upload_methods(t):
         statData = uploadFile(statDataFilePath)
         
     
-#********************************************************************************************************************************************************************************************************************************************************
 #rafa
 #guardar variables de resultado en file en formato csv
 #carlos - {methodo: result }
@@ -144,10 +145,13 @@ def p_csv_methods(t):
     
     writer = csv.writer(open(t[3]+'.csv', 'wb'))
 #writes statistics results
-    for key, value in stat.items():
-        writer.writerow([key, value])
+    if statLast == True:
+        for key, value in stat.items():
+            writer.writerow([key, value])
+    else:
+        pass#blah blah blah
+
         
-#**********************************************************************************************************************************************************************************************************************************************************
 #glorimar
 def p_printResults(t):
     'printResults : PRINT'
@@ -358,13 +362,23 @@ def p_crossvalidation_assignment(p):
 def p_csv_assignment(p):
     '''csv_assignment : CSV_HEADER '=' BOOLEAN
                         | CSV_CLASSCOLUMN '=' INT
-                        | CSV_FEATURESCOLUMNS '=' array_list'''
+                        | CSV_FEATURESCOLUMNS '=' array_list
+                        | CSV_TESTCLASSCOLUMN '=' INT
+                        | CSV_TESTFEATURESCOLUMNS '=' array_list'''
     if isinstance(p[3], int):
-        global classColumn
-        classColumn = p[3]
+        if p[3] == 'class_column':
+            global classColumn
+            classColumn = p[3]
+        else:
+            global testClassColumn
+            testClassColumn = p[3]
     elif isinstance(p[3], list):
-        global featuresColumn
-        featuresColumn = p[3]
+        if p[3] == 'features_columns':
+            global featuresColumn
+            featuresColumn = p[3]
+        else:
+            global testFeaturesColumn
+            testFeaturesColumn = p[3]
     else:
         global hasHeader
         hasHeader = p[3]
@@ -436,6 +450,8 @@ class_column = 0;
 uploadTrainingData("dumyData.csv");
 gnbc();
 execute();
+test_class_column = 0;
+test_features_column = [1,2,3,4];
 uploadTestData("testdata.csv\");
 predict();
 uploaddata("statdumy.csv")
