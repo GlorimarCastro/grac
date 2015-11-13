@@ -4,14 +4,13 @@ from scipy import stats
 import random, csv
 import numpy
 import sys
-from sklearn.base import ClassifierMixin
+from audioop import avg
 tokens = graclex.tokens
 
 #grac static variable
-global k_fold, doCrossValidation, hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, statDataFilePath, stat, trainingData, testData, statData
-global classifier, statLast
+global k_fold,  hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, statDataFilePath, stat, trainingData, testData, statData
+global classifier, statLast, cv_fold_result, cv_scoring, lastmethod
 k_fold = 5
-doCrossValidation = False
 hasHeader = False
 classColumn = 0
 featuresColumn = [1]
@@ -23,9 +22,13 @@ trainingData = None
 testData = None
 statData = None
 classifier = None
-stat = {}
-classResult = None
 statLast = None
+lastmethod = ""
+#result variables
+classResult = None      #un array simple con cada resultado de la prediccion
+stat = {}               #un diccionario de la siguiente forma {'mean': result, 'avg': result ...}
+cv_fold_result = {}     #si el usuario hace un cross validation cada este diccionario sera {fold1: numpy.array([[], [], []]), fold2:numpy.array([[], [], []]), ...}
+cv_scoring = {}         #si el usuario ejecuta cv sera un diccionario con la siguiente forma: {fold1: {'accuracy': float, ..}, fold2: {'accuracy': float, ..}, ... avg scoring: {}}
 
 #start
 def p_programm(p):
@@ -38,7 +41,6 @@ def p_statement_list(p):
         p[0] = (p[1], p[3]) 
     else:
         p[0] = p[1]
-
 def p_statement(p):
     '''statement : method 
                     | assignment'''
@@ -56,7 +58,7 @@ def p_method(p):
                 | statistics_methods'''
     p[0] = p[1]
 
-#GLORIMAR
+#inicializa la variable global classifier con el classificador que el usuario haya escrito
 def p_classifier(t):
     'classifier : CLASSIFIERS'
     t[0] = t[1]
@@ -80,6 +82,7 @@ def p_classifier(t):
         classifier = GaussianNB()
         
 #GLORIMAR
+#aun hay que cambiar el predict a que trabaje con lo que el usuario haya indicado
 def p_classifier_methods(t):
     '''classifier_methods : CLASSIFIER_METHOD
                             | CLASSIFIER_METHOD_WPARAMETER '(' ')' '''
@@ -87,7 +90,7 @@ def p_classifier_methods(t):
     global classifier, classResult
     #si es un methodo que requiere parametro se ejecuta en el if
     if len(t) > 2:
-        if t[1] == "predict":
+        if t[1].lower() == "predict":
             #execute predict
             verifyTestData()
             verifyClassifier()
@@ -96,23 +99,85 @@ def p_classifier_methods(t):
             print "Result:"
             print classResult
     else:
-        if t[1] == "getErrorRate()":
+        if t[1].lower() == "getcverrorrate()":
             #execute getErrorRate
-            pass
-        elif t[1] == "saveErrorRate()":
-            #execute saveErrorRate
-            pass
-        elif t[1] == "execute()":
+            if  len(cv_scoring) > 0:
+                print "Avg scoring for the cross-validation:"
+                print "Accuracy: ", cv_scoring['avg scorinmg']['accuracy'], " Precision: ", cv_scoring['avg scorinmg']['precision'], " Recall: ", cv_scoring['avg scorinmg']['recall'], "F-score ", cv_scoring['avg scorinmg']['fscore']
+            else:
+                print "No cross-validation scoring on system"                
+        elif t[1].lower() == "execute()":
             verifyClassifier()
             verifyTrainingData()
-            
+            global lastmethod
+            lastmethod = "execute"
             features = trainingData[:,featuresColumn]
             classVector = trainingData[:,classColumn]
             classifier.fit(features, classVector)
             
+        elif t[1].lower() == "executecv()":
+            verifyClassifier()
+            verifyTrainingData()
+            global lastmethod
+            lastmethod = "executecv"
+            from sklearn.cross_validation import LabelKFold #no poermite overlaping
+            print "============================================"
+            print "Doing Cross-Validation: "
+            features = trainingData[:,featuresColumn]
+            classVector =trainingData[:,classColumn]
+            label = numpy.array(range(len(classVector)))
+            lkf = LabelKFold(label, k_fold)
+            #
+            iterationNum = 0
+            #scoring avg:
+            accuracyAvg = 0
+            precisionAvg = 0
+            recallAvg = 0
+            fbetaScoreAvg = 0
+            for train_ind, test_ind in lkf:
+                X_train, X_test = features[train_ind], features[test_ind]
+                y_train, y_test = classVector[train_ind], classVector[test_ind]
+                from sklearn.metrics import confusion_matrix, accuracy_score, precision_recall_fscore_support
+                
+                classifier.fit(X_train, y_train)
+                y_predicted = classifier.predict(X_test)
+                
+                #scoring 
+                accuracy = accuracy_score(y_test, y_predicted)
+                scoreResult = precision_recall_fscore_support(y_test, y_predicted, beta = 1.0, average = 'micro')
+                precision = scoreResult[0]
+                recall = scoreResult[1]
+                fbetaScore = scoreResult[2]
+                cm = confusion_matrix(y_test, y_predicted)
+                
+                #adding to avg
+                accuracyAvg = accuracyAvg + accuracy
+                precisionAvg = precisionAvg + precision
+                recallAvg = recallAvg  + recall
+                fbetaScoreAvg = fbetaScoreAvg + fbetaScore
+            
+                #adding result
+                cv_fold_result['fold_', iterationNum] = {'truth': y_test, 'prediction': y_predicted}
+                cv_scoring['fold_', iterationNum] = {'accuracy': accuracy, 'precision': precision, 'recall': recall, 'fscore': fbetaScore, 'confusion matrix': cm}
+                print "---------------------------------------"
+                print "For fold ", iterationNum
+                print "Confusion matrix is:"
+                print confusion_matrix(y_test, y_predicted)
+                print "Accuracy: ", accuracy, " Precision: ", precision, " Recall: ", recall, 'F-score', fbetaScore
+                
+                iterationNum = iterationNum + 1
+            accuracyAvg = accuracyAvg / k_fold
+            precisionAvg = precisionAvg / k_fold
+            recallAvg = recallAvg / k_fold
+            fbetaScoreAvg = fbetaScoreAvg / k_fold
+            cv_scoring['avg scorinmg'] = {'accuracy': accuracyAvg, 'precision': precisionAvg, 'recall': recallAvg, 'fscore': fbetaScoreAvg}
+            print "---------------------------------------"
+            print "Avg scoring:"
+            print "Accuracy: ", accuracyAvg, " Precision: ", precisionAvg, " Recall: ", recallAvg, "F-score ", fbetaScoreAvg
 
-
-
+#Done
+#esto se encarga de inicializar la variable global de data con la data que elk usuario subio.
+#    trainingData: si elk usuario llama uploadTrainingData
 def p_upload_methods(t):
     '''upload_methods : UPLOAD_COMMAND '(' PATH ')' '''
     t[0] = t[1]
@@ -121,17 +186,17 @@ def p_upload_methods(t):
         global trainingDataFilePath, trainingData
         trainingDataFilePath = t[3]
         trainingData = uploadFile(t[3])
-    
+        print "Training data uploaded"
     elif t[1].lower() == "uploadTestData".lower():
         global testDataFilePath, testData
         testDataFilePath = t[3]
         testData = uploadFile(t[3])
-        print "entro"
+        print "Test data uploaded"
     elif t[1].lower() == "uploaddata":
         global statData, statDataFilePath
         statDataFilePath = t[3]
         statData = uploadFile(statDataFilePath)
-        
+        print "Data uploaded"
     
 #********************************************************************************************************************************************************************************************************************************************************
 #rafa
@@ -296,14 +361,12 @@ def p_assignment(p):
         variables[p[1]] = p[3]
     
 def p_crossvalidation_assignment(p):
-    '''crossvalidation_assignment :  KFOLD '=' INT
-                                    | CROSSVALIDATIONACTION '=' BOOLEAN'''
+    '''crossvalidation_assignment :  KFOLD '=' INT'''
     if isinstance(p[3], int):
         global k_fold
+        if p[3] < 2:
+            sys.exit("kFold should not be less than 2")
         k_fold = p[3]
-    else:
-        global doCrossValidation
-        doCrossValidation = p[3]
 
 def p_csv_assignment(p):
     '''csv_assignment : CSV_HEADER '=' BOOLEAN
@@ -336,7 +399,7 @@ def p_list(p):
 
 #error handler, se debe de incluir una salida al programa
 def p_error(p):
-    print ("Sintax error in input")
+    sys.exit("Sintax error in input")
 
 
 #===============================================================================================================================
@@ -344,10 +407,8 @@ def p_error(p):
 #===============================================================================================================================
 
 def uploadFile(csvfilepath):
-    print csvfilepath
     if not csvfilepath.lower().endswith('.csv'):
         raise Exception('Incorrect file extension.')
-
     else:
         try:
             if hasHeader == "true":
@@ -372,29 +433,38 @@ def verifyTestData():
 def verifyClassifier():
     if classifier == None:
         sys.exit("Classifier have not being initialized")
+    
+ 
+    def precision(predictedVector, truthVector):
+        pass
+    
+    def recall(predictedVector, truthVector):
+        pass
+    
+    def hharmonicMean(predictedVector, truthVector):
+        pass
         
 #===============================================================================================================================
 #                    TEST                        TEST                        TEST                        TESTs
 #===============================================================================================================================
-data2test3 = ""
+
  
 data2test = """
 grac {
 features_columns = [1,2,3,4];
+kfold = 2;
 hasHeader = false;
 class_column = 0;
 uploadTrainingData("dumyData.csv");
 gnbc();
-execute();
-uploadTestData("testdata.csv\");
-predict();
-uploaddata("statdumy.csv")
+executecv();
+getcverrorrate()
 }
 """
 
 y = yacc.yacc()
 result = y.parse(data2test)
-print statData
+print "termino"
  
 
 

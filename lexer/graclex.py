@@ -6,7 +6,7 @@ import re
 #crear CSV_Method = saveresult() y borrarlo de CSV_VAR
 reservedWords = {
     'CLASSIFIERS'  : ['svc\(\)','dtc\(\)', 'gnbc\(\)'],
-    'CLASSIFIER_METHOD': ['getErrorRate\(\)', 'saveErrorRate\(\)',  'execute\(\)','calcBestClassifier\(\)'],
+    'CLASSIFIER_METHOD': ['getCVErrorRate\(\)',  'execute\(\)', 'executeCV\(\)', 'calcBestClassifier\(\)'],
     'COMMENT': ['#'],
     'INT': 'int',
     'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData', 'uploadData'],
@@ -15,8 +15,8 @@ reservedWords = {
     'PRINT': ['printBestClassifier\(\)','printClassifiersComparitions\(\)'],
     'STATISTICS': ['mean','avg','min','max','mode','least','rndm','count','stdev'],
     'GRAC_START': ['grac'],
-    'KFOLD': ['k_fold'],
-    'CROSSVALIDATIONACTION': ['doCrossValidation'],
+    'KFOLD': ['kfold'],
+    #'CROSSVALIDATIONACTION': ['doCrossValidation'],
     'CSV_HEADER': ['hasheader'],
     'CSV_CLASSCOLUMN': ['class_column'],
     'CSV_FEATURESCOLUMNS': ["features_columns"],
@@ -50,7 +50,7 @@ t_ignore                        = ' \t'
 t_ALL                           = reservedWords.get('ALL')[0]
 t_GRAC_START                    = reservedWords.get('GRAC_START')[0]
 t_KFOLD                         = reservedWords.get('KFOLD')[0]
-t_CROSSVALIDATIONACTION         = reservedWords.get('CROSSVALIDATIONACTION')[0]
+#t_CROSSVALIDATIONACTION         = reservedWords.get('CROSSVALIDATIONACTION')[0]
 t_CSV_HEADER                    = reservedWords.get('CSV_HEADER')[0]
 t_CSV_SAVERESULT                = reservedWords.get('CSV_SAVERESULT')[0]
 t_CLASSIFIER_METHOD_WPARAMETER  = reservedWords.get('CLASSIFIER_METHOD_WPARAMETER')[0]
@@ -141,20 +141,11 @@ def find_column(input,token):
 #=========================================================================
 #test
 #=========================================================================
-"""
-data2test = """ """
-svc()dtc()DTC()"SvC()" doCrossValidation execute() #hola
-svc()965() all true
-uploadData
-hasHeader
-printClassifiersComparitions()
-printBestClassifier()
-calcBestClassifier()
-mean
-avg
-dimelou
 
-"""
+#data2test = """ 
+#executecv()
+
+#"""
 
 
 lexer = lex.lex(reflags=re.UNICODE|re.IGNORECASE)
@@ -165,4 +156,5 @@ for tok in lexer:
 
 
 print 'llego al final'
+
 """

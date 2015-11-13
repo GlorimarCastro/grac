@@ -32,56 +32,54 @@ Rule 21    assignment -> crossvalidation_assignment
 Rule 22    assignment -> csv_assignment
 Rule 23    assignment -> ID = array_list
 Rule 24    crossvalidation_assignment -> KFOLD = INT
-Rule 25    crossvalidation_assignment -> CROSSVALIDATIONACTION = BOOLEAN
-Rule 26    csv_assignment -> CSV_HEADER = BOOLEAN
-Rule 27    csv_assignment -> CSV_CLASSCOLUMN = INT
-Rule 28    csv_assignment -> CSV_FEATURESCOLUMNS = array_list
-Rule 29    array_list -> [ list ]
-Rule 30    list -> INT
-Rule 31    list -> INT , list
+Rule 25    csv_assignment -> CSV_HEADER = BOOLEAN
+Rule 26    csv_assignment -> CSV_CLASSCOLUMN = INT
+Rule 27    csv_assignment -> CSV_FEATURESCOLUMNS = array_list
+Rule 28    array_list -> [ list ]
+Rule 29    list -> INT
+Rule 30    list -> INT , list
 
 Terminals, with rules where they appear
 
 (                    : 14 15 16 18 19 20
 )                    : 14 15 16 18 19 20
-,                    : 31
+,                    : 30
 ;                    : 3
-=                    : 23 24 25 26 27 28
+=                    : 23 24 25 26 27
 ALL                  : 
-BOOLEAN              : 25 26
+BOOLEAN              : 25
 CLASSIFIERS          : 12
 CLASSIFIER_METHOD    : 13
 CLASSIFIER_METHOD_WPARAMETER : 14
 COMMENT              : 
-CROSSVALIDATIONACTION : 25
-CSV_CLASSCOLUMN      : 27
-CSV_FEATURESCOLUMNS  : 28
-CSV_HEADER           : 26
+CSV_CLASSCOLUMN      : 26
+CSV_FEATURESCOLUMNS  : 27
+CSV_HEADER           : 25
 CSV_SAVERESULT       : 16
 GRAC_START           : 1
 ID                   : 18 23
-INT                  : 19 24 27 30 31
+INT                  : 19 24 26 29 30
 KFOLD                : 24
 PATH                 : 15 16
 PRINT                : 17
 STATISTICS           : 18 19 20
 UPLOAD_COMMAND       : 15
-[                    : 29
-]                    : 29
+[                    : 28
+]                    : 28
 error                : 
 {                    : 1
 }                    : 1
 
 Nonterminals, with rules where they appear
 
-array_list           : 20 23 28
+array_list           : 20 23 27
 assignment           : 5
 classifier           : 6
 classifier_methods   : 7
 crossvalidation_assignment : 21
 csv_assignment       : 22
 csv_methods          : 9
-list                 : 29 31
+list                 : 28 30
 method               : 4
 printResults         : 10
 program              : 0
@@ -140,50 +138,48 @@ state 3
     (19) statistics_methods -> . STATISTICS ( INT )
     (20) statistics_methods -> . STATISTICS ( array_list )
     (24) crossvalidation_assignment -> . KFOLD = INT
-    (25) crossvalidation_assignment -> . CROSSVALIDATIONACTION = BOOLEAN
-    (26) csv_assignment -> . CSV_HEADER = BOOLEAN
-    (27) csv_assignment -> . CSV_CLASSCOLUMN = INT
-    (28) csv_assignment -> . CSV_FEATURESCOLUMNS = array_list
+    (25) csv_assignment -> . CSV_HEADER = BOOLEAN
+    (26) csv_assignment -> . CSV_CLASSCOLUMN = INT
+    (27) csv_assignment -> . CSV_FEATURESCOLUMNS = array_list
 
-    ID              shift and go to state 21
-    CLASSIFIERS     shift and go to state 28
-    CLASSIFIER_METHOD shift and go to state 22
+    ID              shift and go to state 20
+    CLASSIFIERS     shift and go to state 27
+    CLASSIFIER_METHOD shift and go to state 21
     CLASSIFIER_METHOD_WPARAMETER shift and go to state 5
-    UPLOAD_COMMAND  shift and go to state 12
+    UPLOAD_COMMAND  shift and go to state 11
     CSV_SAVERESULT  shift and go to state 9
     PRINT           shift and go to state 10
-    STATISTICS      shift and go to state 23
-    KFOLD           shift and go to state 24
-    CROSSVALIDATIONACTION shift and go to state 11
-    CSV_HEADER      shift and go to state 20
+    STATISTICS      shift and go to state 22
+    KFOLD           shift and go to state 23
+    CSV_HEADER      shift and go to state 19
     CSV_CLASSCOLUMN shift and go to state 4
     CSV_FEATURESCOLUMNS shift and go to state 7
 
-    printResults                   shift and go to state 14
-    assignment                     shift and go to state 17
+    printResults                   shift and go to state 13
+    assignment                     shift and go to state 16
     upload_methods                 shift and go to state 6
-    crossvalidation_assignment     shift and go to state 18
-    csv_assignment                 shift and go to state 13
-    classifier                     shift and go to state 25
-    csv_methods                    shift and go to state 27
-    classifier_methods             shift and go to state 26
+    crossvalidation_assignment     shift and go to state 17
+    csv_assignment                 shift and go to state 12
+    classifier                     shift and go to state 24
+    csv_methods                    shift and go to state 26
+    classifier_methods             shift and go to state 25
     statistics_methods             shift and go to state 8
-    statement                      shift and go to state 15
-    statement_list                 shift and go to state 19
-    method                         shift and go to state 16
+    statement                      shift and go to state 14
+    statement_list                 shift and go to state 18
+    method                         shift and go to state 15
 
 state 4
 
-    (27) csv_assignment -> CSV_CLASSCOLUMN . = INT
+    (26) csv_assignment -> CSV_CLASSCOLUMN . = INT
 
-    =               shift and go to state 29
+    =               shift and go to state 28
 
 
 state 5
 
     (14) classifier_methods -> CLASSIFIER_METHOD_WPARAMETER . ( )
 
-    (               shift and go to state 30
+    (               shift and go to state 29
 
 
 state 6
@@ -196,9 +192,9 @@ state 6
 
 state 7
 
-    (28) csv_assignment -> CSV_FEATURESCOLUMNS . = array_list
+    (27) csv_assignment -> CSV_FEATURESCOLUMNS . = array_list
 
-    =               shift and go to state 31
+    =               shift and go to state 30
 
 
 state 8
@@ -213,7 +209,7 @@ state 9
 
     (16) csv_methods -> CSV_SAVERESULT . ( PATH )
 
-    (               shift and go to state 32
+    (               shift and go to state 31
 
 
 state 10
@@ -226,19 +222,12 @@ state 10
 
 state 11
 
-    (25) crossvalidation_assignment -> CROSSVALIDATIONACTION . = BOOLEAN
+    (15) upload_methods -> UPLOAD_COMMAND . ( PATH )
 
-    =               shift and go to state 33
+    (               shift and go to state 32
 
 
 state 12
-
-    (15) upload_methods -> UPLOAD_COMMAND . ( PATH )
-
-    (               shift and go to state 34
-
-
-state 13
 
     (22) assignment -> csv_assignment .
 
@@ -246,7 +235,7 @@ state 13
     }               reduce using rule 22 (assignment -> csv_assignment .)
 
 
-state 14
+state 13
 
     (10) method -> printResults .
 
@@ -254,16 +243,16 @@ state 14
     }               reduce using rule 10 (method -> printResults .)
 
 
-state 15
+state 14
 
     (2) statement_list -> statement .
     (3) statement_list -> statement . ; statement_list
 
     }               reduce using rule 2 (statement_list -> statement .)
-    ;               shift and go to state 35
+    ;               shift and go to state 33
 
 
-state 16
+state 15
 
     (4) statement -> method .
 
@@ -271,7 +260,7 @@ state 16
     }               reduce using rule 4 (statement -> method .)
 
 
-state 17
+state 16
 
     (5) statement -> assignment .
 
@@ -279,7 +268,7 @@ state 17
     }               reduce using rule 5 (statement -> assignment .)
 
 
-state 18
+state 17
 
     (21) assignment -> crossvalidation_assignment .
 
@@ -287,28 +276,28 @@ state 18
     }               reduce using rule 21 (assignment -> crossvalidation_assignment .)
 
 
-state 19
+state 18
 
     (1) program -> GRAC_START { statement_list . }
 
-    }               shift and go to state 36
+    }               shift and go to state 34
+
+
+state 19
+
+    (25) csv_assignment -> CSV_HEADER . = BOOLEAN
+
+    =               shift and go to state 35
 
 
 state 20
 
-    (26) csv_assignment -> CSV_HEADER . = BOOLEAN
+    (23) assignment -> ID . = array_list
 
-    =               shift and go to state 37
+    =               shift and go to state 36
 
 
 state 21
-
-    (23) assignment -> ID . = array_list
-
-    =               shift and go to state 38
-
-
-state 22
 
     (13) classifier_methods -> CLASSIFIER_METHOD .
 
@@ -316,23 +305,23 @@ state 22
     }               reduce using rule 13 (classifier_methods -> CLASSIFIER_METHOD .)
 
 
-state 23
+state 22
 
     (18) statistics_methods -> STATISTICS . ( ID )
     (19) statistics_methods -> STATISTICS . ( INT )
     (20) statistics_methods -> STATISTICS . ( array_list )
 
-    (               shift and go to state 39
+    (               shift and go to state 37
 
 
-state 24
+state 23
 
     (24) crossvalidation_assignment -> KFOLD . = INT
 
-    =               shift and go to state 40
+    =               shift and go to state 38
 
 
-state 25
+state 24
 
     (6) method -> classifier .
 
@@ -340,7 +329,7 @@ state 25
     }               reduce using rule 6 (method -> classifier .)
 
 
-state 26
+state 25
 
     (7) method -> classifier_methods .
 
@@ -348,7 +337,7 @@ state 26
     }               reduce using rule 7 (method -> classifier_methods .)
 
 
-state 27
+state 26
 
     (9) method -> csv_methods .
 
@@ -356,7 +345,7 @@ state 27
     }               reduce using rule 9 (method -> csv_methods .)
 
 
-state 28
+state 27
 
     (12) classifier -> CLASSIFIERS .
 
@@ -364,51 +353,44 @@ state 28
     }               reduce using rule 12 (classifier -> CLASSIFIERS .)
 
 
+state 28
+
+    (26) csv_assignment -> CSV_CLASSCOLUMN = . INT
+
+    INT             shift and go to state 39
+
+
 state 29
 
-    (27) csv_assignment -> CSV_CLASSCOLUMN = . INT
+    (14) classifier_methods -> CLASSIFIER_METHOD_WPARAMETER ( . )
 
-    INT             shift and go to state 41
+    )               shift and go to state 40
 
 
 state 30
 
-    (14) classifier_methods -> CLASSIFIER_METHOD_WPARAMETER ( . )
+    (27) csv_assignment -> CSV_FEATURESCOLUMNS = . array_list
+    (28) array_list -> . [ list ]
 
-    )               shift and go to state 42
+    [               shift and go to state 41
 
+    array_list                     shift and go to state 42
 
 state 31
 
-    (28) csv_assignment -> CSV_FEATURESCOLUMNS = . array_list
-    (29) array_list -> . [ list ]
+    (16) csv_methods -> CSV_SAVERESULT ( . PATH )
 
-    [               shift and go to state 43
+    PATH            shift and go to state 43
 
-    array_list                     shift and go to state 44
 
 state 32
 
-    (16) csv_methods -> CSV_SAVERESULT ( . PATH )
+    (15) upload_methods -> UPLOAD_COMMAND ( . PATH )
 
-    PATH            shift and go to state 45
+    PATH            shift and go to state 44
 
 
 state 33
-
-    (25) crossvalidation_assignment -> CROSSVALIDATIONACTION = . BOOLEAN
-
-    BOOLEAN         shift and go to state 46
-
-
-state 34
-
-    (15) upload_methods -> UPLOAD_COMMAND ( . PATH )
-
-    PATH            shift and go to state 47
-
-
-state 35
 
     (3) statement_list -> statement ; . statement_list
     (2) statement_list -> . statement
@@ -434,90 +416,88 @@ state 35
     (19) statistics_methods -> . STATISTICS ( INT )
     (20) statistics_methods -> . STATISTICS ( array_list )
     (24) crossvalidation_assignment -> . KFOLD = INT
-    (25) crossvalidation_assignment -> . CROSSVALIDATIONACTION = BOOLEAN
-    (26) csv_assignment -> . CSV_HEADER = BOOLEAN
-    (27) csv_assignment -> . CSV_CLASSCOLUMN = INT
-    (28) csv_assignment -> . CSV_FEATURESCOLUMNS = array_list
+    (25) csv_assignment -> . CSV_HEADER = BOOLEAN
+    (26) csv_assignment -> . CSV_CLASSCOLUMN = INT
+    (27) csv_assignment -> . CSV_FEATURESCOLUMNS = array_list
 
-    ID              shift and go to state 21
-    CLASSIFIERS     shift and go to state 28
-    CLASSIFIER_METHOD shift and go to state 22
+    ID              shift and go to state 20
+    CLASSIFIERS     shift and go to state 27
+    CLASSIFIER_METHOD shift and go to state 21
     CLASSIFIER_METHOD_WPARAMETER shift and go to state 5
-    UPLOAD_COMMAND  shift and go to state 12
+    UPLOAD_COMMAND  shift and go to state 11
     CSV_SAVERESULT  shift and go to state 9
     PRINT           shift and go to state 10
-    STATISTICS      shift and go to state 23
-    KFOLD           shift and go to state 24
-    CROSSVALIDATIONACTION shift and go to state 11
-    CSV_HEADER      shift and go to state 20
+    STATISTICS      shift and go to state 22
+    KFOLD           shift and go to state 23
+    CSV_HEADER      shift and go to state 19
     CSV_CLASSCOLUMN shift and go to state 4
     CSV_FEATURESCOLUMNS shift and go to state 7
 
-    printResults                   shift and go to state 14
-    assignment                     shift and go to state 17
+    printResults                   shift and go to state 13
+    assignment                     shift and go to state 16
     upload_methods                 shift and go to state 6
-    crossvalidation_assignment     shift and go to state 18
-    csv_assignment                 shift and go to state 13
-    classifier                     shift and go to state 25
-    csv_methods                    shift and go to state 27
-    classifier_methods             shift and go to state 26
+    crossvalidation_assignment     shift and go to state 17
+    csv_assignment                 shift and go to state 12
+    classifier                     shift and go to state 24
+    csv_methods                    shift and go to state 26
+    classifier_methods             shift and go to state 25
     statistics_methods             shift and go to state 8
-    statement                      shift and go to state 15
-    statement_list                 shift and go to state 48
-    method                         shift and go to state 16
+    statement                      shift and go to state 14
+    statement_list                 shift and go to state 45
+    method                         shift and go to state 15
 
-state 36
+state 34
 
     (1) program -> GRAC_START { statement_list } .
 
     $end            reduce using rule 1 (program -> GRAC_START { statement_list } .)
 
 
-state 37
+state 35
 
-    (26) csv_assignment -> CSV_HEADER = . BOOLEAN
+    (25) csv_assignment -> CSV_HEADER = . BOOLEAN
 
-    BOOLEAN         shift and go to state 49
+    BOOLEAN         shift and go to state 46
 
 
-state 38
+state 36
 
     (23) assignment -> ID = . array_list
-    (29) array_list -> . [ list ]
+    (28) array_list -> . [ list ]
 
-    [               shift and go to state 43
+    [               shift and go to state 41
 
-    array_list                     shift and go to state 50
+    array_list                     shift and go to state 47
 
-state 39
+state 37
 
     (18) statistics_methods -> STATISTICS ( . ID )
     (19) statistics_methods -> STATISTICS ( . INT )
     (20) statistics_methods -> STATISTICS ( . array_list )
-    (29) array_list -> . [ list ]
+    (28) array_list -> . [ list ]
 
-    ID              shift and go to state 53
-    INT             shift and go to state 51
-    [               shift and go to state 43
+    ID              shift and go to state 50
+    INT             shift and go to state 48
+    [               shift and go to state 41
 
-    array_list                     shift and go to state 52
+    array_list                     shift and go to state 49
 
-state 40
+state 38
 
     (24) crossvalidation_assignment -> KFOLD = . INT
 
-    INT             shift and go to state 54
+    INT             shift and go to state 51
 
 
-state 41
+state 39
 
-    (27) csv_assignment -> CSV_CLASSCOLUMN = INT .
+    (26) csv_assignment -> CSV_CLASSCOLUMN = INT .
 
-    ;               reduce using rule 27 (csv_assignment -> CSV_CLASSCOLUMN = INT .)
-    }               reduce using rule 27 (csv_assignment -> CSV_CLASSCOLUMN = INT .)
+    ;               reduce using rule 26 (csv_assignment -> CSV_CLASSCOLUMN = INT .)
+    }               reduce using rule 26 (csv_assignment -> CSV_CLASSCOLUMN = INT .)
 
 
-state 42
+state 40
 
     (14) classifier_methods -> CLASSIFIER_METHOD_WPARAMETER ( ) .
 
@@ -525,62 +505,54 @@ state 42
     }               reduce using rule 14 (classifier_methods -> CLASSIFIER_METHOD_WPARAMETER ( ) .)
 
 
+state 41
+
+    (28) array_list -> [ . list ]
+    (29) list -> . INT
+    (30) list -> . INT , list
+
+    INT             shift and go to state 52
+
+    list                           shift and go to state 53
+
+state 42
+
+    (27) csv_assignment -> CSV_FEATURESCOLUMNS = array_list .
+
+    ;               reduce using rule 27 (csv_assignment -> CSV_FEATURESCOLUMNS = array_list .)
+    }               reduce using rule 27 (csv_assignment -> CSV_FEATURESCOLUMNS = array_list .)
+
+
 state 43
-
-    (29) array_list -> [ . list ]
-    (30) list -> . INT
-    (31) list -> . INT , list
-
-    INT             shift and go to state 55
-
-    list                           shift and go to state 56
-
-state 44
-
-    (28) csv_assignment -> CSV_FEATURESCOLUMNS = array_list .
-
-    ;               reduce using rule 28 (csv_assignment -> CSV_FEATURESCOLUMNS = array_list .)
-    }               reduce using rule 28 (csv_assignment -> CSV_FEATURESCOLUMNS = array_list .)
-
-
-state 45
 
     (16) csv_methods -> CSV_SAVERESULT ( PATH . )
 
-    )               shift and go to state 57
+    )               shift and go to state 54
 
 
-state 46
-
-    (25) crossvalidation_assignment -> CROSSVALIDATIONACTION = BOOLEAN .
-
-    ;               reduce using rule 25 (crossvalidation_assignment -> CROSSVALIDATIONACTION = BOOLEAN .)
-    }               reduce using rule 25 (crossvalidation_assignment -> CROSSVALIDATIONACTION = BOOLEAN .)
-
-
-state 47
+state 44
 
     (15) upload_methods -> UPLOAD_COMMAND ( PATH . )
 
-    )               shift and go to state 58
+    )               shift and go to state 55
 
 
-state 48
+state 45
 
     (3) statement_list -> statement ; statement_list .
 
     }               reduce using rule 3 (statement_list -> statement ; statement_list .)
 
 
-state 49
+state 46
 
-    (26) csv_assignment -> CSV_HEADER = BOOLEAN .
+    (25) csv_assignment -> CSV_HEADER = BOOLEAN .
 
-    ;               reduce using rule 26 (csv_assignment -> CSV_HEADER = BOOLEAN .)
-    }               reduce using rule 26 (csv_assignment -> CSV_HEADER = BOOLEAN .)
+    ;               reduce using rule 25 (csv_assignment -> CSV_HEADER = BOOLEAN .)
+    }               reduce using rule 25 (csv_assignment -> CSV_HEADER = BOOLEAN .)
 
 
-state 50
+state 47
 
     (23) assignment -> ID = array_list .
 
@@ -588,28 +560,28 @@ state 50
     }               reduce using rule 23 (assignment -> ID = array_list .)
 
 
-state 51
+state 48
 
     (19) statistics_methods -> STATISTICS ( INT . )
 
-    )               shift and go to state 59
+    )               shift and go to state 56
 
 
-state 52
+state 49
 
     (20) statistics_methods -> STATISTICS ( array_list . )
 
-    )               shift and go to state 60
+    )               shift and go to state 57
 
 
-state 53
+state 50
 
     (18) statistics_methods -> STATISTICS ( ID . )
 
-    )               shift and go to state 61
+    )               shift and go to state 58
 
 
-state 54
+state 51
 
     (24) crossvalidation_assignment -> KFOLD = INT .
 
@@ -617,23 +589,23 @@ state 54
     }               reduce using rule 24 (crossvalidation_assignment -> KFOLD = INT .)
 
 
-state 55
+state 52
 
-    (30) list -> INT .
-    (31) list -> INT . , list
+    (29) list -> INT .
+    (30) list -> INT . , list
 
-    ]               reduce using rule 30 (list -> INT .)
-    ,               shift and go to state 62
-
-
-state 56
-
-    (29) array_list -> [ list . ]
-
-    ]               shift and go to state 63
+    ]               reduce using rule 29 (list -> INT .)
+    ,               shift and go to state 59
 
 
-state 57
+state 53
+
+    (28) array_list -> [ list . ]
+
+    ]               shift and go to state 60
+
+
+state 54
 
     (16) csv_methods -> CSV_SAVERESULT ( PATH ) .
 
@@ -641,7 +613,7 @@ state 57
     }               reduce using rule 16 (csv_methods -> CSV_SAVERESULT ( PATH ) .)
 
 
-state 58
+state 55
 
     (15) upload_methods -> UPLOAD_COMMAND ( PATH ) .
 
@@ -649,7 +621,7 @@ state 58
     }               reduce using rule 15 (upload_methods -> UPLOAD_COMMAND ( PATH ) .)
 
 
-state 59
+state 56
 
     (19) statistics_methods -> STATISTICS ( INT ) .
 
@@ -657,7 +629,7 @@ state 59
     }               reduce using rule 19 (statistics_methods -> STATISTICS ( INT ) .)
 
 
-state 60
+state 57
 
     (20) statistics_methods -> STATISTICS ( array_list ) .
 
@@ -665,7 +637,7 @@ state 60
     }               reduce using rule 20 (statistics_methods -> STATISTICS ( array_list ) .)
 
 
-state 61
+state 58
 
     (18) statistics_methods -> STATISTICS ( ID ) .
 
@@ -673,28 +645,28 @@ state 61
     }               reduce using rule 18 (statistics_methods -> STATISTICS ( ID ) .)
 
 
-state 62
+state 59
 
-    (31) list -> INT , . list
-    (30) list -> . INT
-    (31) list -> . INT , list
+    (30) list -> INT , . list
+    (29) list -> . INT
+    (30) list -> . INT , list
 
-    INT             shift and go to state 55
+    INT             shift and go to state 52
 
-    list                           shift and go to state 64
+    list                           shift and go to state 61
 
-state 63
+state 60
 
-    (29) array_list -> [ list ] .
+    (28) array_list -> [ list ] .
 
-    ;               reduce using rule 29 (array_list -> [ list ] .)
-    }               reduce using rule 29 (array_list -> [ list ] .)
-    )               reduce using rule 29 (array_list -> [ list ] .)
+    ;               reduce using rule 28 (array_list -> [ list ] .)
+    }               reduce using rule 28 (array_list -> [ list ] .)
+    )               reduce using rule 28 (array_list -> [ list ] .)
 
 
-state 64
+state 61
 
-    (31) list -> INT , list .
+    (30) list -> INT , list .
 
-    ]               reduce using rule 31 (list -> INT , list .)
+    ]               reduce using rule 30 (list -> INT , list .)
 
