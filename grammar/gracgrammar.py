@@ -418,7 +418,7 @@ def p_statistics_methods(p):
 
         if p[1] == 'mean':
             stat['mean'] = numpy.mean(statData[:,p[3]])
-            print("mean = "+str(stat['avg']))
+            print("mean = "+str(stat['mean']))
 
     elif isinstance(p[3], list):
 
@@ -481,7 +481,7 @@ def p_statistics_methods(p):
 
         if p[1] == 'mean':
             stat['mean'] = numpy.mean(p[3])
-            print("mean = "+str(stat['avg']))
+            print("mean = "+str(stat['mean']))
 
     else:
         global variables
@@ -546,7 +546,7 @@ def p_statistics_methods(p):
 
             if p[1] == 'mean':
                 stat['mean'] = numpy.mean(variables[p[3]])
-                print("mean = "+str(stat['avg']))
+                print("mean = "+str(stat['mean']))
 
         else:
             print "Variable not defined"
