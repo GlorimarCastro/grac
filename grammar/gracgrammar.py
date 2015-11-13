@@ -171,8 +171,58 @@ def p_statistics_methods(p):
     global stat, statLast
     statLast = True
     if isinstance(p[3], int):
-        #WTF LOL
-        pass
+
+        if p[1] == 'count':
+            temp = 0
+            for e in statData[:,p[3]]:
+                temp += 1
+            stat['count'] = temp
+
+        if p[1] == 'min':
+
+            stat['min'] = min(statData[:,p[3]])
+
+        if p[1] == 'max':
+
+            stat['max'] = max(statData[:,p[3]])
+
+        if p[1] == 'rndm':
+
+            stat['rndm'] = random.choice(statData[:,p[3]])
+
+        if p[1] == 'least':
+            # Tally occurrences of numbers in a list
+            cnt = {}
+            result = []
+            #initialize dictionary with counts=0
+            for n in [statData[:,p[3]]]:
+                cnt[n] = 0
+            #link keys with their counts
+            for w in [statData[:,p[3]]]:
+                cnt[w] += 1
+            #get min
+            min = len(cnt)
+            #print min
+            for c in cnt:
+                if cnt[c] < min:
+                    min = cnt[c]
+
+            #prints keys with the lowest counts
+            for e in cnt:
+                if cnt[e] == min:
+                    result.append(e)
+            stat['least'] = result
+
+        if p[1] == 'mode':
+            stat['mode'] = stats.mode(statData[:,p[3]])
+            ""
+        if p[1] == 'stdev':
+            stat['stdev'] = numpy.std(statData[:,p[3]])
+        if p[1] == 'avg':
+            stat['avg'] = numpy.mean(statData[:,p[3]])
+        if p[1] == 'mean':
+            stat['mean'] = numpy.mean(statData[:,p[3]])
+
     elif isinstance(p[3], list):
 
         if p[1] == 'count':
