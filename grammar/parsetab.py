@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '96BAF37FF1708AE65CE876660CBF2D75'
+_lr_signature = 'BABF7099839CCCED33AD3CC95ECB3353'
     
-_lr_action_items = {'CSV_CLASSCOLUMN':([3,33,],[4,4,]),'CLASSIFIER_METHOD_WPARAMETER':([3,33,],[5,5,]),'CSV_FEATURESCOLUMNS':([3,33,],[7,7,]),'CSV_SAVERESULT':([3,33,],[9,9,]),'PRINT':([3,33,],[10,10,]),'PATH':([31,32,],[43,44,]),'[':([30,36,37,],[41,41,41,]),'UPLOAD_COMMAND':([3,33,],[11,11,]),')':([29,43,44,48,49,50,60,],[40,54,55,56,57,58,-28,]),'(':([5,9,11,22,],[29,31,32,37,]),',':([52,],[59,]),';':([6,8,10,12,13,14,15,16,17,21,24,25,26,27,39,40,42,46,47,51,54,55,56,57,58,60,],[-8,-11,-17,-22,-10,33,-4,-5,-21,-13,-6,-7,-9,-12,-26,-14,-27,-25,-23,-24,-16,-15,-19,-20,-18,-28,]),'=':([4,7,19,20,23,],[28,30,35,36,38,]),'$end':([2,34,],[0,-1,]),'GRAC_START':([0,],[1,]),'CSV_HEADER':([3,33,],[19,19,]),']':([52,53,61,],[-29,60,-30,]),'ID':([3,33,37,],[20,20,50,]),'CLASSIFIER_METHOD':([3,33,],[21,21,]),'STATISTICS':([3,33,],[22,22,]),'KFOLD':([3,33,],[23,23,]),'INT':([28,37,38,41,59,],[39,48,51,52,52,]),'BOOLEAN':([35,],[46,]),'{':([1,],[3,]),'}':([6,8,10,12,13,14,15,16,17,18,21,24,25,26,27,39,40,42,45,46,47,51,54,55,56,57,58,60,],[-8,-11,-17,-22,-10,-2,-4,-5,-21,34,-13,-6,-7,-9,-12,-26,-14,-27,-3,-25,-23,-24,-16,-15,-19,-20,-18,-28,]),'CLASSIFIERS':([3,33,],[27,27,]),}
+_lr_action_items = {'CSV_CLASSCOLUMN':([3,37,],[4,4,]),'CLASSIFIER_METHOD_WPARAMETER':([3,37,],[5,5,]),'CSV_TESTFEATURESCOLUMNS':([3,37,],[7,7,]),'CSV_FEATURESCOLUMNS':([3,37,],[8,8,]),'CSV_SAVERESULT':([3,37,],[10,10,]),'PRINT':([3,37,],[11,11,]),'PATH':([34,35,],[48,49,]),'[':([32,33,40,41,],[46,46,46,46,]),'UPLOAD_COMMAND':([3,37,],[12,12,]),')':([31,48,49,54,55,56,66,],[44,60,61,62,63,64,-30,]),'(':([5,10,12,24,],[31,34,35,41,]),'CSV_TESTCLASSCOLUMN':([3,37,],[13,13,]),',':([58,],[65,]),';':([6,9,11,14,15,16,17,18,19,23,26,27,28,29,43,44,45,47,50,52,53,57,60,61,62,63,64,66,],[-8,-11,-17,-22,-10,37,-4,-5,-21,-13,-6,-7,-9,-12,-26,-14,-29,-27,-28,-25,-23,-24,-16,-15,-19,-20,-18,-30,]),'=':([4,7,8,13,21,22,25,],[30,32,33,36,39,40,42,]),'$end':([2,38,],[0,-1,]),'GRAC_START':([0,],[1,]),'CSV_HEADER':([3,37,],[21,21,]),']':([58,59,67,],[-31,66,-32,]),'ID':([3,37,41,],[22,22,56,]),'CLASSIFIER_METHOD':([3,37,],[23,23,]),'STATISTICS':([3,37,],[24,24,]),'KFOLD':([3,37,],[25,25,]),'INT':([30,36,41,42,46,65,],[43,50,54,57,58,58,]),'BOOLEAN':([39,],[52,]),'{':([1,],[3,]),'}':([6,9,11,14,15,16,17,18,19,20,23,26,27,28,29,43,44,45,47,50,51,52,53,57,60,61,62,63,64,66,],[-8,-11,-17,-22,-10,-2,-4,-5,-21,38,-13,-6,-7,-9,-12,-26,-14,-29,-27,-28,-3,-25,-23,-24,-16,-15,-19,-20,-18,-30,]),'CLASSIFIERS':([3,37,],[29,29,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'assignment':([3,33,],[16,16,]),'upload_methods':([3,33,],[6,6,]),'list':([41,59,],[53,61,]),'crossvalidation_assignment':([3,33,],[17,17,]),'csv_assignment':([3,33,],[12,12,]),'classifier':([3,33,],[24,24,]),'printResults':([3,33,],[13,13,]),'classifier_methods':([3,33,],[25,25,]),'program':([0,],[2,]),'statistics_methods':([3,33,],[8,8,]),'statement':([3,33,],[14,14,]),'csv_methods':([3,33,],[26,26,]),'statement_list':([3,33,],[18,45,]),'array_list':([30,36,37,],[42,47,49,]),'method':([3,33,],[15,15,]),}
+_lr_goto_items = {'assignment':([3,37,],[18,18,]),'upload_methods':([3,37,],[6,6,]),'list':([46,65,],[59,67,]),'crossvalidation_assignment':([3,37,],[19,19,]),'csv_assignment':([3,37,],[14,14,]),'classifier':([3,37,],[26,26,]),'printResults':([3,37,],[15,15,]),'classifier_methods':([3,37,],[27,27,]),'program':([0,],[2,]),'statistics_methods':([3,37,],[9,9,]),'statement':([3,37,],[16,16,]),'csv_methods':([3,37,],[28,28,]),'statement_list':([3,37,],[20,51,]),'array_list':([32,33,40,41,],[45,47,53,55,]),'method':([3,37,],[17,17,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,34 +26,36 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> GRAC_START { statement_list }','program',4,'p_programm','gracgrammar.py',30),
-  ('statement_list -> statement','statement_list',1,'p_statement_list','gracgrammar.py',33),
-  ('statement_list -> statement ; statement_list','statement_list',3,'p_statement_list','gracgrammar.py',34),
-  ('statement -> method','statement',1,'p_statement','gracgrammar.py',41),
-  ('statement -> assignment','statement',1,'p_statement','gracgrammar.py',42),
-  ('method -> classifier','method',1,'p_method','gracgrammar.py',49),
-  ('method -> classifier_methods','method',1,'p_method','gracgrammar.py',50),
-  ('method -> upload_methods','method',1,'p_method','gracgrammar.py',51),
-  ('method -> csv_methods','method',1,'p_method','gracgrammar.py',52),
-  ('method -> printResults','method',1,'p_method','gracgrammar.py',53),
-  ('method -> statistics_methods','method',1,'p_method','gracgrammar.py',54),
-  ('classifier -> CLASSIFIERS','classifier',1,'p_classifier','gracgrammar.py',59),
-  ('classifier_methods -> CLASSIFIER_METHOD','classifier_methods',1,'p_classifier_methods','gracgrammar.py',82),
-  ('classifier_methods -> CLASSIFIER_METHOD_WPARAMETER ( )','classifier_methods',3,'p_classifier_methods','gracgrammar.py',83),
-  ('upload_methods -> UPLOAD_COMMAND ( PATH )','upload_methods',4,'p_upload_methods','gracgrammar.py',115),
-  ('csv_methods -> CSV_SAVERESULT ( PATH )','csv_methods',4,'p_csv_methods','gracgrammar.py',141),
-  ('printResults -> PRINT','printResults',1,'p_printResults','gracgrammar.py',151),
-  ('statistics_methods -> STATISTICS ( ID )','statistics_methods',4,'p_statistics_methods','gracgrammar.py',166),
-  ('statistics_methods -> STATISTICS ( INT )','statistics_methods',4,'p_statistics_methods','gracgrammar.py',167),
-  ('statistics_methods -> STATISTICS ( array_list )','statistics_methods',4,'p_statistics_methods','gracgrammar.py',168),
-  ('assignment -> crossvalidation_assignment','assignment',1,'p_assignment','gracgrammar.py',288),
-  ('assignment -> csv_assignment','assignment',1,'p_assignment','gracgrammar.py',289),
-  ('assignment -> ID = array_list','assignment',3,'p_assignment','gracgrammar.py',290),
-  ('crossvalidation_assignment -> KFOLD = INT','crossvalidation_assignment',3,'p_crossvalidation_assignment','gracgrammar.py',297),
-  ('csv_assignment -> CSV_HEADER = BOOLEAN','csv_assignment',3,'p_csv_assignment','gracgrammar.py',305),
-  ('csv_assignment -> CSV_CLASSCOLUMN = INT','csv_assignment',3,'p_csv_assignment','gracgrammar.py',306),
-  ('csv_assignment -> CSV_FEATURESCOLUMNS = array_list','csv_assignment',3,'p_csv_assignment','gracgrammar.py',307),
-  ('array_list -> [ list ]','array_list',3,'p_array_list','gracgrammar.py',319),
-  ('list -> INT','list',1,'p_list','gracgrammar.py',323),
-  ('list -> INT , list','list',3,'p_list','gracgrammar.py',324),
+  ('program -> GRAC_START { statement_list }','program',4,'p_programm','gracgrammar.py',39),
+  ('statement_list -> statement','statement_list',1,'p_statement_list','gracgrammar.py',42),
+  ('statement_list -> statement ; statement_list','statement_list',3,'p_statement_list','gracgrammar.py',43),
+  ('statement -> method','statement',1,'p_statement','gracgrammar.py',49),
+  ('statement -> assignment','statement',1,'p_statement','gracgrammar.py',50),
+  ('method -> classifier','method',1,'p_method','gracgrammar.py',57),
+  ('method -> classifier_methods','method',1,'p_method','gracgrammar.py',58),
+  ('method -> upload_methods','method',1,'p_method','gracgrammar.py',59),
+  ('method -> csv_methods','method',1,'p_method','gracgrammar.py',60),
+  ('method -> printResults','method',1,'p_method','gracgrammar.py',61),
+  ('method -> statistics_methods','method',1,'p_method','gracgrammar.py',62),
+  ('classifier -> CLASSIFIERS','classifier',1,'p_classifier','gracgrammar.py',67),
+  ('classifier_methods -> CLASSIFIER_METHOD','classifier_methods',1,'p_classifier_methods','gracgrammar.py',91),
+  ('classifier_methods -> CLASSIFIER_METHOD_WPARAMETER ( )','classifier_methods',3,'p_classifier_methods','gracgrammar.py',92),
+  ('upload_methods -> UPLOAD_COMMAND ( PATH )','upload_methods',4,'p_upload_methods','gracgrammar.py',186),
+  ('csv_methods -> CSV_SAVERESULT ( PATH )','csv_methods',4,'p_csv_methods','gracgrammar.py',211),
+  ('printResults -> PRINT','printResults',1,'p_printResults','gracgrammar.py',224),
+  ('statistics_methods -> STATISTICS ( ID )','statistics_methods',4,'p_statistics_methods','gracgrammar.py',239),
+  ('statistics_methods -> STATISTICS ( INT )','statistics_methods',4,'p_statistics_methods','gracgrammar.py',240),
+  ('statistics_methods -> STATISTICS ( array_list )','statistics_methods',4,'p_statistics_methods','gracgrammar.py',241),
+  ('assignment -> crossvalidation_assignment','assignment',1,'p_assignment','gracgrammar.py',411),
+  ('assignment -> csv_assignment','assignment',1,'p_assignment','gracgrammar.py',412),
+  ('assignment -> ID = array_list','assignment',3,'p_assignment','gracgrammar.py',413),
+  ('crossvalidation_assignment -> KFOLD = INT','crossvalidation_assignment',3,'p_crossvalidation_assignment','gracgrammar.py',420),
+  ('csv_assignment -> CSV_HEADER = BOOLEAN','csv_assignment',3,'p_csv_assignment','gracgrammar.py',428),
+  ('csv_assignment -> CSV_CLASSCOLUMN = INT','csv_assignment',3,'p_csv_assignment','gracgrammar.py',429),
+  ('csv_assignment -> CSV_FEATURESCOLUMNS = array_list','csv_assignment',3,'p_csv_assignment','gracgrammar.py',430),
+  ('csv_assignment -> CSV_TESTCLASSCOLUMN = INT','csv_assignment',3,'p_csv_assignment','gracgrammar.py',431),
+  ('csv_assignment -> CSV_TESTFEATURESCOLUMNS = array_list','csv_assignment',3,'p_csv_assignment','gracgrammar.py',432),
+  ('array_list -> [ list ]','array_list',3,'p_array_list','gracgrammar.py',452),
+  ('list -> INT','list',1,'p_list','gracgrammar.py',456),
+  ('list -> INT , list','list',3,'p_list','gracgrammar.py',457),
 ]

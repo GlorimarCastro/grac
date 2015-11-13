@@ -19,7 +19,9 @@ reservedWords = {
     #'CROSSVALIDATIONACTION': ['doCrossValidation'],
     'CSV_HEADER': ['hasheader'],
     'CSV_CLASSCOLUMN': ['class_column'],
+    'CSV_TESTCLASSCOLUMN': ['test_class_column'],
     'CSV_FEATURESCOLUMNS': ["features_columns"],
+    'CSV_TESTFEATURESCOLUMNS': ['test_features_column'],
     'CSV_SAVERESULT': ['saveResult'],
     'CLASSIFIER_METHOD_WPARAMETER': ['predict']
 
@@ -43,6 +45,8 @@ reg_print = re.compile('|'.join(reservedWords['PRINT']))
 reg_statistics = re.compile('|'.join(reservedWords['STATISTICS']))
 reg_featurescolumn = re.compile(reservedWords.get('CSV_FEATURESCOLUMNS')[0])
 reg_classcolumn = re.compile(reservedWords.get('CSV_CLASSCOLUMN')[0])
+reg_testfeaturescolumn = re.compile(reservedWords.get('CSV_TESTFEATURESCOLUMNS')[0])
+reg_testclasscolumn = re.compile(reservedWords.get('CSV_TESTCLASSCOLUMN')[0])
 #------------------------------------------------------
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
@@ -63,6 +67,13 @@ def t_CSV_FEATURESCOLUMNS(t):
 
 @TOKEN(reg_classcolumn.pattern)
 def t_CSV_CLASSCOLUMN(t):
+    return t
+@TOKEN(reg_testfeaturescolumn.pattern)
+def t_CSV_TESTFEATURESCOLUMNS(t):
+    return t
+
+@TOKEN(reg_testclasscolumn.pattern)
+def t_CSV_TESTCLASSCOLUMN(t):
     return t
 
 def t_PATH(t):
@@ -141,6 +152,20 @@ def find_column(input,token):
 #=========================================================================
 #test
 #=========================================================================
+
+
+data2test = """
+svc()dtc()DTC()"SvC()" doCrossValidation execute() #hola
+svc()965() all true
+uploadData
+hasHeader
+printClassifiersComparitions()
+printBestClassifier()
+calcBestClassifier()
+mean
+avg
+dimelou
+
 
 #data2test = """ 
 #executecv()
