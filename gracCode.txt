@@ -1,0 +1,10 @@
+grac{
+hasHeader = true;
+features_Columns = [1,2,3,4,5];
+uploadTrainingData("dumytry.csv");
+svc();
+executecv();
+printbestclassifier();
+x = [1,2,3,4,5,6];
+mean(x)
+}

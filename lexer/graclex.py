@@ -11,8 +11,7 @@ reservedWords = {
     'INT': 'int',
     'UPLOAD_COMMAND':['uploadTrainingData', 'uploadTestData', 'uploadData'],
     'BOOLEAN':['true', 'false'],
-    'ALL': ['all'],
-    'PRINT': ['printBestClassifier\(\)','printClassifiersComparitions\(\)'],
+    'PRINT': ['printBestClassifier\(\)'],
     'STATISTICS': ['mean','avg','min','max','mode','least','rndm','count','stdev'],
     'GRAC_START': ['grac'],
     'KFOLD': ['kfold'],
@@ -51,7 +50,6 @@ reg_testclasscolumn = re.compile(reservedWords.get('CSV_TESTCLASSCOLUMN')[0])
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
 t_ignore                        = ' \t'
-t_ALL                           = reservedWords.get('ALL')[0]
 t_GRAC_START                    = reservedWords.get('GRAC_START')[0]
 t_KFOLD                         = reservedWords.get('KFOLD')[0]
 #t_CROSSVALIDATIONACTION         = reservedWords.get('CROSSVALIDATIONACTION')[0]

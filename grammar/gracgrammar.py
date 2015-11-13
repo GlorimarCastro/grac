@@ -10,14 +10,14 @@ tokens = graclex.tokens
 #grac static variable
 
 global k_fold,  hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, statDataFilePath, stat, trainingData, testData, statData
-global classifier, statLast, cv_fold_result, cv_scoring, lastmethod
-
+global classifier, statLast, cv_fold_result, cv_scoring, lastmethod, classifiers
+classifiers = ['svc', 'dtc', 'gnbc']
 k_fold = 5
 hasHeader = False
 classColumn = 0
 featuresColumn = [1]
-testClassColumn = 0
-testFeaturesColumn = [1]
+testClassColumn = None
+testFeaturesColumn = None
 variables = {}
 trainingDataFilePath = None
 testDataFilePath = None
@@ -36,7 +36,7 @@ cv_scoring = {}         #si el usuario ejecuta cv sera un diccionario con la sig
 
 #start
 def p_programm(p):
-    '''program : GRAC_START '{'  statement_list '}' '''
+    '''program : GRAC_START '{'  statement_list '}' '''  
     p[0] = p[3]
 def p_statement_list(p):
     '''statement_list : statement
@@ -95,10 +95,15 @@ def p_classifier_methods(t):
     #si es un methodo que requiere parametro se ejecuta en el if
     if len(t) > 2:
         if t[1].lower() == "predict":
-            #execute predict
             verifyTestData()
             verifyClassifier()
-            featuresVect = testData[: ,featuresColumn]
+            #execute predict
+            if testClassColumn == None:
+                testClassColumn = classColumn
+            if testFeaturesColumn == None:
+                testFeaturesColumn = featuresColumn
+            
+            featuresVect = testData[: ,testFeaturesColumn]
             classResult =  classifier.predict(featuresVect)
             print "Result:"
             print classResult
@@ -122,7 +127,6 @@ def p_classifier_methods(t):
         elif t[1].lower() == "executecv()":
             verifyClassifier()
             verifyTrainingData()
-            global lastmethod
             lastmethod = "executecv"
             from sklearn.cross_validation import LabelKFold #no poermite overlaping
             print "============================================"
@@ -203,10 +207,7 @@ def p_upload_methods(t):
         print "Data uploaded"
     
 #rafa
-#guardar variables de resultado en file en formato csv
-#carlos - {methodo: result }
-#glorimar - matriz
-#path csv y existe
+#aun hay que terminar esto
 def p_csv_methods(t):
     ''' csv_methods : CSV_SAVERESULT '(' PATH ')' '''
     
@@ -220,15 +221,94 @@ def p_csv_methods(t):
 
         
 #glorimar
+#done
 def p_printResults(t):
     'printResults : PRINT'
     t[0] = t[1]
-    if t[1] == "printBestClassifier()":
-        #execute printBestClassifier
-        pass
-    elif t[1] == "printClassifiersComparitions()":
-        #execute printClassifiersComparitions
-        pass
+    if t[1].lower() == "printbestclassifier()":
+        verifyTrainingData()
+        from sklearn.cross_validation import LabelKFold #no poermite overlaping
+        print "============================================"
+        print "Calculating best Classifier: "
+        features = trainingData[:,featuresColumn]
+        classVector =trainingData[:,classColumn]
+        label = numpy.array(range(len(classVector)))
+        lkf = LabelKFold(label, k_fold)
+        #
+        iterationNum = 0
+        #scoring avg:
+        avgScoring = {'svc': {'accuracy': 0, 'precision': 0, 'recall': 0, 'fscore': 0, 'name': 'Support Vector Classifier'}, 'dtc': {'accuracy': 0, 'precision': 0, 'recall': 0, 'fscore': 0, 'name': 'Decision Tree Classifier'}, 'gnbc': {'accuracy': 0, 'precision': 0, 'recall': 0, 'fscore': 0, 'name': 'GaussianNB'}}
+
+        for train_ind, test_ind in lkf:
+            X_train, X_test = features[train_ind], features[test_ind]
+            y_train, y_test = classVector[train_ind], classVector[test_ind]
+            from sklearn.metrics import confusion_matrix, accuracy_score, precision_recall_fscore_support
+            from sklearn import svm, tree
+            from sklearn.naive_bayes import GaussianNB
+            
+            svc_prediction = svm.SVC().fit(X_train, y_train).predict(X_test) 
+            dtc_prediction = tree.DecisionTreeClassifier().fit(X_train, y_train).predict(X_test) 
+            gnbc_prediction = GaussianNB().fit(X_train, y_train).predict(X_test) 
+            
+            #scoring 
+            scoreResult = precision_recall_fscore_support(y_test, svc_prediction, beta = 1.0, average = 'micro')
+            avgScoring['svc']['accuracy'] = avgScoring['svc']['accuracy'] + accuracy_score(y_test, svc_prediction)
+            avgScoring['svc']['precision'] = avgScoring['svc']['precision'] + scoreResult[0]
+            avgScoring['svc']['recall'] = avgScoring['svc']['recall'] + scoreResult[1]
+            avgScoring['svc']['fscore'] = avgScoring['svc']['fscore'] + scoreResult[2]
+            
+            scoreResult = precision_recall_fscore_support(y_test, dtc_prediction, beta = 1.0, average = 'micro')
+            avgScoring['dtc']['accuracy'] = avgScoring['svc']['accuracy'] + accuracy_score(y_test, dtc_prediction)
+            avgScoring['dtc']['precision'] = avgScoring['svc']['precision'] + scoreResult[0]
+            avgScoring['dtc']['recall'] = avgScoring['svc']['recall'] + scoreResult[1]
+            avgScoring['dtc']['fscore'] = avgScoring['svc']['fscore'] + scoreResult[2]
+            
+            scoreResult = precision_recall_fscore_support(y_test, gnbc_prediction, beta = 1.0, average = 'micro')
+            avgScoring['gnbc']['accuracy'] = avgScoring['svc']['accuracy'] + accuracy_score(y_test, gnbc_prediction)
+            avgScoring['gnbc']['precision'] = avgScoring['svc']['precision'] + scoreResult[0]
+            avgScoring['gnbc']['recall'] = avgScoring['svc']['recall'] + scoreResult[1]
+            avgScoring['gnbc']['fscore'] = avgScoring['svc']['fscore'] + scoreResult[2]
+ 
+            iterationNum = iterationNum + 1
+            
+        scoreResult = precision_recall_fscore_support(y_test, svc_prediction, beta = 1.0, average = 'micro')
+        avgScoring['svc']['accuracy'] = avgScoring['svc']['accuracy'] / k_fold
+        avgScoring['svc']['precision'] = avgScoring['svc']['precision'] / k_fold
+        avgScoring['svc']['recall'] = avgScoring['svc']['recall'] / k_fold
+        avgScoring['svc']['fscore'] = avgScoring['svc']['fscore'] / k_fold
+            
+        scoreResult = precision_recall_fscore_support(y_test, dtc_prediction, beta = 1.0, average = 'micro')
+        avgScoring['dtc']['accuracy'] = avgScoring['svc']['accuracy']/ k_fold
+        avgScoring['dtc']['precision'] = avgScoring['svc']['precision'] / k_fold
+        avgScoring['dtc']['recall'] = avgScoring['svc']['recall'] / k_fold
+        avgScoring['dtc']['fscore'] = avgScoring['svc']['fscore'] / k_fold
+            
+        scoreResult = precision_recall_fscore_support(y_test, gnbc_prediction, beta = 1.0, average = 'micro')
+        avgScoring['gnbc']['accuracy'] = avgScoring['svc']['accuracy'] / k_fold
+        avgScoring['gnbc']['precision'] = avgScoring['svc']['precision']/ k_fold
+        avgScoring['gnbc']['recall'] = avgScoring['svc']['recall'] / k_fold
+        avgScoring['gnbc']['fscore'] = avgScoring['svc']['fscore'] / k_fold
+
+        #calculate best one
+        bestclassifier = {'accuracy': 0, 'name': []}
+        """
+        if avgScoring['svc']['accuracy'] < avgScoring['dtc']['accuracy']:
+            bestclassifier[0] = 'Decision Tree'
+        else:
+            bestclassifier.append('Decision Tree')
+            """
+        for key in avgScoring:
+            if avgScoring[key]['accuracy'] > bestclassifier['accuracy']:
+                bestclassifier['accuracy'] = avgScoring[key]['accuracy']
+                bestclassifier['name'] = [avgScoring[key]['name']]
+            elif avgScoring[key]['accuracy'] ==  bestclassifier['accuracy']:
+                bestclassifier['accuracy'] = avgScoring[key]['accuracy']
+                bestclassifier['name'].append(avgScoring[key]['name'])
+        
+        print "Best Classifier(s): ", ','.join(bestclassifier['name']), ". With an accuracy of: ", (bestclassifier['accuracy'] * 100), "%"
+            
+        
+
 #carlos
 #resultado guardarlos en un dic global
 #si el usuario no ha subido file error
@@ -444,7 +524,7 @@ def p_csv_assignment(p):
         else:
             global testFeaturesColumn
             testFeaturesColumn = p[3]
-    else:
+    elif p[1].lower() == 'hasheader':
         global hasHeader
         hasHeader = p[3]
 
@@ -478,6 +558,7 @@ def uploadFile(csvfilepath):
     else:
         try:
             if hasHeader == "true":
+                print "entro a con header"
                 return numpy.loadtxt(open(csvfilepath,"rb"),delimiter=",",skiprows=1)
             else:
                 return numpy.loadtxt(open(csvfilepath,"rb"),delimiter=",")
@@ -510,28 +591,29 @@ def verifyClassifier():
     def hharmonicMean(predictedVector, truthVector):
         pass
         
+def getParser():
+    return yacc.yacc()
+
 #===============================================================================================================================
 #                    TEST                        TEST                        TEST                        TESTs
 #===============================================================================================================================
 
  
-data2test = """
-grac {
-features_columns = [1,2,3,4];
-kfold = 2;
-hasHeader = false;
-class_column = 0;
-uploadTrainingData("dumyData.csv");
-gnbc();
-executecv();
-getcverrorrate()
+#data2test = """
+#grac {
+#features_columns = [1,2,3,4];
+#kfold = 2;
+#hasHeader = false;
+#class_column = 0;
+#uploadTrainingData("dumyData.csv");
+#printbestclassifier()
 
-}
-"""
+#}
+#"""
 
-y = yacc.yacc()
-result = y.parse(data2test)
-print "termino"
+#y = yacc.yacc()
+#result = y.parse(data2test)
+#print "termino"
  
 
 
