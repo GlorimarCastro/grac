@@ -211,6 +211,7 @@ def p_csv_methods(p):
     ''' csv_methods : CSV_SAVERESULT '(' PATH ')' '''
     
     if p[1].lower() == 'savePredResult':
+        #verificar que el path existe y el file es csv
         if classResult == None:
             sys.exit("Classifier prediction have not being calculated")
             
@@ -219,16 +220,20 @@ def p_csv_methods(p):
             writer.writerow(value)
             
     elif p[1].lower() == 'saveStatResult':
-        writer = csv.writer(open(p[3]+'.csv', 'wb'))
+        #verificar que el path existe y el file es csv
+        
+        
+        writer = csv.writer(open(p[3], 'wb'))
         for key, value in stat.items():
             writer.writerow([key, value])
             
     elif p[1].lower() == 'savecvresult':
+        #verificar que el usuario te dio un directory path
         if len(cv_fold_result) < 1:
             sys.exit("Cross-validation have not being executed")
         #para cada fold creara el file
         for foldn in cv_fold_result:
-            writer = csv.writer(open(str(foldn) + '.csv', 'wb')) #verificar que actually grabe dentro del directorio p[3]+ '\\' + 
+            writer = csv.writer(open(p[3] +  str(foldn) + '.csv', 'wb')) #verificar que actually grabe dentro del directorio p[3]+ '\\' + 
             writer.writerow(['truth' , 'prediction'])
             for i in range(len(cv_fold_result[foldn]['truth'])):
                 writer.writerow([cv_fold_result[foldn]['truth'][i] , cv_fold_result[foldn]['prediction'][i]])
@@ -236,7 +241,7 @@ def p_csv_methods(p):
         #crea file para scoring
         f = open('scoring.csv', 'wb')
         for foldn in cv_scoring:
-            f.write(foldn + ': ' + str(cv_scoring[foldn]))
+            f.write(p[3] + foldn + ': ' + str(cv_scoring[foldn]))
             f.write("\n")
     
 
@@ -331,11 +336,8 @@ def p_printResults(t):
         
 
 #carlos
-#resultado guardarlos en un dic global
-#si el usuario no ha subido file error
-#int = columna del file
-#ID sacar de dict
-# verificar que to-do exista
+#imprimir resultados al terminal
+
 def p_statistics_methods(p):
     '''statistics_methods : STATISTICS '(' ID ')' 
                             | STATISTICS '(' INT ')' 
