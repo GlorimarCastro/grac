@@ -21,7 +21,7 @@ reservedWords = {
     'CSV_TESTCLASSCOLUMN': ['test_class_column'],
     'CSV_FEATURESCOLUMNS': ["features_columns"],
     'CSV_TESTFEATURESCOLUMNS': ['test_features_column'],
-    'CSV_SAVERESULT': ['saveResult'],
+    'CSV_SAVERESULT': ['saveCVResult', 'saveStatResult', 'savePredResult'],
     'CLASSIFIER_METHOD_WPARAMETER': ['predict']
 
 }
@@ -46,6 +46,7 @@ reg_featurescolumn = re.compile(reservedWords.get('CSV_FEATURESCOLUMNS')[0])
 reg_classcolumn = re.compile(reservedWords.get('CSV_CLASSCOLUMN')[0])
 reg_testfeaturescolumn = re.compile(reservedWords.get('CSV_TESTFEATURESCOLUMNS')[0])
 reg_testclasscolumn = re.compile(reservedWords.get('CSV_TESTCLASSCOLUMN')[0])
+reg_saveresult = re.compile(','.join(reservedWords.get('CSV_SAVERESULT')))
 #------------------------------------------------------
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
@@ -54,7 +55,6 @@ t_GRAC_START                    = reservedWords.get('GRAC_START')[0]
 t_KFOLD                         = reservedWords.get('KFOLD')[0]
 #t_CROSSVALIDATIONACTION         = reservedWords.get('CROSSVALIDATIONACTION')[0]
 t_CSV_HEADER                    = reservedWords.get('CSV_HEADER')[0]
-t_CSV_SAVERESULT                = reservedWords.get('CSV_SAVERESULT')[0]
 t_CLASSIFIER_METHOD_WPARAMETER  = reservedWords.get('CLASSIFIER_METHOD_WPARAMETER')[0]
 #------------------------------------------------------
 #        TOKEN DEFINITION WITH FUNCTION
@@ -78,6 +78,9 @@ def t_PATH(t):
     r'\"(.+?)\"'
     return t
 
+@TOKEN(reg_saveresult)
+def t_CSV_SAVERESULT(t):
+    return t
 #Rule for classifiers:
 @TOKEN(reg_classifiers.pattern)
 def t_CLASSIFIERS(t):

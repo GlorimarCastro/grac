@@ -10,7 +10,7 @@ tokens = graclex.tokens
 #grac static variable
 
 global k_fold,  hasHeader, classColumn, featuresColumn, variables, trainingDataFilePath, testDataFilePath, statDataFilePath, stat, trainingData, testData, statData
-global classifier, statLast, cv_fold_result, cv_scoring, lastmethod, classifiers
+global classifier, cv_fold_result, cv_scoring, classifiers
 classifiers = ['svc', 'dtc', 'gnbc']
 k_fold = 5
 hasHeader = False
@@ -26,12 +26,10 @@ trainingData = None
 testData = None
 statData = None
 classifier = None
-statLast = None
-lastmethod = ""
 #result variables
 classResult = None      #un array simple con cada resultado de la prediccion
 stat = {}               #un diccionario de la siguiente forma {'mean': result, 'avg': result ...}
-cv_fold_result = {}     #si el usuario hace un cross validation cada este diccionario sera {fold1: numpy.array([[], [], []]), fold2:numpy.array([[], [], []]), ...}
+cv_fold_result = {}     #si el usuario hace un cross validation cada este diccionario sera {fold1: truth': y_test, 'prediction': y_predicted, fold2: ...}
 cv_scoring = {}         #si el usuario ejecuta cv sera un diccionario con la siguiente forma: {fold1: {'accuracy': float, ..}, fold2: {'accuracy': float, ..}, ... avg scoring: {}}
 
 #start
@@ -165,8 +163,8 @@ def p_classifier_methods(t):
                 fbetaScoreAvg = fbetaScoreAvg + fbetaScore
             
                 #adding result
-                cv_fold_result['fold_', iterationNum] = {'truth': y_test, 'prediction': y_predicted}
-                cv_scoring['fold_', iterationNum] = {'accuracy': accuracy, 'precision': precision, 'recall': recall, 'fscore': fbetaScore, 'confusion matrix': cm}
+                cv_fold_result['fold_' + str(iterationNum)] = {'truth': y_test, 'prediction': y_predicted}
+                cv_scoring['fold_' + str(iterationNum)] = {'accuracy': accuracy, 'precision': precision, 'recall': recall, 'fscore': fbetaScore, 'confusion matrix': cm}
                 print "---------------------------------------"
                 print "For fold ", iterationNum
                 print "Confusion matrix is:"
@@ -208,16 +206,39 @@ def p_upload_methods(t):
     
 #rafa
 #aun hay que terminar esto
-def p_csv_methods(t):
+#falta asegurar que los file sean validos y que es un directorio
+def p_csv_methods(p):
     ''' csv_methods : CSV_SAVERESULT '(' PATH ')' '''
     
-    writer = csv.writer(open(t[3]+'.csv', 'wb'))
-#writes statistics results
-    if statLast == True:
+    if p[1].lower() == 'savePredResult':
+        if classResult == None:
+            sys.exit("Classifier prediction have not being calculated")
+            
+        writer = csv.writer(open(p[3]+'.csv', 'wb'))
+        for value in classResult:
+            writer.writerow(value)
+            
+    elif p[1].lower() == 'saveStatResult':
+        writer = csv.writer(open(p[3]+'.csv', 'wb'))
         for key, value in stat.items():
             writer.writerow([key, value])
-    else:
-        pass#blah blah blah
+            
+    elif p[1].lower() == 'savecvresult':
+        if len(cv_fold_result) < 1:
+            sys.exit("Cross-validation have not being executed")
+        #para cada fold creara el file
+        for foldn in cv_fold_result:
+            writer = csv.writer(open(str(foldn) + '.csv', 'wb')) #verificar que actually grabe dentro del directorio p[3]+ '\\' + 
+            writer.writerow(['truth' , 'prediction'])
+            for i in range(len(cv_fold_result[foldn]['truth'])):
+                writer.writerow([cv_fold_result[foldn]['truth'][i] , cv_fold_result[foldn]['prediction'][i]])
+                
+        #crea file para scoring
+        f = open('scoring.csv', 'wb')
+        for foldn in cv_scoring:
+            f.write(foldn + ': ' + str(cv_scoring[foldn]))
+            f.write("\n")
+    
 
         
 #glorimar
