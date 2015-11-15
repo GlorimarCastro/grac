@@ -1,1 +1,71 @@
-# grac
+# Introduction
+
+GRAC is a python base [special-purpose programming language] for [supervised machine learning] and [statistic]. It allows the user to upload CSV file and run classification, prediction and statistics on it. 
+
+## Statistic
+The available methods for statitics are:
+  - Mean 
+  - Average
+  - Maximun
+  - Minimun
+  - Mode
+  - Least
+  - Random
+  - Count
+  - Standard Deviation
+ 
+## Machine Learning
+For now tha machine learning clisifier avilable are supervised clissifier:
+  - [Decision Tree]
+  - [Support Vector Machine]
+  - [Gaussian Naive Bayes]
+  
+Also GRAC allows you to calculate the best classifier for your data, base on accuracy, and do [cross-validarion]
+
+### Version
+1.0
+
+
+---
+# Installation
+## Dependecies
+GRAC use a series of python package all listed in the requeriment.txt file. To install this packages you can run the next command line in 
+#### Ubuntu:
+```sh
+$ python -m pip install -r requirements.txt
+```
+Make sure that you have the newest version of pip in your sysmtem, since Ubuntu have an outdated version of pip. Inside the dependecies folder you can find the python file get-pip.py, this file is for installing the newest version of pip. 
+### Windows:
+For windows if you have Anaconda or Conda yo can run the next command line:
+```sh
+$ conda create -n new environment --file requirements.txt
+```
+
+If not you can install all the dependencies using the next command lines:
+```sh
+$ python -m pip install numpy
+$ python -m pip install scipy
+$ python -m pip install ply
+$ python -m pip pydot
+$ python -m pip scikit-learn
+```
+If you get an error installing scikit-learn you should download the source file. For users with Python 2.7 in the dependecies folder you can find an installer for scikit-learn
+
+## GRAC
+To use GRAC you can clone this repository or you can download the zip file from the last release. 
+---
+
+# Example
+Examples of how tou use GRAC can be find in the [example] folder
+
+
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
+
+   [example]: <https://github.com/GlorimarCastro/grac/tree/master/examples>
+   [special-purpose programming language]: <https://en.wikipedia.org/wiki/Domain-specific_language>
+   [supervised machine learning]: <https://en.wikipedia.org/wiki/Supervised_learning>
+   [statistic]: <https://en.wikipedia.org/wiki/Statistics>
+   [Decision Tree]: <http://mines.humanoriented.com/classes/2010/fall/csci568/portfolio_exports/lguo/decisionTree.html>
+   [Support Vector Machine]: <http://www.support-vector-machines.org/>
+   [Gaussian Naive Bayes]: <https://en.wikipedia.org/wiki/Naive_Bayes_classifier>
+   [cross-validarion]: <https://www.cs.cmu.edu/~schneide/tut5/node42.html>
