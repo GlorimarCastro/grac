@@ -63,10 +63,10 @@ Examples of how to use GRAC can be found in the [examples] folder
 ---
 
 #Developers
-  - [Glorimar Castro Noriega] 
-  - [Rafael Feliciano Isales] 
-  - [Anthony S Slaughter Amaro] 
-  - [Carlos E Rosario Gonzalez] 
+  - [Glorimar Castro Noriega] : glorimar.castro@upr.edu
+  - [Rafael Feliciano Isales] : rafael.feliciano4@upr.edu
+  - [Anthony S Slaughter Amaro] : anthony.slaughter@upr.edu
+  - [Carlos E Rosario Gonzalez] : carlos.rosario10@upr.edu
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
@@ -78,7 +78,7 @@ Examples of how to use GRAC can be found in the [examples] folder
    [Support Vector Machine]: <http://www.support-vector-machines.org/>
    [Gaussian Naive Bayes]: <https://en.wikipedia.org/wiki/Naive_Bayes_classifier>
    [cross-validation]: <https://www.cs.cmu.edu/~schneide/tut5/node42.html>
-   [Carlos E Rosario Gonzalez]: <carlos.rosario10@upr.edu>
+   [Carlos E Rosario Gonzalez]: <https://github.com/zrike>
    [Glorimar Castro Noriega]: <glorimar.castro@upr.edu>
-   [Anthony S Slaughter Amaro]: <anthony.slaughter@upr.edu>
-   [Rafael Feliciano Isales]: <rafael.feliciano4@upr.edu>
+   [Anthony S Slaughter Amaro]: <https://github.com/slaughter30>
+   [Rafael Feliciano Isales]: <https://github.com/rafaelfeliciano4>
