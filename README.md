@@ -52,7 +52,9 @@ $ python -m pip scikit-learn
 If you get an error installing scikit-learn you should download the source file. For users with Python 2.7 in the dependecies folder you can find an installer for scikit-learn
 
 ## GRAC
+
 To use GRAC you can clone this repository or you can download the zip file from the last release. 
+
 ---
 
 # Example
