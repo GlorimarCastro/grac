@@ -61,10 +61,10 @@ To use GRAC you can clone this repository or you can download the zip file from 
 Examples of how tou use GRAC can be found in the [examples] folder
 
 #Developers
-  - [Glorimar Castro Noriega]   https://github.com/GlorimarCastro
-  - [Rafael Feliciano Isales]  https://github.com/RafaelFeliciano4
-  - [Anthony S Slaughter Amaro]  https://github.com/slaughter30
-  - [Carlos E Rosario Gonzalez]  https://github.com/zrike
+  - [Glorimar Castro Noriega] 
+  - [Rafael Feliciano Isales] 
+  - [Anthony S Slaughter Amaro] 
+  - [Carlos E Rosario Gonzalez] 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
