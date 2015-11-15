@@ -20,7 +20,7 @@ For now, the machine learning classifiers available are supervised classifiers:
   - [Support Vector Machine]
   - [Gaussian Naive Bayes]
   
-Also, GRAC allows you to calculate the best classifier for your data, based on accuracy, and does a [cross-validation]
+Also, GRAC allows you to calculate the best classifier for your data (based on accuracy), and to execute [cross-validation]
 
 ### Version
 1.0
