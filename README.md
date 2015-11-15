@@ -20,7 +20,7 @@ For now, the machine learning classifiers available are supervised classifiers:
   - [Support Vector Machine]
   - [Gaussian Naive Bayes]
   
-Also, GRAC allows you to calculate the best classifier for your data, bases on accuracy, and does a [cross-validation]
+Also, GRAC allows you to calculate the best classifier for your data, based on accuracy, and does a [cross-validation]
 
 ### Version
 1.0
@@ -29,8 +29,8 @@ Also, GRAC allows you to calculate the best classifier for your data, bases on a
 ---
 # Installation
 ## Dependecies
-GRAC uses a series of python packages, all listed in the requirement.txt file. To install this packages you can run the next command line in
-#### Ubuntu:
+GRAC uses a series of python packages, all listed in the requirement.txt file. To install this packages you can run the next command line in:
+### Ubuntu:
 ```sh
 $ python -m pip install -r requirements.txt
 ```
@@ -49,25 +49,25 @@ $ python -m pip install ply
 $ python -m pip pydot
 $ python -m pip scikit-learn
 ```
-If you get an error installing scikit-learn you should download the source file. For users with Python 2.7 in the dependecies folder you can find an installer for scikit-learn
+If you get an error installing scikit-learn you should download the source file. Users with Python 2.7 can find an installer for scikit-learn in the dependecies folder.
 
 ## GRAC
 
-To use GRAC you can clone this repository or you can download the zip file from the last release. 
+To use GRAC you can clone this repository or you can download the zip file from the latest release. 
 
 ---
 
 # Example Section
-Examples of how tou use GRAC can be found in the [example] folder
+Examples of how tou use GRAC can be found in the [examples] folder
 
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-   [example]: <https://github.com/GlorimarCastro/grac/tree/master/examples>
+   [examples]: <https://github.com/GlorimarCastro/grac/tree/master/examples>
    [special-purpose programming language]: <https://en.wikipedia.org/wiki/Domain-specific_language>
    [supervised machine learning]: <https://en.wikipedia.org/wiki/Supervised_learning>
-   [statistic]: <https://en.wikipedia.org/wiki/Statistics>
+   [statistics]: <https://en.wikipedia.org/wiki/Statistics>
    [Decision Tree]: <http://mines.humanoriented.com/classes/2010/fall/csci568/portfolio_exports/lguo/decisionTree.html>
    [Support Vector Machine]: <http://www.support-vector-machines.org/>
    [Gaussian Naive Bayes]: <https://en.wikipedia.org/wiki/Naive_Bayes_classifier>
-   [cross-validarion]: <https://www.cs.cmu.edu/~schneide/tut5/node42.html>
+   [cross-validation]: <https://www.cs.cmu.edu/~schneide/tut5/node42.html>
