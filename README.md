@@ -79,6 +79,6 @@ Examples of how to use GRAC can be found in the [examples] folder
    [Gaussian Naive Bayes]: <https://en.wikipedia.org/wiki/Naive_Bayes_classifier>
    [cross-validation]: <https://www.cs.cmu.edu/~schneide/tut5/node42.html>
    [Carlos E Rosario Gonzalez]: <https://github.com/zrike>
-   [Glorimar Castro Noriega]: <glorimar.castro@upr.edu>
+   [Glorimar Castro Noriega]: <https://github.com/GlorimarCastro>
    [Anthony S Slaughter Amaro]: <https://github.com/slaughter30>
    [Rafael Feliciano Isales]: <https://github.com/rafaelfeliciano4>
