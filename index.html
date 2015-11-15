@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Grac by GlorimarCastro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Grac</h1>
+      <h2 class="project-tagline"></h2>
+      <a href="https://github.com/GlorimarCastro/grac" class="btn">View on GitHub</a>
+      <a href="https://github.com/GlorimarCastro/grac/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/GlorimarCastro/grac/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
+
+<p>GRAC is a python based <a href="https://en.wikipedia.org/wiki/Domain-specific_language">special-purpose programming language</a> for <a href="https://en.wikipedia.org/wiki/Supervised_learning">supervised machine learning</a> and <a href="https://en.wikipedia.org/wiki/Statistics">statistics</a>. It allows the user to upload CSV files and run classification methods, predictions and statistics on it. </p>
+
+<h2>
+<a id="statistic-section" class="anchor" href="#statistic-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Statistic Section</h2>
+
+<p>The available methods for statitics are:</p>
+
+<ul>
+<li>Mean </li>
+<li>Average</li>
+<li>Maximun</li>
+<li>Minimun</li>
+<li>Mode</li>
+<li>Least</li>
+<li>Random</li>
+<li>Count</li>
+<li>Standard Deviation</li>
+</ul>
+
+<h2>
+<a id="machine-learning-section" class="anchor" href="#machine-learning-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine Learning Section</h2>
+
+<p>For now, the machine learning classifiers available are supervised classifiers:</p>
+
+<ul>
+<li><a href="http://mines.humanoriented.com/classes/2010/fall/csci568/portfolio_exports/lguo/decisionTree.html">Decision Tree</a></li>
+<li><a href="http://www.support-vector-machines.org/">Support Vector Machine</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Naive_Bayes_classifier">Gaussian Naive Bayes</a></li>
+</ul>
+
+<p>Also, GRAC allows you to calculate the best classifier for your data (based on accuracy), and to execute <a href="https://www.cs.cmu.edu/%7Eschneide/tut5/node42.html">cross-validation</a></p>
+
+<h2>
+<a id="version" class="anchor" href="#version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version</h2>
+
+<p>1.0</p>
+
+<hr>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+
+<h2>
+<a id="dependecies" class="anchor" href="#dependecies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependecies</h2>
+
+<p>GRAC uses a series of python packages, all listed in the requirement.txt file. To install this packages you can run the next command line in:</p>
+
+<h3>
+<a id="ubuntu" class="anchor" href="#ubuntu" aria-hidden="true"><span class="octicon octicon-link"></span></a>Ubuntu:</h3>
+
+<div class="highlight highlight-source-shell"><pre>$ python -m pip install -r requirements.txt</pre></div>
+
+<p>Make sure that you have the newest version of pip in your system, since Ubuntu has an outdated version of pip. Inside the dependecies folder you can find the python file get-pip.py, this file is for installing the newest version of pip. </p>
+
+<h3>
+<a id="windows" class="anchor" href="#windows" aria-hidden="true"><span class="octicon octicon-link"></span></a>Windows:</h3>
+
+<p>For windows, if you have Anaconda or Conda yo can run the next command line:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ conda create -n new environment --file requirements.txt</pre></div>
+
+<p>If you don't have Anaconda or Conda, you can install all the dependencies using the next command lines:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ python -m pip install numpy
+$ python -m pip install scipy
+$ python -m pip install ply
+$ python -m pip pydot
+$ python -m pip scikit-learn</pre></div>
+
+<p>If you get an error installing scikit-learn you should download the source file. Users with Python 2.7 can find an installer for scikit-learn in the dependecies folder.</p>
+
+<h2>
+<a id="grac" class="anchor" href="#grac" aria-hidden="true"><span class="octicon octicon-link"></span></a>GRAC</h2>
+
+<p>To use GRAC you can clone this repository or you can download the zip file from the latest release. </p>
+
+<hr>
+
+<h1>
+<a id="example-section" class="anchor" href="#example-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Section</h1>
+
+<p>Examples of how tou use GRAC can be found in the <a href="https://github.com/GlorimarCastro/grac/tree/master/examples">examples</a> folder</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/GlorimarCastro/grac">Grac</a> is maintained by <a href="https://github.com/GlorimarCastro">GlorimarCastro</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
