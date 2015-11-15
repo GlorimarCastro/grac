@@ -58,7 +58,7 @@ To use GRAC you can clone this repository or you can download the zip file from 
 ---
 
 # Example Section
-Examples of how tou use GRAC can be found in the [examples] folder
+Examples of how to use GRAC can be found in the [examples] folder
 
 #Developers
   - [Glorimar Castro Noriega] 
