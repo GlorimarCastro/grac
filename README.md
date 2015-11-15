@@ -22,7 +22,7 @@ For now, the machine learning classifiers available are supervised classifiers:
   
 Also, GRAC allows you to calculate the best classifier for your data (based on accuracy), and to execute [cross-validation]
 
-### Version
+## Version
 1.0
 
 
