@@ -212,9 +212,16 @@ def p_csv_methods(p):
     ''' csv_methods : CSV_SAVERESULT '(' PATH ')' '''
 
     path = p[3][1:-1]
+
     if p[1].lower() == 'savePredResult'.lower():
         print "Prediction results are going to be saved in ", path
-        #verificar que el path existe y el file es csv
+        #verifica que el path existe y el file es csv
+        if not os.path.exists(p[3]):
+            raise Exception('Cannot locate file.')
+
+        if not p[3].lower().endswith('.csv'):
+            raise Exception('Incorrect file extension.')
+
         if classResult == None:
             sys.exit("Classifier prediction have not being calculated")
 
@@ -228,9 +235,15 @@ def p_csv_methods(p):
         writer.close()
 
     elif p[1].lower() == 'saveStatResult'.lower():
-        #verificar que el path existe y el file es csv
-        
-        writer = csv.writer(open(path, 'wb'))
+        #verifica que el path existe y el file es csv
+        if not os.path.exists(p[3]):
+            raise Exception('Cannot locate file.')
+
+        if not p[3].lower().endswith('.csv'):
+            raise Exception('Incorrect file extension.')
+
+        writer = csv.writer(open(p[3], 'wb'))
+
         for key, value in stat.items():
             writer.writerow([key, value])
 
@@ -362,46 +375,48 @@ def p_statistics_methods(p):
             for e in statData[:,p[3]]:
                 temp += 1
             stat['count'] = temp
-            print("count = "+stat['count'])
+            print("count = "+str(stat['count']))
 
         if p[1] == 'min':
 
             stat['min'] = min(statData[:,p[3]])
-            print("min = "+stat['min'])
+            print("min = "+str(stat['min']))
 
         if p[1] == 'max':
 
             stat['max'] = max(statData[:,p[3]])
-            print("max = "+stat['max'])
+            print("max = "+str(stat['max']))
         if p[1] == 'rndm':
 
             stat['rndm'] = random.choice(statData[:,p[3]])
-            print("random number = "+stat['rndm'])
+            print("random number = "+str(stat['rndm']))
         if p[1] == 'least':
             # Tally occurrences of numbers in a list
             cnt = {}
             result = []
             #initialize dictionary with counts=0
-            for n in [statData[:,p[3]]]:
+            x = statData[:,p[3]]
+            for n in x:
                 cnt[n] = 0
             #link keys with their counts
             for w in [statData[:,p[3]]]:
                 cnt[w] += 1
             #get min
-            min = len(cnt)
+            mini = len(cnt)
             #print min
             for c in cnt:
-                if cnt[c] < min:
-                    min = cnt[c]
+                if cnt[c] < mini:
+                    mini = cnt[c]
 
             #prints keys with the lowest counts
             for e in cnt:
-                if cnt[e] == min:
+                if cnt[e] == mini:
                     result.append(e)
             stat['least'] = result
-            print("least repeated number = "+stat['least'])
+            print("least repeated number = "+str(stat['least']))
 
         if p[1] == 'mode':
+
             if statData.ndim == 1:
                 x,y = stats.mode(statData[:])
                 stat['mode'] = "Valor mas repetido: " + str( x[0]) +  ". Se repitio: " +  str(y[0]) 
@@ -421,11 +436,12 @@ def p_statistics_methods(p):
 
         if p[1] == 'avg':
             stat['avg'] = numpy.mean(statData[:,p[3]])
-            print("average = "+stat['avg'])
+            print("average = "+str(stat['avg']))
 
         if p[1] == 'mean':
             stat['mean'] = numpy.mean(statData[:,p[3]])
             print("mean = ", stat['mean'])
+
 
     #PARA list
     elif isinstance(p[3], list):
@@ -435,61 +451,63 @@ def p_statistics_methods(p):
             for e in p[3]:
                 temp += 1
             stat['count'] = temp
-            print("count = "+stat['count'])
+            print("count = "+str(stat['count']))
 
         if p[1] == 'min':
 
             stat['min'] = min(p[3])
-            print("min = "+stat['min'])
+            print("min = "+str(stat['min']))
 
         if p[1] == 'max':
 
             stat['max'] = max(p[3])
-            print("max = "+stat['max'])
+            print("max = "+str(stat['max']))
 
         if p[1] == 'rndm':
 
             stat['rndm'] = random.choice(p[3])
-            print("random number = "+stat['rndm'])
+            print("random number = "+str(stat['rndm']))
         if p[1] == 'least':
             # Tally occurrences of numbers in a list
             cnt = {}
             result = []
             #initialize dictionary with counts=0
-            for n in [p[3]]:
+            x = p[3]
+            for n in x:
                 cnt[n] = 0
             #link keys with their counts
             for w in [p[3]]:
                 cnt[w] += 1
             #get min
-            min = len(cnt)
+            mini = len(cnt)
             #print min
             for c in cnt:
-                if cnt[c] < min:
-                    min = cnt[c]
+                if cnt[c] < mini:
+                    mini = cnt[c]
 
             #prints keys with the lowest counts
             for e in cnt:
-                if cnt[e] == min:
+                if cnt[e] == mini:
                     result.append(e)
             stat['least'] = result
-            print("least repeated number = "+stat['least'])
+            print("least repeated number = "+str(stat['least']))
 
         if p[1] == 'mode':
             stat['mode'] = stats.mode(p[3])
-            print("mode = "+stat['mode'])
+            print("mode = "+str(stat['mode']))
 
         if p[1] == 'stdev':
             stat['stdev'] = numpy.std(p[3])
-            print("standard deviation = "+stat['stdev'])
+            print("standard deviation = "+str(stat['stdev']))
 
         if p[1] == 'avg':
             stat['avg'] = numpy.mean(p[3])
-            print("average = "+stat['avg'])
+            print("average = "+str(stat['avg']))
 
         if p[1] == 'mean':
             stat['mean'] = numpy.mean(p[3])
-            print("mean = "+stat['mean'])
+
+            print("mean = "+ str(stat['mean']))
 
     else:
         global variables
@@ -499,62 +517,65 @@ def p_statistics_methods(p):
                 for e in variables[p[3]]:
                     temp += 1
                 stat['count'] = temp
-                print("count = "+stat['count'])
+                print("count = "+str(stat['count']))
 
             if p[1] == 'min':
 
                 stat['min'] = min(variables[p[3]])
-                print("min = "+stat['min'])
+                print("min = "+str(stat['min']))
 
             if p[1] == 'max':
 
                 stat['max'] = max(variables[p[3]])
-                print("max = "+stat['max'])
+                print("max = "+str(stat['max']))
 
             if p[1] == 'rndm':
 
                 stat['rndm'] = random.choice(variables[p[3]])
-                print("random number = "+stat['rndm'])
+                print("random number = "+str(stat['rndm']))
 
             if p[1] == 'least':
+                ###TESTING LEAST FREQUENT ALGORITHM
                 # Tally occurrences of numbers in a list
                 cnt = {}
                 result = []
+                x = variables[p[3]]
                 #initialize dictionary with counts=0
-                for n in [variables[p[3]]]:
+                for n in x:
                     cnt[n] = 0
                 #link keys with their counts
-                for w in [variables[p[3]]]:
+                for w in x:
                     cnt[w] += 1
                 #get min
-                min = len(cnt)
+                mini = len(cnt)
                 #print min
                 for c in cnt:
-                    if cnt[c] < min:
-                        min = cnt[c]
+                    if cnt[c] < mini:
+                        mini = cnt[c]
 
                 #prints keys with the lowest counts
                 for e in cnt:
-                    if cnt[e] == min:
+                    if cnt[e] == mini:
                         result.append(e)
                 stat['least'] = result
-                print("least repeated number = "+stat['least'])
+                print("least repeated number = "+str(stat['least']))
 
             if p[1] == 'mode':
                 stat['mode'] = stats.mode(variables[p[3]])
-                print("mode = "+stat['mode'])
+                print("mode = "+str(stat['mode']))
 
             if p[1] == 'stdev':
                 stat['stdev'] = numpy.std(variables[p[3]])
-                print("standard deviation = "+stat['stdev'])
+                print("standard deviation = "+str(stat['stdev']))
 
             if p[1] == 'avg':
                 stat['avg'] = numpy.mean(variables[p[3]])
-                print("average = "+stat['avg'])
+                print("average = "+str(stat['avg']))
 
             if p[1] == 'mean':
                 stat['mean'] = numpy.mean(variables[p[3]])
                 print("mean = " + str(stat['mean']))
+
 
         else:
             print "Variable not defined"

@@ -169,7 +169,6 @@ printBestClassifier()
 calcBestClassifier()
 mean
 avg
-dimelou
 
 
 #data2test = """ 

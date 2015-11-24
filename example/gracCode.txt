@@ -1,11 +1,21 @@
 grac{
 hasHeader = true;
 features_Columns = [1,2,3,4,5];
-uploadTrainingData("dumytry.csv");
+uploadTrainingData("dumyData.csv");
 svc();
 executecv();
 printbestclassifier();
 saveCVResult("/home/galarwen/pl/eclipse/grac/example/gracResult");
 x = [1,2,3,4,5,6];
 mean(x)
+x = [1,2,2,3,3,3,3,3,4,5];
+mean(x);
+stdev(x);
+count(x);
+avg(x);
+max(x);
+mode(x);
+least(x);
+rndm(x);
+min(x)
 }
