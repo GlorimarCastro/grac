@@ -5,7 +5,7 @@ uploadTrainingData("dumytry.csv");
 svc();
 executecv();
 printbestclassifier();
-saveCVResult("D:/goldilla/");
+saveCVResult("/home/galarwen/pl/eclipse/grac/example/gracResult");
 x = [1,2,3,4,5,6];
 mean(x)
 }
