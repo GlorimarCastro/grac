@@ -360,49 +360,93 @@ def p_statistics_methods(p):
     if isinstance(p[3], int):
 
         if p[1] == 'count':
-            temp = 0
-            for e in statData[:,p[3]]:
-                temp += 1
-            stat['count'] = temp
-            print("count = "+str(stat['count']))
+            if statData.ndim == 1:
+                temp = 0
+                for e in statData[:]:
+                    temp += 1
+                stat['count'] = temp
+                print("count = "+str(stat['count']))
+            else:
+                temp = 0
+                for e in statData[:,p[3]]:
+                    temp += 1
+                stat['count'] = temp
+                print("count = "+str(stat['count']))
 
         if p[1] == 'min':
-
-            stat['min'] = min(statData[:,p[3]])
-            print("min = "+str(stat['min']))
+            if statData.ndim == 1:
+                stat['min'] = min(statData[:])
+                print("min = "+str(stat['min']))
+            else:
+                stat['min'] = min(statData[:,p[3]])
+                print("min = "+str(stat['min']))
 
         if p[1] == 'max':
+            if statData.ndim == 1:
+                stat['max'] = max(statData[:])
+                print("max = "+str(stat['max']))
+            else:
+                stat['max'] = max(statData[:,p[3]])
+                print("max = "+str(stat['max']))
 
-            stat['max'] = max(statData[:,p[3]])
-            print("max = "+str(stat['max']))
         if p[1] == 'rndm':
+            if statData.ndim == 1:
+                stat['rndm'] = random.choice(statData[:])
+                print("random number = "+str(stat['rndm']))
+            else:
+                stat['rndm'] = random.choice(statData[:,p[3]])
+                print("random number = "+str(stat['rndm']))
 
-            stat['rndm'] = random.choice(statData[:,p[3]])
-            print("random number = "+str(stat['rndm']))
         if p[1] == 'least':
-            # Tally occurrences of numbers in a list
-            cnt = {}
-            result = []
-            #initialize dictionary with counts=0
-            x = statData[:,p[3]]
-            for n in x:
-                cnt[n] = 0
-            #link keys with their counts
-            for w in [statData[:,p[3]]]:
-                cnt[w] += 1
-            #get min
-            mini = len(cnt)
-            #print min
-            for c in cnt:
-                if cnt[c] < mini:
-                    mini = cnt[c]
 
-            #prints keys with the lowest counts
-            for e in cnt:
-                if cnt[e] == mini:
-                    result.append(e)
-            stat['least'] = result
-            print("least repeated number = "+str(stat['least']))
+            if statData.ndim == 1:
+                 # Tally occurrences of numbers in a list
+                cnt = {}
+                result = []
+                #initialize dictionary with counts=0
+                x = statData[:]
+                for n in x:
+                    cnt[n] = 0
+                #link keys with their counts
+                for w in [statData[:]]:
+                    cnt[w] += 1
+                #get min
+                mini = len(cnt)
+                #print min
+                for c in cnt:
+                    if cnt[c] < mini:
+                        mini = cnt[c]
+
+                #prints keys with the lowest counts
+                for e in cnt:
+                    if cnt[e] == mini:
+                        result.append(e)
+                stat['least'] = result
+                print("least repeated number = "+str(stat['least']))
+            else:
+                 # Tally occurrences of numbers in a list
+                cnt = {}
+                result = []
+                #initialize dictionary with counts=0
+                x = statData[:,p[3]]
+                for n in x:
+                    cnt[n] = 0
+                #link keys with their counts
+                for w in [statData[:,p[3]]]:
+                    cnt[w] += 1
+                #get min
+                mini = len(cnt)
+                #print min
+                for c in cnt:
+                    if cnt[c] < mini:
+                        mini = cnt[c]
+
+                #prints keys with the lowest counts
+                for e in cnt:
+                    if cnt[e] == mini:
+                        result.append(e)
+                stat['least'] = result
+                print("least repeated number = "+str(stat['least']))
 
         if p[1] == 'mode':
 
