@@ -35,6 +35,7 @@ cv_scoring = {}         #si el usuario ejecuta cv sera un diccionario con la sig
 #start
 def p_programm(p):
     '''program : GRAC_START '{'  statement_list '}' '''  
+    print "comenzo programa"
     p[0] = p[3]
 def p_statement_list(p):
     '''statement_list : statement
@@ -89,7 +90,7 @@ def p_classifier_methods(t):
     '''classifier_methods : CLASSIFIER_METHOD
                             | CLASSIFIER_METHOD_WPARAMETER '(' ')' '''
     t[0] = t[1]
-    global classifier, classResult
+    global classifier, classResult, testClassColumn, testFeaturesColumn
     #si es un methodo que requiere parametro se ejecuta en el if
     if len(t) > 2:
         if t[1].lower() == "predict":
@@ -211,9 +212,11 @@ def p_csv_methods(p):
     ''' csv_methods : CSV_SAVERESULT '(' PATH ')' '''
 
     path = p[3][1:-1]
-    if p[1].lower() == 'savePredResult':
+
+    if p[1].lower() == 'savePredResult'.lower():
+        print "Prediction results are going to be saved in ", path
         #verifica que el path existe y el file es csv
-        if not os.path.exist(p[3]):
+        if not os.path.exists(p[3]):
             raise Exception('Cannot locate file.')
 
         if not p[3].lower().endswith('.csv'):
@@ -222,23 +225,29 @@ def p_csv_methods(p):
         if classResult == None:
             sys.exit("Classifier prediction have not being calculated")
 
-        writer = csv.writer(open(p[3]+'.csv', 'wb'))
+        writer = open(path +'.csv', 'w')
+        firstline = True
         for value in classResult:
-            writer.writerow(value)
+            if firstline:
+                firstline = False
+                writer.write(str(value))
+            writer.write("\n" + str(value))
+        writer.close()
 
-    elif p[1].lower() == 'saveStatResult':
+    elif p[1].lower() == 'saveStatResult'.lower():
         #verifica que el path existe y el file es csv
-        if not os.path.exist(p[3]):
+        if not os.path.exists(p[3]):
             raise Exception('Cannot locate file.')
 
         if not p[3].lower().endswith('.csv'):
             raise Exception('Incorrect file extension.')
 
         writer = csv.writer(open(p[3], 'wb'))
+
         for key, value in stat.items():
             writer.writerow([key, value])
 
-    elif p[1].lower() == 'savecvresult':
+    elif p[1].lower() == 'savecvresult'.lower():
         #verificar que el usuario te dio un directory path
         if len(cv_fold_result) < 1:
             sys.exit("Cross-validation have not being executed")
@@ -358,59 +367,116 @@ def p_statistics_methods(p):
                             | STATISTICS '(' array_list ')' '''
     global stat
 
+    #PARA INT
     if isinstance(p[3], int):
 
         if p[1] == 'count':
-            temp = 0
-            for e in statData[:,p[3]]:
-                temp += 1
-            stat['count'] = temp
-            print("count = "+str(stat['count']))
+            if statData.ndim == 1:
+                temp = 0
+                for e in statData[:]:
+                    temp += 1
+                stat['count'] = temp
+                print("count = "+str(stat['count']))
+            else:
+                temp = 0
+                for e in statData[:,p[3]]:
+                    temp += 1
+                stat['count'] = temp
+                print("count = "+str(stat['count']))
 
         if p[1] == 'min':
-
-            stat['min'] = min(statData[:,p[3]])
-            print("min = "+str(stat['min']))
+            if statData.ndim == 1:
+                stat['min'] = min(statData[:])
+                print("min = "+str(stat['min']))
+            else:
+                stat['min'] = min(statData[:,p[3]])
+                print("min = "+str(stat['min']))
 
         if p[1] == 'max':
+            if statData.ndim == 1:
+                stat['max'] = max(statData[:])
+                print("max = "+str(stat['max']))
+            else:
+                stat['max'] = max(statData[:,p[3]])
+                print("max = "+str(stat['max']))
 
-            stat['max'] = max(statData[:,p[3]])
-            print("max = "+str(stat['max']))
         if p[1] == 'rndm':
+            if statData.ndim == 1:
+                stat['rndm'] = random.choice(statData[:])
+                print("random number = "+str(stat['rndm']))
+            else:
+                stat['rndm'] = random.choice(statData[:,p[3]])
+                print("random number = "+str(stat['rndm']))
 
-            stat['rndm'] = random.choice(statData[:,p[3]])
-            print("random number = "+str(stat['rndm']))
         if p[1] == 'least':
-            # Tally occurrences of numbers in a list
-            cnt = {}
-            result = []
-            #initialize dictionary with counts=0
-            for n in [statData[:,p[3]]]:
-                cnt[n] = 0
-            #link keys with their counts
-            for w in [statData[:,p[3]]]:
-                cnt[w] += 1
-            #get min
-            min = len(cnt)
-            #print min
-            for c in cnt:
-                if cnt[c] < min:
-                    min = cnt[c]
 
-            #prints keys with the lowest counts
-            for e in cnt:
-                if cnt[e] == min:
-                    result.append(e)
-            stat['least'] = result
-            print("least repeated number = "+str(stat['least']))
+            if statData.ndim == 1:
+                 # Tally occurrences of numbers in a list
+                cnt = {}
+                result = []
+                #initialize dictionary with counts=0
+                x = statData[:]
+                for n in x:
+                    cnt[n] = 0
+                #link keys with their counts
+                for w in [statData[:]]:
+                    cnt[w] += 1
+                #get min
+                mini = len(cnt)
+                #print min
+                for c in cnt:
+                    if cnt[c] < mini:
+                        mini = cnt[c]
+
+                #prints keys with the lowest counts
+                for e in cnt:
+                    if cnt[e] == mini:
+                        result.append(e)
+                stat['least'] = result
+                print("least repeated number = "+str(stat['least']))
+            else:
+                 # Tally occurrences of numbers in a list
+                cnt = {}
+                result = []
+                #initialize dictionary with counts=0
+                x = statData[:,p[3]]
+                for n in x:
+                    cnt[n] = 0
+                #link keys with their counts
+                for w in [statData[:,p[3]]]:
+                    cnt[w] += 1
+                #get min
+                mini = len(cnt)
+                #print min
+                for c in cnt:
+                    if cnt[c] < mini:
+                        mini = cnt[c]
+
+                #prints keys with the lowest counts
+                for e in cnt:
+                    if cnt[e] == mini:
+                        result.append(e)
+                stat['least'] = result
+                print("least repeated number = "+str(stat['least']))
 
         if p[1] == 'mode':
-            stat['mode'] = stats.mode(statData[:,p[3]])
-            print("mode = "+str(stat['mode']))
+
+            if statData.ndim == 1:
+                x,y = stats.mode(statData[:])
+                stat['mode'] = "Valor mas repetido: " + str( x[0]) +  ". Se repitio: " +  str(y[0]) 
+                print("mode = ", stat['mode'])
+            else:
+                x,y = stats.mode(statData[:,p[3]])
+                stat['mode'] = "Valor mas repetido: " + str( x[0]) +  ". Se repitio: " +  str(y[0]) 
+                print("mode = ", stat['mode'])
 
         if p[1] == 'stdev':
-            stat['stdev'] = numpy.std(statData[:,p[3]])
-            print("standard deviation = "+str(stat['stdev']))
+            if statData.ndim == 1:
+                stat['stdev'] = numpy.std(statData[:])
+                print("standard deviation = "+stat['stdev'])
+            else: 
+                stat['stdev'] = numpy.std(statData[:,p[3]])
+                print("standard deviation = "+stat['stdev'])
 
         if p[1] == 'avg':
             stat['avg'] = numpy.mean(statData[:,p[3]])
@@ -418,8 +484,10 @@ def p_statistics_methods(p):
 
         if p[1] == 'mean':
             stat['mean'] = numpy.mean(statData[:,p[3]])
-            print("mean = "+str(stat['mean']))
+            print("mean = ", stat['mean'])
 
+
+    #PARA list
     elif isinstance(p[3], list):
 
         if p[1] == 'count':
@@ -432,7 +500,7 @@ def p_statistics_methods(p):
         if p[1] == 'min':
 
             stat['min'] = min(p[3])
-            print("min = "+stat['min'])
+            print("min = "+str(stat['min']))
 
         if p[1] == 'max':
 
@@ -448,21 +516,22 @@ def p_statistics_methods(p):
             cnt = {}
             result = []
             #initialize dictionary with counts=0
-            for n in [p[3]]:
+            x = p[3]
+            for n in x:
                 cnt[n] = 0
             #link keys with their counts
             for w in [p[3]]:
                 cnt[w] += 1
             #get min
-            min = len(cnt)
+            mini = len(cnt)
             #print min
             for c in cnt:
-                if cnt[c] < min:
-                    min = cnt[c]
+                if cnt[c] < mini:
+                    mini = cnt[c]
 
             #prints keys with the lowest counts
             for e in cnt:
-                if cnt[e] == min:
+                if cnt[e] == mini:
                     result.append(e)
             stat['least'] = result
             print("least repeated number = "+str(stat['least']))
@@ -481,7 +550,8 @@ def p_statistics_methods(p):
 
         if p[1] == 'mean':
             stat['mean'] = numpy.mean(p[3])
-            print("mean = "+str(stat['mean']))
+
+            print("mean = "+ str(stat['mean']))
 
     else:
         global variables
@@ -509,25 +579,27 @@ def p_statistics_methods(p):
                 print("random number = "+str(stat['rndm']))
 
             if p[1] == 'least':
+                ###TESTING LEAST FREQUENT ALGORITHM
                 # Tally occurrences of numbers in a list
                 cnt = {}
                 result = []
+                x = variables[p[3]]
                 #initialize dictionary with counts=0
-                for n in [variables[p[3]]]:
+                for n in x:
                     cnt[n] = 0
                 #link keys with their counts
-                for w in [variables[p[3]]]:
+                for w in x:
                     cnt[w] += 1
                 #get min
-                min = len(cnt)
+                mini = len(cnt)
                 #print min
                 for c in cnt:
-                    if cnt[c] < min:
-                        min = cnt[c]
+                    if cnt[c] < mini:
+                        mini = cnt[c]
 
                 #prints keys with the lowest counts
                 for e in cnt:
-                    if cnt[e] == min:
+                    if cnt[e] == mini:
                         result.append(e)
                 stat['least'] = result
                 print("least repeated number = "+str(stat['least']))
@@ -546,7 +618,8 @@ def p_statistics_methods(p):
 
             if p[1] == 'mean':
                 stat['mean'] = numpy.mean(variables[p[3]])
-                print("mean = "+str(stat['mean']))
+                print("mean = " + str(stat['mean']))
+
 
         else:
             print "Variable not defined"
@@ -563,6 +636,7 @@ def p_assignment(p):
     p[0] = p[1]
     if len(p) > 2:
         global variables
+        print "esta entrando aqui"
         variables[p[1]] = p[3]
     
 def p_crossvalidation_assignment(p):
@@ -580,21 +654,26 @@ def p_csv_assignment(p):
                         | CSV_TESTCLASSCOLUMN '=' INT
                         | CSV_TESTFEATURESCOLUMNS '=' array_list'''
     if isinstance(p[3], int):
-        if p[3] == 'class_column':
+        if p[1].lower() == 'class_column':               
             global classColumn
+            print "Clas column set to ", p[3]
             classColumn = p[3]
         else:
             global testClassColumn
+            print "Test class column set to ", p[3]
             testClassColumn = p[3]
     elif isinstance(p[3], list):
-        if p[3] == 'features_columns':
+        if p[1].lower() == 'features_columns':
             global featuresColumn
+            print "features columns now are: ", p[3]
             featuresColumn = p[3]
         else:
             global testFeaturesColumn
-            testFeaturesColumn = p[3]
+            print "testFeaturesColumn now are: ", p[3]
+            testFeaturesColumn = p[3] 
     elif p[1].lower() == 'hasheader':
         global hasHeader
+        print "Has header set to ", p[3]
         hasHeader = p[3]
 
 def p_array_list(p):
@@ -668,17 +747,18 @@ def getParser():
 #===============================================================================================================================
 
  
-#data2test = """
-#grac {
-#features_columns = [1,2,3,4];
-#kfold = 2;
-#hasHeader = false;
-#class_column = 0;
-#uploadTrainingData("dumyData.csv");
-#printbestclassifier()
-
-#}
-#"""
+data2test = """
+grac{
+hasHeader = false;
+features_columns = [1,2,3,4,5];
+uploadTrainingData("../example/dumytry.csv");
+uploadTestData("../example/gracDumyData.csv");
+dtc();
+execute();#this calculare matrix values for svc 
+predict();
+savePredResult("dtcResult")
+}
+"""
 
 #y = yacc.yacc()
 #result = y.parse(data2test)

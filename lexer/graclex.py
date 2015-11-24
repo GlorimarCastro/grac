@@ -47,6 +47,7 @@ reg_classcolumn = re.compile(reservedWords.get('CSV_CLASSCOLUMN')[0])
 reg_testfeaturescolumn = re.compile(reservedWords.get('CSV_TESTFEATURESCOLUMNS')[0])
 reg_testclasscolumn = re.compile(reservedWords.get('CSV_TESTCLASSCOLUMN')[0])
 reg_saveresult = re.compile(','.join(reservedWords.get('CSV_SAVERESULT')))
+reg_classsifiermethodwithparameters = re.compile(reservedWords.get('CLASSIFIER_METHOD_WPARAMETER')[0])
 #------------------------------------------------------
 #        SIMPLE TOKEN DEFINITION
 #----------------------------------------------------
@@ -55,10 +56,13 @@ t_GRAC_START                    = reservedWords.get('GRAC_START')[0]
 t_KFOLD                         = reservedWords.get('KFOLD')[0]
 #t_CROSSVALIDATIONACTION         = reservedWords.get('CROSSVALIDATIONACTION')[0]
 t_CSV_HEADER                    = reservedWords.get('CSV_HEADER')[0]
-t_CLASSIFIER_METHOD_WPARAMETER  = reservedWords.get('CLASSIFIER_METHOD_WPARAMETER')[0]
 #------------------------------------------------------
 #        TOKEN DEFINITION WITH FUNCTION
 #------------------------------------------------------
+@TOKEN(reg_classsifiermethodwithparameters.pattern)
+def t_CLASSIFIER_METHOD_WPARAMETER(t):   
+    return t
+
 @TOKEN(reg_featurescolumn.pattern)
 def t_CSV_FEATURESCOLUMNS(t):   
     return t
@@ -165,7 +169,6 @@ printBestClassifier()
 calcBestClassifier()
 mean
 avg
-dimelou
 
 
 #data2test = """ 

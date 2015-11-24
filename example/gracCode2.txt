@@ -1,0 +1,12 @@
+grac{
+hasHeader = false;
+features_columns = [1,2,3,4,5];
+uploadTrainingData("dumytry.csv");
+uploadTestData("gracDumyData.csv");
+dtc();
+execute();#this calculare matrix values for svc 
+predict();
+savePredResult("dtcResult");
+uploadData("dtcResult.csv");
+mode(0)
+}

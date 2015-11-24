@@ -1,6 +1,7 @@
-from grammar import gracgrammar
-import sys
 
+import sys
+sys.path.insert(0,"../")
+from grammar import gracgrammar
 gracParser = gracgrammar.getParser()
 
 gracCode = ""
