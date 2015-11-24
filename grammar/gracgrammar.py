@@ -408,23 +408,19 @@ def p_statistics_methods(p):
                 for n in x:
                     cnt[n] = 0
                 #link keys with their counts
-                for w in [statData[:]]:
+                for w in statData[:]:
                     cnt[w] += 1
                 #get min
-                mini = len(cnt)
-                #print min
-                for c in cnt:
-                    if cnt[c] < mini:
-                        mini = cnt[c]
+                mini = float("inf")
+                minKey = ""
+                for key in cnt.keys():
+                    if cnt[key] < mini:
+                        mini = cnt[key]
+                        minKey = key
 
-                #prints keys with the lowest counts
-                for e in cnt:
-                    if cnt[e] == mini:
-                        result.append(e)
-                stat['least'] = result
-                print("least repeated number = "+str(stat['least']))
+                stat['least'] = minKey
+                print("least repeated number = "+str(minKey))
             else:
-                 # Tally occurrences of numbers in a list
                 cnt = {}
                 result = []
                 #initialize dictionary with counts=0
@@ -434,19 +430,15 @@ def p_statistics_methods(p):
                 #link keys with their counts
                 for w in [statData[:,p[3]]]:
                     cnt[w] += 1
-                #get min
-                mini = len(cnt)
-                #print min
-                for c in cnt:
-                    if cnt[c] < mini:
-                        mini = cnt[c]
+                mini = float("inf")
+                minKey = ""
+                for key in cnt.keys():
+                    if cnt[key] < mini:
+                        mini = cnt[key]
+                        minKey = key
 
-                #prints keys with the lowest counts
-                for e in cnt:
-                    if cnt[e] == mini:
-                        result.append(e)
-                stat['least'] = result
-                print("least repeated number = "+str(stat['least']))
+                stat['least'] = minKey
+                print("least repeated number = "+str(minKey))
 
         if p[1] == 'mode':
 
@@ -520,18 +512,14 @@ def p_statistics_methods(p):
             for w in [p[3]]:
                 cnt[w] += 1
             #get min
-            mini = len(cnt)
-            #print min
-            for c in cnt:
-                if cnt[c] < mini:
-                    mini = cnt[c]
-
-            #prints keys with the lowest counts
-            for e in cnt:
-                if cnt[e] == mini:
-                    result.append(e)
-            stat['least'] = result
-            print("least repeated number = "+str(stat['least']))
+            mini = float("inf")
+            minKey = ""
+            for key in cnt.keys():
+                if cnt[key] < mini:
+                    mini = cnt[key]
+                    minKey = key
+            stat['least'] = minKey
+            print("least repeated number = "+str(minKey))
 
         if p[1] == 'mode':
             x,y = stats.mode(p[3])
@@ -589,18 +577,15 @@ def p_statistics_methods(p):
                 for w in x:
                     cnt[w] += 1
                 #get min
-                mini = len(cnt)
-                #print min
-                for c in cnt:
-                    if cnt[c] < mini:
-                        mini = cnt[c]
+                mini = float("inf")
+                minKey = ""
+                for key in cnt.keys():
+                    if cnt[key] < mini:
+                        mini = cnt[key]
+                        minKey = key
 
-                #prints keys with the lowest counts
-                for e in cnt:
-                    if cnt[e] == mini:
-                        result.append(e)
-                stat['least'] = result
-                print("least repeated number = "+str(stat['least']))
+                stat['least'] = minKey
+                print("least repeated number = "+str(minKey))
 
             if p[1] == 'mode':
                 x,y =  stats.mode(variables[p[3]])
@@ -651,10 +636,11 @@ def p_csv_assignment(p):
                         | CSV_FEATURESCOLUMNS '=' array_list
                         | CSV_TESTCLASSCOLUMN '=' INT
                         | CSV_TESTFEATURESCOLUMNS '=' array_list'''
+
     if isinstance(p[3], int):
         if p[1].lower() == 'class_column':               
             global classColumn
-            print "Clas column set to ", p[3]
+            print "Class column set to ", p[3]
             classColumn = p[3]
         else:
             global testClassColumn
