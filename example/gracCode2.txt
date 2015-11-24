@@ -8,5 +8,10 @@ execute();#this calculare matrix values for svc
 predict();
 savePredResult("dtcResult");
 uploadData("dtcResult.csv");
-mode(0)
+mode(0);
+mean(0);
+stdev(0);
+avg(0);
+mode(0);
+saveStatResult("statResult")
 }

@@ -35,7 +35,6 @@ cv_scoring = {}         #si el usuario ejecuta cv sera un diccionario con la sig
 #start
 def p_programm(p):
     '''program : GRAC_START '{'  statement_list '}' '''  
-    print "comenzo programa"
     p[0] = p[3]
 def p_statement_list(p):
     '''statement_list : statement
@@ -216,11 +215,6 @@ def p_csv_methods(p):
     if p[1].lower() == 'savePredResult'.lower():
         print "Prediction results are going to be saved in ", path
         #verifica que el path existe y el file es csv
-        if not os.path.exists(p[3]):
-            raise Exception('Cannot locate file.')
-
-        if not p[3].lower().endswith('.csv'):
-            raise Exception('Incorrect file extension.')
 
         if classResult == None:
             sys.exit("Classifier prediction have not being calculated")
@@ -236,13 +230,8 @@ def p_csv_methods(p):
 
     elif p[1].lower() == 'saveStatResult'.lower():
         #verifica que el path existe y el file es csv
-        if not os.path.exists(p[3]):
-            raise Exception('Cannot locate file.')
 
-        if not p[3].lower().endswith('.csv'):
-            raise Exception('Incorrect file extension.')
-
-        writer = csv.writer(open(p[3], 'wb'))
+        writer = csv.writer(open(path, 'wb'))
 
         for key, value in stat.items():
             writer.writerow([key, value])
@@ -419,28 +408,36 @@ def p_statistics_methods(p):
 
             if statData.ndim == 1:
                 x,y = stats.mode(statData[:])
-                stat['mode'] = "Valor mas repetido: " + str( x[0]) +  ". Se repitio: " +  str(y[0]) 
-                print("mode = ", stat['mode'])
+                stat['mode'] = x[0]
+                print("mode = " + "Valor mas repetido: " + str( x[0]) +  ". Se repitio: " +  str(y[0]))
             else:
                 x,y = stats.mode(statData[:,p[3]])
                 stat['mode'] = "Valor mas repetido: " + str( x[0]) +  ". Se repitio: " +  str(y[0]) 
-                print("mode = ", stat['mode'])
+                print("mode = " + str( stat['mode']))
 
         if p[1] == 'stdev':
             if statData.ndim == 1:
                 stat['stdev'] = numpy.std(statData[:])
-                print("standard deviation = "+stat['stdev'])
+                print("standard deviation = " + str(stat['stdev']))
             else: 
                 stat['stdev'] = numpy.std(statData[:,p[3]])
-                print("standard deviation = "+stat['stdev'])
+                print("standard deviation = " + str(stat['stdev']))
 
         if p[1] == 'avg':
-            stat['avg'] = numpy.mean(statData[:,p[3]])
-            print("average = "+str(stat['avg']))
+            if statData.ndim == 1:
+                stat['avg'] = numpy.mean(statData[:])
+                print("average = "+str(stat['avg']))
+            else:
+                stat['avg'] = numpy.mean(statData[:,p[3]])
+                print("average = "+str(stat['avg']))
 
         if p[1] == 'mean':
-            stat['mean'] = numpy.mean(statData[:,p[3]])
-            print("mean = ", stat['mean'])
+            if statData.ndim == 1:
+                stat['mean'] = numpy.mean(statData[:])
+                print("mean = " + str(stat['mean']))
+            else:
+                stat['mean'] = numpy.mean(statData[:,p[3]])
+                print("mean = " + str(stat['mean']))
 
 
     #PARA list
@@ -493,8 +490,9 @@ def p_statistics_methods(p):
             print("least repeated number = "+str(stat['least']))
 
         if p[1] == 'mode':
-            stat['mode'] = stats.mode(p[3])
-            print("mode = "+str(stat['mode']))
+            x,y = stats.mode(p[3])
+            stat['mode'] = x[0]
+            print("mode = " + str(x[0]))
 
         if p[1] == 'stdev':
             stat['stdev'] = numpy.std(p[3])
@@ -561,8 +559,9 @@ def p_statistics_methods(p):
                 print("least repeated number = "+str(stat['least']))
 
             if p[1] == 'mode':
-                stat['mode'] = stats.mode(variables[p[3]])
-                print("mode = "+str(stat['mode']))
+                x,y =  stats.mode(variables[p[3]])
+                stat['mode'] = x[0]
+                print("mode = "+ str(x[0]))
 
             if p[1] == 'stdev':
                 stat['stdev'] = numpy.std(variables[p[3]])
@@ -592,7 +591,6 @@ def p_assignment(p):
     p[0] = p[1]
     if len(p) > 2:
         global variables
-        print "esta entrando aqui"
         variables[p[1]] = p[3]
     
 def p_crossvalidation_assignment(p):

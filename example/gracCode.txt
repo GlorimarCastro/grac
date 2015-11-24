@@ -1,13 +1,13 @@
 grac{
 hasHeader = true;
 features_Columns = [1,2,3,4,5];
-uploadTrainingData("dumyData.csv");
+uploadTrainingData("dumytry.csv");
 svc();
 executecv();
 printbestclassifier();
 saveCVResult("/home/galarwen/pl/eclipse/grac/example/gracResult");
 x = [1,2,3,4,5,6];
-mean(x)
+mean(x);
 x = [1,2,2,3,3,3,3,3,4,5];
 mean(x);
 stdev(x);
