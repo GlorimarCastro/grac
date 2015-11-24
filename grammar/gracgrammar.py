@@ -212,7 +212,13 @@ def p_csv_methods(p):
 
     path = p[3][1:-1]
     if p[1].lower() == 'savePredResult':
-        #verificar que el path existe y el file es csv
+        #verifica que el path existe y el file es csv
+        if not os.path.exist(p[3]):
+            raise Exception('Cannot locate file.')
+
+        if not p[3].lower().endswith('.csv'):
+            raise Exception('Incorrect file extension.')
+
         if classResult == None:
             sys.exit("Classifier prediction have not being calculated")
 
@@ -221,9 +227,13 @@ def p_csv_methods(p):
             writer.writerow(value)
 
     elif p[1].lower() == 'saveStatResult':
-        #verificar que el path existe y el file es csv
-        
-        
+        #verifica que el path existe y el file es csv
+        if not os.path.exist(p[3]):
+            raise Exception('Cannot locate file.')
+
+        if not p[3].lower().endswith('.csv'):
+            raise Exception('Incorrect file extension.')
+
         writer = csv.writer(open(p[3], 'wb'))
         for key, value in stat.items():
             writer.writerow([key, value])
@@ -346,8 +356,8 @@ def p_statistics_methods(p):
     '''statistics_methods : STATISTICS '(' ID ')' 
                             | STATISTICS '(' INT ')' 
                             | STATISTICS '(' array_list ')' '''
-    global stat, statLast
-    statLast = True
+    global stat
+
     if isinstance(p[3], int):
 
         if p[1] == 'count':
@@ -355,19 +365,21 @@ def p_statistics_methods(p):
             for e in statData[:,p[3]]:
                 temp += 1
             stat['count'] = temp
+            print("count = "+str(stat['count']))
 
         if p[1] == 'min':
 
             stat['min'] = min(statData[:,p[3]])
+            print("min = "+str(stat['min']))
 
         if p[1] == 'max':
 
             stat['max'] = max(statData[:,p[3]])
-
+            print("max = "+str(stat['max']))
         if p[1] == 'rndm':
 
             stat['rndm'] = random.choice(statData[:,p[3]])
-
+            print("random number = "+str(stat['rndm']))
         if p[1] == 'least':
             # Tally occurrences of numbers in a list
             cnt = {}
@@ -390,16 +402,23 @@ def p_statistics_methods(p):
                 if cnt[e] == min:
                     result.append(e)
             stat['least'] = result
+            print("least repeated number = "+str(stat['least']))
 
         if p[1] == 'mode':
             stat['mode'] = stats.mode(statData[:,p[3]])
-            ""
+            print("mode = "+str(stat['mode']))
+
         if p[1] == 'stdev':
             stat['stdev'] = numpy.std(statData[:,p[3]])
+            print("standard deviation = "+str(stat['stdev']))
+
         if p[1] == 'avg':
             stat['avg'] = numpy.mean(statData[:,p[3]])
+            print("average = "+str(stat['avg']))
+
         if p[1] == 'mean':
             stat['mean'] = numpy.mean(statData[:,p[3]])
+            print("mean = "+str(stat['mean']))
 
     elif isinstance(p[3], list):
 
@@ -408,19 +427,22 @@ def p_statistics_methods(p):
             for e in p[3]:
                 temp += 1
             stat['count'] = temp
+            print("count = "+str(stat['count']))
 
         if p[1] == 'min':
 
             stat['min'] = min(p[3])
+            print("min = "+stat['min'])
 
         if p[1] == 'max':
 
             stat['max'] = max(p[3])
+            print("max = "+str(stat['max']))
 
         if p[1] == 'rndm':
 
             stat['rndm'] = random.choice(p[3])
-
+            print("random number = "+str(stat['rndm']))
         if p[1] == 'least':
             # Tally occurrences of numbers in a list
             cnt = {}
@@ -443,16 +465,23 @@ def p_statistics_methods(p):
                 if cnt[e] == min:
                     result.append(e)
             stat['least'] = result
+            print("least repeated number = "+str(stat['least']))
 
         if p[1] == 'mode':
             stat['mode'] = stats.mode(p[3])
-            ""
+            print("mode = "+str(stat['mode']))
+
         if p[1] == 'stdev':
             stat['stdev'] = numpy.std(p[3])
+            print("standard deviation = "+str(stat['stdev']))
+
         if p[1] == 'avg':
             stat['avg'] = numpy.mean(p[3])
+            print("average = "+str(stat['avg']))
+
         if p[1] == 'mean':
             stat['mean'] = numpy.mean(p[3])
+            print("mean = "+str(stat['mean']))
 
     else:
         global variables
@@ -462,18 +491,22 @@ def p_statistics_methods(p):
                 for e in variables[p[3]]:
                     temp += 1
                 stat['count'] = temp
+                print("count = "+str(stat['count']))
 
             if p[1] == 'min':
 
                 stat['min'] = min(variables[p[3]])
+                print("min = "+str(stat['min']))
 
             if p[1] == 'max':
 
                 stat['max'] = max(variables[p[3]])
+                print("max = "+str(stat['max']))
 
             if p[1] == 'rndm':
 
                 stat['rndm'] = random.choice(variables[p[3]])
+                print("random number = "+str(stat['rndm']))
 
             if p[1] == 'least':
                 # Tally occurrences of numbers in a list
@@ -497,18 +530,27 @@ def p_statistics_methods(p):
                     if cnt[e] == min:
                         result.append(e)
                 stat['least'] = result
+                print("least repeated number = "+str(stat['least']))
 
             if p[1] == 'mode':
                 stat['mode'] = stats.mode(variables[p[3]])
+                print("mode = "+str(stat['mode']))
+
             if p[1] == 'stdev':
                 stat['stdev'] = numpy.std(variables[p[3]])
+                print("standard deviation = "+str(stat['stdev']))
+
             if p[1] == 'avg':
                 stat['avg'] = numpy.mean(variables[p[3]])
+                print("average = "+str(stat['avg']))
+
             if p[1] == 'mean':
                 stat['mean'] = numpy.mean(variables[p[3]])
+                print("mean = "+str(stat['mean']))
 
         else:
             print "Variable not defined"
+
 
 
 #=====================================================================================
