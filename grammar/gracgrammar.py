@@ -690,7 +690,6 @@ def uploadFile(csvfilepath):
     else:
         try:
             if hasHeader == "true":
-                print "entro a con header"
                 return numpy.loadtxt(open(csvfilepath,"rb"),delimiter=",",skiprows=1)
             else:
                 return numpy.loadtxt(open(csvfilepath,"rb"),delimiter=",")
