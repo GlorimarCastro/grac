@@ -385,21 +385,22 @@ def p_statistics_methods(p):
             cnt = {}
             result = []
             #initialize dictionary with counts=0
-            for n in [statData[:,p[3]]]:
+            x = statData[:,p[3]]
+            for n in x:
                 cnt[n] = 0
             #link keys with their counts
             for w in [statData[:,p[3]]]:
                 cnt[w] += 1
             #get min
-            min = len(cnt)
+            mini = len(cnt)
             #print min
             for c in cnt:
-                if cnt[c] < min:
-                    min = cnt[c]
+                if cnt[c] < mini:
+                    mini = cnt[c]
 
             #prints keys with the lowest counts
             for e in cnt:
-                if cnt[e] == min:
+                if cnt[e] == mini:
                     result.append(e)
             stat['least'] = result
             print("least repeated number = "+str(stat['least']))
@@ -432,7 +433,7 @@ def p_statistics_methods(p):
         if p[1] == 'min':
 
             stat['min'] = min(p[3])
-            print("min = "+stat['min'])
+            print("min = "+str(stat['min']))
 
         if p[1] == 'max':
 
@@ -448,21 +449,22 @@ def p_statistics_methods(p):
             cnt = {}
             result = []
             #initialize dictionary with counts=0
-            for n in [p[3]]:
+            x = p[3]
+            for n in x:
                 cnt[n] = 0
             #link keys with their counts
             for w in [p[3]]:
                 cnt[w] += 1
             #get min
-            min = len(cnt)
+            mini = len(cnt)
             #print min
             for c in cnt:
-                if cnt[c] < min:
-                    min = cnt[c]
+                if cnt[c] < mini:
+                    mini = cnt[c]
 
             #prints keys with the lowest counts
             for e in cnt:
-                if cnt[e] == min:
+                if cnt[e] == mini:
                     result.append(e)
             stat['least'] = result
             print("least repeated number = "+str(stat['least']))
@@ -509,25 +511,27 @@ def p_statistics_methods(p):
                 print("random number = "+str(stat['rndm']))
 
             if p[1] == 'least':
+                ###TESTING LEAST FREQUENT ALGORITHM
                 # Tally occurrences of numbers in a list
                 cnt = {}
                 result = []
+                x = variables[p[3]]
                 #initialize dictionary with counts=0
-                for n in [variables[p[3]]]:
+                for n in x:
                     cnt[n] = 0
                 #link keys with their counts
-                for w in [variables[p[3]]]:
+                for w in x:
                     cnt[w] += 1
                 #get min
-                min = len(cnt)
+                mini = len(cnt)
                 #print min
                 for c in cnt:
-                    if cnt[c] < min:
-                        min = cnt[c]
+                    if cnt[c] < mini:
+                        mini = cnt[c]
 
                 #prints keys with the lowest counts
                 for e in cnt:
-                    if cnt[e] == min:
+                    if cnt[e] == mini:
                         result.append(e)
                 stat['least'] = result
                 print("least repeated number = "+str(stat['least']))

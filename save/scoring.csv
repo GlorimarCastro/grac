@@ -1,0 +1,21 @@
+"/Users/CERG/grac/save"avg scorinmg: {'recall': 0.85136075949367096, 'precision': 0.85136075949367096, 'fscore': 0.85136075949367096, 'accuracy': 0.85136075949367096}
+"/Users/CERG/grac/save"fold_4: {'recall': 0.82278481012658233, 'confusion matrix': array([[20,  0,  0,  0],
+       [ 4, 15,  0,  0],
+       [ 0,  0, 21,  0],
+       [ 0,  0, 10,  9]]), 'precision': 0.82278481012658233, 'fscore': 0.82278481012658233, 'accuracy': 0.82278481012658233}
+"/Users/CERG/grac/save"fold_2: {'recall': 0.86075949367088611, 'confusion matrix': array([[19,  0,  0,  0],
+       [ 5, 16,  0,  0],
+       [ 0,  0, 19,  0],
+       [ 0,  0,  6, 14]]), 'precision': 0.86075949367088611, 'fscore': 0.86075949367088611, 'accuracy': 0.86075949367088611}
+"/Users/CERG/grac/save"fold_3: {'recall': 0.86075949367088611, 'confusion matrix': array([[19,  0,  0,  0],
+       [ 3, 17,  0,  0],
+       [ 0,  0, 21,  0],
+       [ 0,  0,  8, 11]]), 'precision': 0.86075949367088611, 'fscore': 0.86075949367088611, 'accuracy': 0.86075949367088611}
+"/Users/CERG/grac/save"fold_0: {'recall': 0.86250000000000004, 'confusion matrix': array([[20,  0,  0,  0],
+       [ 5, 14,  0,  0],
+       [ 0,  0, 20,  0],
+       [ 0,  0,  6, 15]]), 'precision': 0.86250000000000004, 'fscore': 0.86250000000000004, 'accuracy': 0.86250000000000004}
+"/Users/CERG/grac/save"fold_1: {'recall': 0.84999999999999998, 'confusion matrix': array([[21,  0,  0,  0],
+       [ 4, 16,  0,  0],
+       [ 0,  0, 19,  0],
+       [ 0,  0,  8, 12]]), 'precision': 0.84999999999999998, 'fscore': 0.84999999999999998, 'accuracy': 0.84999999999999998}
