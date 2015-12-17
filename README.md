@@ -1,4 +1,8 @@
-# Introduction
+# Table of Content
+* <a href="#introduccion"> Introduction </a>
+----
+
+# <a id="introduccion"> Introduction </a>
 
 ### Description
 GRAC is a python based [special-purpose programming language] for [supervised machine learning] and [statistics]. It allows the user to upload CSV files and run classification methods, predictions and statistics on it.
@@ -71,6 +75,12 @@ Examples of how to use GRAC can be found in the [examples] folder
 # Grac Grammra
 ![alt tag](https://github.com/GlorimarCastro/grac/blob/master/imgs/gracgrammar.png?raw=tru)
 ----
+----
+# Language Tutorial
+The next video contain a tutorial and a description of GRAC. 
+
+<br>
+Also, the user can go to the Reference Manual secction for detailed instruction in how to use the diferent methods of GRAC. 
 ----
 # Reference Manual
 ## Basic Syntax
@@ -595,6 +605,11 @@ Ply
 ### Test methodology & program used to test
 Using python 2.7 we  tested all the variables used and each method 
     exhaustively and compared the results.   All the code used for testing can be found in the example folder in the github account for the project 
+----
+# Conclusion
+
+Machine Learning, data mining, and big data are important fields in programming, as they are used for the advance in Medicine, Cyber Security, Financial Analysis, etc. It would be convenient for a language that could do all  of this without needing support from other languages and complicated file formats. This is why GRAC was created. With GRAC, the user can analyse data in a CSV file using machine learning or statistical methods. <br>
+GRAC is extremely convenient, as there is no need for the understanding of many languages. The user only needs to have a basic knowledge of Python, which is one of the most known languages, and be able to follow the basic guidelines of GRAC to fulfill the wanted analysis. 
 
 ----
 #Developers
