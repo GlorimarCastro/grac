@@ -73,7 +73,8 @@ Examples of how to use GRAC can be found in the [examples] folder
 ----
 ----
 # <a id="tutorial"> Language Tutorial </a>
-The next video contain a tutorial and a description of GRAC. 
+The next video contain a tutorial and a description of GRAC:
+- [https://www.youtube.com/watch?v=SGs17I4_cI8&feature=youtu.be]
 
 <br>
 Also, the user can go to the Reference Manual secction for detailed instruction in how to use the diferent methods of GRAC. 
@@ -627,4 +628,5 @@ GRAC is extremely convenient, as there is no need for the understanding of many 
    [Carlos E Rosario Gonzalez]: <https://github.com/zrike>
    [Glorimar Castro Noriega]: <https://github.com/GlorimarCastro>
    [Anthony S Slaughter Amaro]: <https://github.com/slaughter30>
+   [https://www.youtube.com/watch?v=SGs17I4_cI8&feature=youtu.be]: <- [https://www.youtube.com/watch?v=SGs17I4_cI8&feature=youtu.be]>
    [Rafael Feliciano Isales]: <https://github.com/rafaelfeliciano4>
