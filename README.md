@@ -1,26 +1,3 @@
-# Table of Content
-## <a href="#introduccion"> Introduction </a>
-### <a href="#description"> Description </a>
-### <a href="#motivation"> Motivation </a>
-### <a href="#statSect"> Statistic Section </a>
-### <a href="#Mach"> Machine Learning Section </a>
-## <a href="#instal"> Installation </a>
-### <a href="#depende"> Dependecies </a>
-## <a href="#example" >Example Section </a>
-## <a href="#grammar"> Grac Grammar </a>
-## <a href="#tutorial"> Language Tutorial </a>
-## <a href="#referencemanual"> Reference Manual </a>
-### <a href="#basicsyn"> Basic Syntax </a>
-### <a href="#types"> Types </a>
-##### <a href="#bool"> Booleans </a>
-##### <a href="#path"> Path </a>
-##### <a href="#ints"> Integers </a>
-##### <a href="#arra">Arrays</a>
-### <a href="#varia">Variables</a>
-##### <a href="#kfold">kfold:</a>
-
-----
-
 # <a id="introduccion"> Introduction </a>
 
 ### <a id="description"> Description </a>
@@ -141,7 +118,7 @@ t = 9
 ## <a id="varia">Variables</a>
 #### <a id="kfold">kfold:</a>
 * kfold - set the number of folds the k-fold cross-validation method will use. 
-* Default Value: 5    
+* Default Value: 5
 * Accepted values/types: Integer
 * example:
 ```sh
@@ -154,7 +131,7 @@ $    saveCVResult(“path\to\output\file”)
 $}
 ```
 
-#### hasheader:
+#### <a id="hasheader">hasheader:</a>
 * hasheader - tells whether the first row should be ignored (is a header) or not.
 * Default Value: False
 * Accepted values/types: Boolean
@@ -170,7 +147,7 @@ $    execute()
 $}
 ```
 
-#### class_column
+#### <a id="classcol">class_column</a>
 * class_column - Identify and separates the column that holds the class from the features in the 
     training file. 
 * Default Value: 0
@@ -186,7 +163,7 @@ $    gnbc();
 $    execute()
 $}
 ```
-#### test_class_column
+#### <a id="testclacol">test_class_column</a>
 * test_class_column - Identify the class column to be used for testing. If no value is set, it will copy the value from class_column.
 * Default Value: None
 * Accepted values/types: Integer
@@ -205,8 +182,8 @@ $    execute();
 $    predict()
 $}
 ```
-#### features_columns
-* features_columns - Identify and separates the columns holding the features from the class.     
+#### <a id="feacolm"> features_columns</a>
+* features_columns - Identify and separates the columns holding the features from the class.
 * Default Value: [1]
 * Accepted values/types: Array of Integers
 * Example
@@ -220,7 +197,7 @@ $    gnbc();
 $    execute()
 $}
 ```
-#### test_features_column
+#### <a id="testfeatcolm">test_features_column</a>
 * test_features_column - Identify the columns holding the features to be tested. If no value is set, it will copy the value from features_column.
 * Default Value: None
 * Accepted values/types: Array of Integers
@@ -240,9 +217,9 @@ $    predict()
 $}
 ```
 
-## Functions
-### Machine Learning
-#### svc()
+## <a id="functions">Functions</a>
+### <a id="machinlearfun">Machine Learning</a>
+#### <a id="svc">svc()</a>
 * Parameters:
     No parameters needed.
 * svc - set the Support Vector Machine classifiers as the classifier to 
@@ -255,7 +232,7 @@ $     svc();
 $     execute()
 $}
 ```
-#### dtc()
+#### <a id="dtc">dtc()</a>
 * Parameters
     No parameters needed.
 * dtc - set the Decision Tree Classifier as the classifier to be used for 
@@ -268,7 +245,7 @@ $     dtc();
 $     execute()
 $}
 ```
-#### gnbc()
+#### <a id="gnbc">gnbc()</a>
 * Parameters
     No parameters needed.
 * gnbc - set the Gaussian Naive Bayes Classifier as the classifier to 
@@ -282,7 +259,7 @@ $     execute()
 $}
 ```
 
-#### execute()
+#### <a id="execute">execute() </a>
 * Parameters:
     No parameter needed. But this method need that the user already 
     set the classifier to use and the training data.
@@ -299,7 +276,7 @@ $    gnbc();
 $    execute()
 $}
 ```
-#### executeCV()
+#### <a id="execcv">executeCV()</a>
 * Parameters:
     No parameter needed. But this method need that the user already 
     set the classifier to use and the training data.
