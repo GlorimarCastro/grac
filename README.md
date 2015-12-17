@@ -4,13 +4,20 @@
 ### <a href="#motivation"> Motivation </a>
 ### <a href="#statSect"> Statistic Section </a>
 ### <a href="#Mach"> Machine Learning Section </a>
-## <a href="#instal"> Installation <\a>
-### <a href="#depende"> Dependecies <\a>
-## <a href="#example" >Example Section <\a>
-## <a href="#grammar"> Grac Grammar <\a>
-## <a href="#tutorial"> Language Tutorial <\a>
-## <a href="#referencemanual"> Reference Manual <\a>
-### <a href="#basicsyn"> Basic Syntax <\a>
+## <a href="#instal"> Installation </a>
+### <a href="#depende"> Dependecies </a>
+## <a href="#example" >Example Section </a>
+## <a href="#grammar"> Grac Grammar </a>
+## <a href="#tutorial"> Language Tutorial </a>
+## <a href="#referencemanual"> Reference Manual </a>
+### <a href="#basicsyn"> Basic Syntax </a>
+### <a href="#types"> Types </a>
+##### <a href="#bool"> Booleans </a>
+##### <a href="#path"> Path </a>
+##### <a href="#ints"> Integers </a>
+##### <a href="#arra">Arrays</a>
+### <a href="#varia">Variables</a>
+##### <a href="#kfold">kfold:</a>
 
 ----
 
@@ -50,8 +57,8 @@ Also, GRAC allows you to calculate the best classifier for your data (based on a
 
 
 ---
-# <a id="instal"> Installation <\a>
-## <a id="depende"> Dependecies <\a>
+# <a id="instal"> Installation </a>
+## <a id="depende"> Dependecies </a>
 GRAC uses a series of python packages, all listed in the requirement.txt file. To install this packages you can run the next command line in:
 ### Ubuntu:
 ```sh
@@ -80,22 +87,22 @@ To use GRAC you can clone this repository or you can download the zip file from 
 
 ---
 
-# <a id="example" >Example Section <\a>
+# <a id="example" >Example Section </a>
 Examples of how to use GRAC can be found in the [examples] folder
 
 ---
-# <a id="grammar"> Grac Grammar <\a>
+# <a id="grammar"> Grac Grammar </a>
 ![alt tag](https://github.com/GlorimarCastro/grac/blob/master/imgs/gracgrammar.png?raw=tru)
 ----
 ----
-# <a id="tutorial"> Language Tutorial <\a>
+# <a id="tutorial"> Language Tutorial </a>
 The next video contain a tutorial and a description of GRAC. 
 
 <br>
 Also, the user can go to the Reference Manual secction for detailed instruction in how to use the diferent methods of GRAC. 
 ----
-# <a id="referencemanual"> Reference Manual <\a>
-## <a id="basicsyn"> Basic Syntax <\a>
+# <a id="referencemanual"> Reference Manual </a>
+## <a id="basicsyn"> Basic Syntax </a>
 * Main Program: each GRAC program have to start with the GRAC special header
 ```sh
 grac{
@@ -109,30 +116,30 @@ hasheader = true;
 t = 9
 }
 ```
-## Types
-#### Booleans
+## <a id="types"> Types </a>
+#### <a id="bool"> Booleans </a>
 * Valid values: true | false
 * Descriptions: Expresses a truth value. It can be either True or False. GRAC uses reserved boolean 
     variables to specify if CSV file contains header and/or to execute cross validation.
-#### Path
+#### <a id="path"> Path </a>
 * Valid Values: r'\"(.+?)\"' 
 * Description:  a series of characters.  Path variables ares used in uploads methods to 
     specify paths for training and testing data files. Also, path variables are used to provide 
     a path to save GRAC results.
-#### Integers
+#### <a id="ints"> Integers </a>
 * Valid Values: r'\d+'
 * Description: integers are numbers that can be written without a fractional component. Integers are 
     used as array component in the following cross validation reserved variables to specify 
     the number of folds and number of columns to train/test: k_fold, class_column, 
     test_class_column, feature_columns and test_feature_column.
 
-#### Arrays
+#### <a id="arra">Arrays</a>
 * Description: an array is a container object that hold a fixed number of values of a single type. Arrays 
     are used to execute  statistics functions and to define cross validation reserved variables. 
     Only arrays of integers are allowed.
 
-## Variables:
-#### kfold:
+## <a id="varia">Variables</a>
+#### <a id="kfold">kfold:</a>
 * kfold - set the number of folds the k-fold cross-validation method will use. 
 * Default Value: 5    
 * Accepted values/types: Integer
