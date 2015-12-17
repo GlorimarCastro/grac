@@ -1,10 +1,11 @@
 # Table of Content
-* <a href="#introduccion"> Introduction </a>
+## <a href="#introduccion"> Introduction </a>
+### <a href="#description"> Description </a>
 ----
 
 # <a id="introduccion"> Introduction </a>
 
-### Description
+### <a id="description"> Description
 GRAC is a python based [special-purpose programming language] for [supervised machine learning] and [statistics]. It allows the user to upload CSV files and run classification methods, predictions and statistics on it.
 
 ### Motivation
@@ -72,7 +73,7 @@ To use GRAC you can clone this repository or you can download the zip file from 
 Examples of how to use GRAC can be found in the [examples] folder
 
 ---
-# Grac Grammra
+# Grac Grammar
 ![alt tag](https://github.com/GlorimarCastro/grac/blob/master/imgs/gracgrammar.png?raw=tru)
 ----
 ----
