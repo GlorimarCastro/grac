@@ -76,8 +76,8 @@ Examples of how to use GRAC can be found in the [examples] folder
 The next video contain a tutorial and a description of GRAC:
 - [https://www.youtube.com/watch?v=SGs17I4_cI8&feature=youtu.be]
 
-<br>
 Also, the user can go to the Reference Manual secction for detailed instruction in how to use the diferent methods of GRAC. 
+
 ----
 # <a id="referencemanual"> Reference Manual </a>
 ## <a id="basicsyn"> Basic Syntax </a>
