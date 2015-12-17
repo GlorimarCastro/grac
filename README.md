@@ -583,12 +583,12 @@ In order to execute some modules, others must be executed first. The modules tha
 | Dependant Module      | Methods that need to be run first                                              |
 |-----------------------|:--------------------------------------------------------------------------------|
 | execute()             | uploadTrainingData(), <br> svc() \| dtc() \| gnbc()                                   |
-| executeCV()           | uploadTrainingData(),svc() \| dtc() \| gnbc()                                    |
-| getCVErrorRate()      | uploadTrainingData(),svc() \| dtc() \| gnbc(),executeCV()                        |
+| executeCV()           | uploadTrainingData(), <br> svc() \| dtc() \| gnbc()                                    |
+| getCVErrorRate()      | uploadTrainingData(), <br> svc() \| dtc() \| gnbc(), <br> executeCV()                        |
 | printBestClassifier() | uploadTrainingData()                                                           |
-| predict()             | uploadTrainingData(),uploadTestData,svc() \| dtc() \| gnbc(),execute()           |
-| saveCVResult()        | uploadTrainingData(),uploadTestData,svc() \| dtc() \| gnbc(),executeCV()         |
-| savePredResult()      | uploadTrainingData(),uploadTestData,svc() \| dtc() \| gnbc(),execute(),predict() |
+| predict()             | uploadTrainingData(), <br> uploadTestData, <br> svc() \| dtc() \| gnbc(),execute()           |
+| saveCVResult()        | uploadTrainingData(), <br> uploadTestData, <br> svc() \| dtc() \| gnbc(),executeCV()         |
+| savePredResult()      | uploadTrainingData(), <br> uploadTestData, <br> svc() \| dtc() \| gnbc(), <br> execute(), <br> predict() |
 
 
 
