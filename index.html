@@ -39,12 +39,26 @@
         </div>
 
         <h1>
-<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
+<a id="-introduction-" class="anchor" href="#-introduction-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="introduccion"> Introduction </a>
+</h1>
 
-<p>GRAC is a python based <a href="https://en.wikipedia.org/wiki/Domain-specific_language">special-purpose programming language</a> for <a href="https://en.wikipedia.org/wiki/Supervised_learning">supervised machine learning</a> and <a href="https://en.wikipedia.org/wiki/Statistics">statistics</a>. It allows the user to upload CSV files and run classification methods, predictions and statistics on it. </p>
+<h3>
+<a id="-description-" class="anchor" href="#-description-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="description"> Description </a>
+</h3>
 
-<h2>
-<a id="statistic-section" class="anchor" href="#statistic-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Statistic Section</h2>
+<p>GRAC is a python based <a href="https://en.wikipedia.org/wiki/Domain-specific_language">special-purpose programming language</a> for <a href="https://en.wikipedia.org/wiki/Supervised_learning">supervised machine learning</a> and <a href="https://en.wikipedia.org/wiki/Statistics">statistics</a>. It allows the user to upload CSV files and run classification methods, predictions and statistics on it.</p>
+
+<h3>
+<a id="-motivation-" class="anchor" href="#-motivation-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="motivation"> Motivation </a>
+</h3>
+
+<p>Python and R are the most used languages for machine learning and data mining. Tools as Weka and Scikit-Learn have been created to facilitate machine learning, data mining, and big data analysis. Weka, however, is for Java programming and just work with attribute-relation file format (ARFF). Scikit-Learn is for Python but doesn't allow you to pre-process text data files. Also, Scikit-Learn requires a lot of dependencies (e.g. NumPy, SciPy, PyDot, etc.).  R is mainly for statistical computing and graphics, making machine learning algorithms hard to code. For these reasons, a new programming tool that converges all the benefits of Weka, Scikit-Learn, and R, but at the same time allow you to program in Python, is desired. Here we propose the creation of a new Python based programming language: GRAC.  GRAC is a programming language for machine learning, data mining and big data analysis that converges some of the benefits of Weka, Scikit-Learn, and R. At the same time GRAC allows you to pre-process text files and it let you use comma-separated values (CSV) files.</p>
+
+<p>Machine learning, data mining and big data have been used for the advance in artificial intelligence, gene therapy, cybersecurity, bioinformatics, medical diagnosis, computer vision, and so on. Also, they have been used to improve financial trading, business processing, sport, law enforcement, telecommunication, search engines, terrorism detection, etc. A lot of different applications for machine learning, data mining and big data can be mentioned. For that reason, good tools for doing machine learning, data mining, and big data analysis are needed. As we presented before, different tools have been created already for these. We propose to add together all the benefits of these different tools in just one; being the main motivation to allow the users to work with CSV files (one of the most used format in the mentioned fields).  The main purpose of GRAC is to allow the users to just indicate the name of the CSV file and a list of actions, so the research can be accomplished faster.</p>
+
+<h3>
+<a id="-statistic-section-" class="anchor" href="#-statistic-section-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="statSect"> Statistic Section </a>
+</h3>
 
 <p>The available methods for statitics are:</p>
 
@@ -60,8 +74,9 @@
 <li>Standard Deviation</li>
 </ul>
 
-<h2>
-<a id="machine-learning-section" class="anchor" href="#machine-learning-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Machine Learning Section</h2>
+<h3>
+<a id="-machine-learning-section-" class="anchor" href="#-machine-learning-section-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="Mach"> Machine Learning Section </a>
+</h3>
 
 <p>For now, the machine learning classifiers available are supervised classifiers:</p>
 
@@ -81,10 +96,12 @@
 <hr>
 
 <h1>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+<a id="-installation-" class="anchor" href="#-installation-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="instal"> Installation </a>
+</h1>
 
 <h2>
-<a id="dependecies" class="anchor" href="#dependecies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dependecies</h2>
+<a id="-dependecies-" class="anchor" href="#-dependecies-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="depende"> Dependecies </a>
+</h2>
 
 <p>GRAC uses a series of python packages, all listed in the requirement.txt file. To install this packages you can run the next command line in:</p>
 
@@ -120,9 +137,767 @@ $ python -m pip scikit-learn</pre></div>
 <hr>
 
 <h1>
-<a id="example-section" class="anchor" href="#example-section" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example Section</h1>
+<a id="example-section-" class="anchor" href="#example-section-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="example">Example Section </a>
+</h1>
 
 <p>Examples of how to use GRAC can be found in the <a href="https://github.com/GlorimarCastro/grac/tree/master/examples">examples</a> folder</p>
+
+<hr>
+
+<h1>
+<a id="-grac-grammar-" class="anchor" href="#-grac-grammar-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="grammar"> Grac Grammar </a>
+</h1>
+
+<h2>
+<a id="" class="anchor" href="#" aria-hidden="true"><span class="octicon octicon-link"></span></a><img src="https://github.com/GlorimarCastro/grac/blob/master/imgs/gracgrammar.png?raw=tru" alt="alt tag">
+</h2>
+
+<hr>
+
+<h1>
+<a id="-language-tutorial-" class="anchor" href="#-language-tutorial-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="tutorial"> Language Tutorial </a>
+</h1>
+
+<p>The next video contain a tutorial and a description of GRAC:</p>
+
+<ul>
+<li>[<a href="https://www.youtube.com/watch?v=SGs17I4_cI8&amp;feature=youtu.be">https://www.youtube.com/watch?v=SGs17I4_cI8&amp;feature=youtu.be</a>]</li>
+</ul>
+
+<p>Also, the user can go to the Reference Manual secction for detailed instruction in how to use the diferent methods of GRAC. </p>
+
+<hr>
+
+<h1>
+<a id="-reference-manual-" class="anchor" href="#-reference-manual-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="referencemanual"> Reference Manual </a>
+</h1>
+
+<h2>
+<a id="-basic-syntax-" class="anchor" href="#-basic-syntax-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="basicsyn"> Basic Syntax </a>
+</h2>
+
+<ul>
+<li>Main Program: each GRAC program have to start with the GRAC special header</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>grac{
+}</pre></div>
+
+<ul>
+<li>Statement Separator:
+Each statement need to end with a semicolon ‘;’, except the last statement. </li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>grac{
+hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+t = 9
+}</pre></div>
+
+<h2>
+<a id="-types-" class="anchor" href="#-types-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="types"> Types </a>
+</h2>
+
+<h4>
+<a id="-booleans-" class="anchor" href="#-booleans-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="bool"> Booleans </a>
+</h4>
+
+<ul>
+<li>Valid values: true | false</li>
+<li>Descriptions: Expresses a truth value. It can be either True or False. GRAC uses reserved boolean 
+variables to specify if CSV file contains header and/or to execute cross validation.
+#### <a id="path"> Path </a>
+</li>
+<li>Valid Values: r'\"(.+?)\"' </li>
+<li>Description:  a series of characters.  Path variables ares used in uploads methods to 
+specify paths for training and testing data files. Also, path variables are used to provide 
+a path to save GRAC results.
+#### <a id="ints"> Integers </a>
+</li>
+<li>Valid Values: r'\d+'</li>
+<li>Description: integers are numbers that can be written without a fractional component. Integers are 
+used as array component in the following cross validation reserved variables to specify 
+the number of folds and number of columns to train/test: k_fold, class_column, 
+test_class_column, feature_columns and test_feature_column.</li>
+</ul>
+
+<h4>
+<a id="arrays" class="anchor" href="#arrays" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="arra">Arrays</a>
+</h4>
+
+<ul>
+<li>Description: an array is a container object that hold a fixed number of values of a single type. Arrays 
+are used to execute  statistics functions and to define cross validation reserved variables. 
+Only arrays of integers are allowed.</li>
+</ul>
+
+<h2>
+<a id="variables" class="anchor" href="#variables" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="varia">Variables</a>
+</h2>
+
+<h4>
+<a id="kfold" class="anchor" href="#kfold" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="kfold">kfold:</a>
+</h4>
+
+<ul>
+<li>kfold - set the number of folds the k-fold cross-validation method will use. </li>
+<li>Default Value: 5</li>
+<li>Accepted values/types: Integer</li>
+<li>example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    kfold = 10<span class="pl-k">;</span>
+$    <span class="pl-en">gnbc</span>();
+$    <span class="pl-en">executeCV</span>();
+$    saveCVResult(“path<span class="pl-cce">\t</span>o<span class="pl-cce">\o</span>utput<span class="pl-cce">\f</span>ile”)
+$}</pre></div>
+
+<h4>
+<a id="hasheader" class="anchor" href="#hasheader" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="hasheader">hasheader:</a>
+</h4>
+
+<ul>
+<li>hasheader - tells whether the first row should be ignored (is a header) or not.</li>
+<li>Default Value: False</li>
+<li>Accepted values/types: Boolean</li>
+<li>Example</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">gnbc</span>();
+$    <span class="pl-en">execute</span>()
+$}</pre></div>
+
+<h4>
+<a id="class_column" class="anchor" href="#class_column" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="classcol">class_column</a>
+</h4>
+
+<ul>
+<li>class_column - Identify and separates the column that holds the class from the features in the 
+training file. </li>
+<li>Default Value: 0</li>
+<li>Accepted values/types: Integer</li>
+<li>Example</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">gnbc</span>();
+$    <span class="pl-en">execute</span>()
+$}</pre></div>
+
+<h4>
+<a id="test_class_column" class="anchor" href="#test_class_column" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="testclacol">test_class_column</a>
+</h4>
+
+<ul>
+<li>test_class_column - Identify the class column to be used for testing. If no value is set, it will copy the value from class_column.</li>
+<li>Default Value: None</li>
+<li>Accepted values/types: Integer</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    test_class_column = 1<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    test_features_column = [2,5,8]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    uploadTestData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">svc</span>();
+$    <span class="pl-en">execute</span>();
+$    <span class="pl-en">predict</span>()
+$}</pre></div>
+
+<h4>
+<a id="-features_columns" class="anchor" href="#-features_columns" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="feacolm"> features_columns</a>
+</h4>
+
+<ul>
+<li>features_columns - Identify and separates the columns holding the features from the class.</li>
+<li>Default Value: [1]</li>
+<li>Accepted values/types: Array of Integers</li>
+<li>Example</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">gnbc</span>();
+$    <span class="pl-en">execute</span>()
+$}</pre></div>
+
+<h4>
+<a id="test_features_column" class="anchor" href="#test_features_column" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="testfeatcolm">test_features_column</a>
+</h4>
+
+<ul>
+<li>test_features_column - Identify the columns holding the features to be tested. If no value is set, it will copy the value from features_column.</li>
+<li>Default Value: None</li>
+<li>Accepted values/types: Array of Integers</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    test_class_column = 1<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    test_features_column = [2,5,8]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    uploadTestData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">svc</span>();
+$    <span class="pl-en">execute</span>();
+$    <span class="pl-en">predict</span>()
+$}</pre></div>
+
+<h2>
+<a id="functions" class="anchor" href="#functions" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="functions">Functions</a>
+</h2>
+
+<h3>
+<a id="machine-learning" class="anchor" href="#machine-learning" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="machinlearfun">Machine Learning</a>
+</h3>
+
+<h4>
+<a id="svc" class="anchor" href="#svc" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="svc">svc()</a>
+</h4>
+
+<ul>
+<li>Parameters:
+No parameters needed.</li>
+<li>svc - set the Support Vector Machine classifiers as the classifier to 
+be used for any method that use a classifier</li>
+<li>Example</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$     uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$     <span class="pl-en">svc</span>();
+$     <span class="pl-en">execute</span>()
+$}</pre></div>
+
+<h4>
+<a id="dtc" class="anchor" href="#dtc" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="dtc">dtc()</a>
+</h4>
+
+<ul>
+<li>Parameters
+No parameters needed.</li>
+<li>dtc - set the Decision Tree Classifier as the classifier to be used for 
+any method that use a classifier. </li>
+<li>Example</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$     uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$     <span class="pl-en">dtc</span>();
+$     <span class="pl-en">execute</span>()
+$}</pre></div>
+
+<h4>
+<a id="gnbc" class="anchor" href="#gnbc" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="gnbc">gnbc()</a>
+</h4>
+
+<ul>
+<li>Parameters
+No parameters needed.</li>
+<li>gnbc - set the Gaussian Naive Bayes Classifier as the classifier to 
+be used for any method that use a classifier</li>
+<li>Example</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$     uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$     <span class="pl-en">gnbc</span>();
+$     <span class="pl-en">execute</span>()
+$}</pre></div>
+
+<h4>
+<a id="execute-" class="anchor" href="#execute-" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="execute">execute() </a>
+</h4>
+
+<ul>
+<li>Parameters:
+No parameter needed. But this method need that the user already 
+set the classifier to use and the training data.</li>
+<li>executeCV - fit the training data uploaded by the user, using the 
+specified classifier. </li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">gnbc</span>();
+$    <span class="pl-en">execute</span>()
+$}</pre></div>
+
+<h4>
+<a id="executecv" class="anchor" href="#executecv" aria-hidden="true"><span class="octicon octicon-link"></span></a><a id="execcv">executeCV()</a>
+</h4>
+
+<ul>
+<li>Parameters:
+No parameter needed. But this method need that the user already 
+set the classifier to use and the training data.</li>
+<li>executeCV - do cross-validation using the classifier specified by 
+the user. The fold used by default is 5, but the user can change this 
+value assigning a different value to the kfold variable. </li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    kfold = 3<span class="pl-k">;</span>
+$    <span class="pl-en">gnbc</span>();
+$    <span class="pl-en">executeCV</span>();
+$    saveCVResult(“path<span class="pl-cce">\t</span>o<span class="pl-cce">\o</span>utput<span class="pl-cce">\f</span>ile”)
+$}</pre></div>
+
+<h4>
+<a id="getcverrorrate" class="anchor" href="#getcverrorrate" aria-hidden="true"><span class="octicon octicon-link"></span></a>getCVErrorRate()</h4>
+
+<ul>
+<li>Parameters:
+No parameter needed. Before using this method executeCV 
+method have to be used. </li>
+<li>getCVErrorRate - print the accuracy, precision, recall and F-score 
+generated by the executeCV method. </li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    kfold = 3<span class="pl-k">;</span>
+$    <span class="pl-en">gnbc</span>();
+$    <span class="pl-en">executeCV</span>();
+$    saveCVResult(“path<span class="pl-cce">\t</span>o<span class="pl-cce">\o</span>utput<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">getCVErrorRate</span>()
+$}</pre></div>
+
+<h4>
+<a id="printbestclassifier" class="anchor" href="#printbestclassifier" aria-hidden="true"><span class="octicon octicon-link"></span></a>printBestClassifier()</h4>
+
+<ul>
+<li>Parameters:
+No parameters needed. But this method need that the user set the 
+data for training and the classifier to use, before using this method.<br>
+</li>
+<li>printBestClassifier - Based on accuracy decide between Support 
+Vector Machine, Gaussian Naivew Bayes and Decision Tree which 
+one is the best to use for the data given as training. The name for 
+the selected classifier is printed in the console.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">printBestClassifier</span>()
+$    }</pre></div>
+
+<h4>
+<a id="predict" class="anchor" href="#predict" aria-hidden="true"><span class="octicon octicon-link"></span></a>predict()</h4>
+
+<ul>
+<li>Parameters:
+Non parameter needed. Before using this method the test data to 
+use have to be uploaded and execute() method have to be used. </li>
+<li>Description:
+predict - using the fit result from execute(), make a prediction for 
+the test data uploaded by the user. </li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    test_class_column = 1<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    test_features_column = [2,5,8]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    uploadTestData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">svc</span>();
+$    <span class="pl-en">execute</span>();
+$    <span class="pl-en">predict</span>()
+$}</pre></div>
+
+<h3>
+<a id="statistic" class="anchor" href="#statistic" aria-hidden="true"><span class="octicon octicon-link"></span></a>Statistic</h3>
+
+<h4>
+<a id="meanx" class="anchor" href="#meanx" aria-hidden="true"><span class="octicon octicon-link"></span></a>mean(x)</h4>
+
+<ul>
+<li>Parameters: 
+The user can enter a variable containing the list of elements, specify a column on the input CSV file containing the elements, or a list of elements directly.</li>
+<li>mean - Calculates the average value (mean) of the elements entered.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    mean(x)
+$  }</pre></div>
+
+<h4>
+<a id="avgx" class="anchor" href="#avgx" aria-hidden="true"><span class="octicon octicon-link"></span></a>avg(x)</h4>
+
+<ul>
+<li>Parameters: 
+The user can enter a variable containing the list of elements, specify a column on the input CSV file containing the elements, or a list of elements directly.</li>
+<li>avg - Calculates the average value (mean) of the elements entered.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    mean(x)<span class="pl-k">;</span>
+$    avg([1,2,3,4])
+$  }</pre></div>
+
+<h4>
+<a id="minx" class="anchor" href="#minx" aria-hidden="true"><span class="octicon octicon-link"></span></a>min(x)</h4>
+
+<ul>
+<li>Parameters: 
+The user can enter a variable containing the list of elements, specify a column on the input CSV file containing the elements, or a list of elements directly.</li>
+<li>min - Calculates the smallest value of the elements entered.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    min(x)
+$  }</pre></div>
+
+<h4>
+<a id="maxx" class="anchor" href="#maxx" aria-hidden="true"><span class="octicon octicon-link"></span></a>max(x)</h4>
+
+<ul>
+<li>Parameters: 
+The user can enter a variable containing the list of elements, specify a column on the input CSV file containing the elements, or a list of elements directly.</li>
+<li>max - Calculates the largest value of the elements entered.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    max(x)
+$  }</pre></div>
+
+<h4>
+<a id="modex" class="anchor" href="#modex" aria-hidden="true"><span class="octicon octicon-link"></span></a>mode(x)</h4>
+
+<ul>
+<li>Parameters: 
+The user can enter a variable containing the list of elements, specify a column on the input CSV file containing the elements, or a list of elements directly.</li>
+<li>Description:
+Calculates the most frequent value of the elements entered.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    mode(x)
+$  }</pre></div>
+
+<h4>
+<a id="leastx" class="anchor" href="#leastx" aria-hidden="true"><span class="octicon octicon-link"></span></a>least(x)</h4>
+
+<ul>
+<li>Parameters: 
+The user can enter a variable containing the list of elements, specify a column on the input CSV file containing the elements, or a list of elements directly.</li>
+<li>Description:
+Calculates the least frequent value of the elements entered.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    least(x)
+$  }</pre></div>
+
+<h4>
+<a id="rndmx" class="anchor" href="#rndmx" aria-hidden="true"><span class="octicon octicon-link"></span></a>rndm(x)</h4>
+
+<ul>
+<li>Parameters: 
+The user can enter a variable containing the list of elements, specify a column on the input CSV file containing the elements, or a list of elements directly.</li>
+<li>Description:
+Selects a random value of the elements entered.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    rndm(x)
+$  }</pre></div>
+
+<h4>
+<a id="countx" class="anchor" href="#countx" aria-hidden="true"><span class="octicon octicon-link"></span></a>count(x)</h4>
+
+<ul>
+<li>Parameters: 
+The user can enter a variable containing the list of elements, specify a column on the input CSV file containing the elements, or a list of elements directly.</li>
+<li>Description:
+Returns the amount of elements entered.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    count(x)
+$  }</pre></div>
+
+<h4>
+<a id="stdevx" class="anchor" href="#stdevx" aria-hidden="true"><span class="octicon octicon-link"></span></a>stdev(x)</h4>
+
+<ul>
+<li>Parameters: 
+The user can enter a variable containing the list of elements, specify a column on the input CSV file containing the elements, or a list of elements directly.</li>
+<li>Description:
+Calculates the standard deviation of the elements entered.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    stdev(x)
+$  }</pre></div>
+
+<h3>
+<a id="data-upload" class="anchor" href="#data-upload" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Upload</h3>
+
+<h4>
+<a id="uploadtrainingdata" class="anchor" href="#uploadtrainingdata" aria-hidden="true"><span class="octicon octicon-link"></span></a>uploadTrainingData()</h4>
+
+<ul>
+<li>Parameters:
+The user must enter the path where the CSV file for training data is 
+    located. The path must be valid and the file must be CSV type.</li>
+<li>Description:
+In order to train with any of the available classifiers, the training data file 
+must be uploaded before.</li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    test_class_column = 1<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    test_features_column = [2,5,8]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">svc</span>();
+$    <span class="pl-en">execute</span>();
+ }</pre></div>
+
+<h4>
+<a id="uploadtestdata" class="anchor" href="#uploadtestdata" aria-hidden="true"><span class="octicon octicon-link"></span></a>uploadTestData()</h4>
+
+<ul>
+<li>Parameters
+The user must enter the path where the CSV file for test data is 
+located. The path must be valid and the file must be CSV type.</li>
+<li>uploadTestData - In order to predict data with any of the available classifiers, the test data 
+file must be uploaded before.</li>
+<li>Example</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    test_class_column = 1<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    test_features_column = [2,5,8]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    uploadTestData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">svc</span>();
+$    <span class="pl-en">execute</span>();
+$    <span class="pl-en">predict</span>()
+$ }</pre></div>
+
+<h4>
+<a id="uploaddata" class="anchor" href="#uploaddata" aria-hidden="true"><span class="octicon octicon-link"></span></a>uploadData()</h4>
+
+<ul>
+<li>Parameters
+The user must enter the path where the CSV file is located. The path 
+must be valid and the file must be CSV type.</li>
+<li>uploadData - The  uploaded file contains the predicted data and can be used to run the 
+GRAC statistical functions.</li>
+<li>Example</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    test_class_column = 1<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    test_features_column = [2,5,8]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    uploadTestData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">svc</span>();
+$    <span class="pl-en">execute</span>();
+$    <span class="pl-en">predict</span>();
+$    savePredResult(“fileName”)<span class="pl-k">;</span>
+$    uploadData(“fileName.csv”)<span class="pl-k">;</span>
+$    mode(0)<span class="pl-k">;</span>
+$    mean(0)<span class="pl-k">;</span>
+$    stdev(0)<span class="pl-k">;</span>
+$ }</pre></div>
+
+<h3>
+<a id="saving-results" class="anchor" href="#saving-results" aria-hidden="true"><span class="octicon octicon-link"></span></a>Saving results:</h3>
+
+<h4>
+<a id="savecvresult" class="anchor" href="#savecvresult" aria-hidden="true"><span class="octicon octicon-link"></span></a>saveCVResult():</h4>
+
+<ul>
+<li>Parameters:
+saveCVResult(path) -The path for the file to save the results</li>
+<li>saveCVResult - Save the predictions of each fold computed by the executeCV in individual files with the format: truth value, predicted value. Also saves a scoring.csv file with the global results including:  precision,  accuracy, recall f-score and confusion matrix of each fold. </li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    uploadTestData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">svc</span>();
+$    <span class="pl-en">executeCV</span>();
+$    <span class="pl-en">saveCVResult</span>()
+$ }</pre></div>
+
+<h4>
+<a id="savestatresult" class="anchor" href="#savestatresult" aria-hidden="true"><span class="octicon octicon-link"></span></a>saveStatResult():</h4>
+
+<ul>
+<li>Parameters:
+saveStatResult( path ) - The path for the file to save the results</li>
+<li>saveStatResult - save the result of all the statistical method used by the user. </li>
+<li>Example:</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    x = [1,2,3,4]<span class="pl-k">;</span>
+$    stdev(x)<span class="pl-k">;</span>
+$    max(x)<span class="pl-k">;</span>
+$    mode(x)<span class="pl-k">;</span>
+$    <span class="pl-en">saveStatResult</span>()
+$  }</pre></div>
+
+<h4>
+<a id="savepredresult" class="anchor" href="#savepredresult" aria-hidden="true"><span class="octicon octicon-link"></span></a>savePredResult():</h4>
+
+<ul>
+<li>Parameters:
+savePredResult( path ) - The path for the file to save the results</li>
+<li>savePredResult - save the result for the prediction method in a CSV file format. The output of the file is:
+    truth value, predicted value</li>
+<li>Example</li>
+</ul>
+
+<div class="highlight highlight-source-shell"><pre>$ grac{
+$    hasheader = <span class="pl-c1">true</span><span class="pl-k">;</span>
+$    class_column = 0<span class="pl-k">;</span>
+$    test_class_column = 1<span class="pl-k">;</span>
+$    features_columns = [1,2,52]<span class="pl-k">;</span>
+$    test_features_column = [2,5,8]<span class="pl-k">;</span>
+$    uploadTrainingData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    uploadTestData(“C:<span class="pl-cce">\p</span>ath<span class="pl-cce">\t</span>o<span class="pl-cce">\f</span>ile”)<span class="pl-k">;</span>
+$    <span class="pl-en">svc</span>();
+$    <span class="pl-en">execute</span>();
+$    <span class="pl-en">predict</span>();
+$    <span class="pl-en">savePredResult</span>()
+$ }</pre></div>
+
+<hr>
+
+<h1>
+<a id="language-development" class="anchor" href="#language-development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Language Development</h1>
+
+<h3>
+<a id="translator-architecture" class="anchor" href="#translator-architecture" aria-hidden="true"><span class="octicon octicon-link"></span></a>Translator Architecture</h3>
+
+<p>For details of the architecture of the translator see the Grammar and Lexemes, Tokens and Syntax section.</p>
+
+<h3>
+<a id="interfaces-between-the-modules" class="anchor" href="#interfaces-between-the-modules" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interfaces between the modules</h3>
+
+<p>In order to execute some modules, others must be executed first. The modules that depend on others are:</p>
+
+<table>
+<thead>
+<tr>
+<th>Dependant Module</th>
+<th align="left">Methods that need to be run first</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>execute()</td>
+<td align="left">uploadTrainingData(), <br> svc() | dtc() | gnbc()</td>
+</tr>
+<tr>
+<td>executeCV()</td>
+<td align="left">uploadTrainingData(), <br> svc() | dtc() | gnbc()</td>
+</tr>
+<tr>
+<td>getCVErrorRate()</td>
+<td align="left">uploadTrainingData(), <br> svc() | dtc() | gnbc(), <br> executeCV()</td>
+</tr>
+<tr>
+<td>printBestClassifier()</td>
+<td align="left">uploadTrainingData()</td>
+</tr>
+<tr>
+<td>predict()</td>
+<td align="left">uploadTrainingData(), <br> uploadTestData, <br> svc() | dtc() | gnbc(),execute()</td>
+</tr>
+<tr>
+<td>saveCVResult()</td>
+<td align="left">uploadTrainingData(), <br> uploadTestData, <br> svc() | dtc() | gnbc(),executeCV()</td>
+</tr>
+<tr>
+<td>savePredResult()</td>
+<td align="left">uploadTrainingData(), <br> uploadTestData, <br> svc() | dtc() | gnbc(), <br> execute(), <br> predict()</td>
+</tr>
+</tbody>
+</table>
+
+<h3>
+<a id="softwares-used-for-the-translator" class="anchor" href="#softwares-used-for-the-translator" aria-hidden="true"><span class="octicon octicon-link"></span></a>Softwares used for the translator</h3>
+
+<p>Ply</p>
+
+<h3>
+<a id="test-methodology--program-used-to-test" class="anchor" href="#test-methodology--program-used-to-test" aria-hidden="true"><span class="octicon octicon-link"></span></a>Test methodology &amp; program used to test</h3>
+
+<p>Using python 2.7 we  tested all the variables used and each method </p>
+
+<h2>
+<a id="----exhaustively-and-compared-the-results---all-the-code-used-for-testing-can-be-found-in-the-example-folder-in-the-github-account-for-the-project-" class="anchor" href="#----exhaustively-and-compared-the-results---all-the-code-used-for-testing-can-be-found-in-the-example-folder-in-the-github-account-for-the-project-" aria-hidden="true"><span class="octicon octicon-link"></span></a>    exhaustively and compared the results.   All the code used for testing can be found in the example folder in the github account for the project </h2>
+
+<h1>
+<a id="conclusion" class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h1>
+
+<p>Machine Learning, data mining, and big data are important fields in programming, as they are used for the advance in Medicine, Cyber Security, Financial Analysis, etc. It would be convenient for a language that could do all  of this without needing support from other languages and complicated file formats. This is why GRAC was created. With GRAC, the user can analyse data in a CSV file using machine learning or statistical methods. <br>
+GRAC is extremely convenient, as there is no need for the understanding of many languages. The user only needs to have a basic knowledge of Python, which is one of the most known languages, and be able to follow the basic guidelines of GRAC to fulfill the wanted analysis. </p>
 
 <hr>
 
@@ -140,7 +915,9 @@ $ python -m pip scikit-learn</pre></div>
 <a href="https://github.com/slaughter30">Anthony S Slaughter Amaro</a> : <a href="mailto:anthony.slaughter@upr.edu">anthony.slaughter@upr.edu</a>
 </li>
 <li>
-<a href="https://github.com/zrike">Carlos E Rosario Gonzalez</a> : <a href="mailto:carlos.rosario10@upr.edu">carlos.rosario10@upr.edu</a>
+<p><a href="https://github.com/zrike">Carlos E Rosario Gonzalez</a> : <a href="mailto:carlos.rosario10@upr.edu">carlos.rosario10@upr.edu</a></p>
+
+<p>[<a href="https://www.youtube.com/watch?v=SGs17I4_cI8&amp;feature=youtu.be">https://www.youtube.com/watch?v=SGs17I4_cI8&amp;feature=youtu.be</a>]: &lt;- [<a href="https://www.youtube.com/watch?v=SGs17I4_cI8&amp;feature=youtu.be%5D%3E">https://www.youtube.com/watch?v=SGs17I4_cI8&amp;feature=youtu.be]&gt;</a></p>
 </li>
 </ul>
       </section>
