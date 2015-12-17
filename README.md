@@ -590,7 +590,11 @@ In order to execute some modules, others must be executed first. The modules tha
 | saveCVResult()        | uploadTrainingData(), <br> uploadTestData, <br> svc() \| dtc() \| gnbc(),executeCV()         |
 | savePredResult()      | uploadTrainingData(), <br> uploadTestData, <br> svc() \| dtc() \| gnbc(), <br> execute(), <br> predict() |
 
-
+### Softwares used for the translator
+Ply
+### Test methodology & program used to test
+Using python 2.7 we  tested all the variables used and each method 
+    exhaustively and compared the results.   All the code used for testing can be found in the example folder in the github account for the project 
 
 ----
 #Developers
