@@ -1,20 +1,31 @@
 # Table of Content
 ## <a href="#introduccion"> Introduction </a>
 ### <a href="#description"> Description </a>
+### <a href="#motivation"> Motivation </a>
+### <a href="#statSect"> Statistic Section </a>
+### <a href="#Mach"> Machine Learning Section </a>
+## <a href="#instal"> Installation <\a>
+### <a href="#depende"> Dependecies <\a>
+## <a href="#example" >Example Section <\a>
+## <a href="#grammar"> Grac Grammar <\a>
+## <a href="#tutorial"> Language Tutorial <\a>
+## <a href="#referencemanual"> Reference Manual <\a>
+### <a href="#basicsyn"> Basic Syntax <\a>
+
 ----
 
 # <a id="introduccion"> Introduction </a>
 
-### <a id="description"> Description
+### <a id="description"> Description </a>
 GRAC is a python based [special-purpose programming language] for [supervised machine learning] and [statistics]. It allows the user to upload CSV files and run classification methods, predictions and statistics on it.
 
-### Motivation
+### <a id="motivation"> Motivation </a>
 Python and R are the most used languages for machine learning and data mining. Tools as Weka and Scikit-Learn have been created to facilitate machine learning, data mining, and big data analysis. Weka, however, is for Java programming and just work with attribute-relation file format (ARFF). Scikit-Learn is for Python but doesn't allow you to pre-process text data files. Also, Scikit-Learn requires a lot of dependencies (e.g. NumPy, SciPy, PyDot, etc.).  R is mainly for statistical computing and graphics, making machine learning algorithms hard to code. For these reasons, a new programming tool that converges all the benefits of Weka, Scikit-Learn, and R, but at the same time allow you to program in Python, is desired. Here we propose the creation of a new Python based programming language: GRAC.  GRAC is a programming language for machine learning, data mining and big data analysis that converges some of the benefits of Weka, Scikit-Learn, and R. At the same time GRAC allows you to pre-process text files and it let you use comma-separated values (CSV) files.
 
 Machine learning, data mining and big data have been used for the advance in artificial intelligence, gene therapy, cybersecurity, bioinformatics, medical diagnosis, computer vision, and so on. Also, they have been used to improve financial trading, business processing, sport, law enforcement, telecommunication, search engines, terrorism detection, etc. A lot of different applications for machine learning, data mining and big data can be mentioned. For that reason, good tools for doing machine learning, data mining, and big data analysis are needed. As we presented before, different tools have been created already for these. We propose to add together all the benefits of these different tools in just one; being the main motivation to allow the users to work with CSV files (one of the most used format in the mentioned fields).  The main purpose of GRAC is to allow the users to just indicate the name of the CSV file and a list of actions, so the research can be accomplished faster.
 
 
-### Statistic Section
+### <a id="statSect"> Statistic Section </a>
 The available methods for statitics are:
   - Mean 
   - Average
@@ -26,7 +37,7 @@ The available methods for statitics are:
   - Count
   - Standard Deviation
  
-### Machine Learning Section
+### <a id="Mach"> Machine Learning Section </a>
 For now, the machine learning classifiers available are supervised classifiers:
   - [Decision Tree]
   - [Support Vector Machine]
@@ -39,8 +50,8 @@ Also, GRAC allows you to calculate the best classifier for your data (based on a
 
 
 ---
-# Installation
-## Dependecies
+# <a id="instal"> Installation <\a>
+## <a id="depende"> Dependecies <\a>
 GRAC uses a series of python packages, all listed in the requirement.txt file. To install this packages you can run the next command line in:
 ### Ubuntu:
 ```sh
@@ -69,22 +80,22 @@ To use GRAC you can clone this repository or you can download the zip file from 
 
 ---
 
-# Example Section
+# <a id="example" >Example Section <\a>
 Examples of how to use GRAC can be found in the [examples] folder
 
 ---
-# Grac Grammar
+# <a id="grammar"> Grac Grammar <\a>
 ![alt tag](https://github.com/GlorimarCastro/grac/blob/master/imgs/gracgrammar.png?raw=tru)
 ----
 ----
-# Language Tutorial
+# <a id="tutorial"> Language Tutorial <\a>
 The next video contain a tutorial and a description of GRAC. 
 
 <br>
 Also, the user can go to the Reference Manual secction for detailed instruction in how to use the diferent methods of GRAC. 
 ----
-# Reference Manual
-## Basic Syntax
+# <a id="referencemanual"> Reference Manual <\a>
+## <a id="basicsyn"> Basic Syntax <\a>
 * Main Program: each GRAC program have to start with the GRAC special header
 ```sh
 grac{
